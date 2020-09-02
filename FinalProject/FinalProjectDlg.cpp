@@ -64,6 +64,7 @@ BEGIN_MESSAGE_MAP(CFinalProjectDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BUTTON1, &CFinalProjectDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -152,3 +153,11 @@ HCURSOR CFinalProjectDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void CFinalProjectDlg::OnBnClickedButton1()
+{
+	// jaskljf;kljsdkl;fjd;lk
+	CAboutDlg abt;
+	abt.DoModal();
+}
