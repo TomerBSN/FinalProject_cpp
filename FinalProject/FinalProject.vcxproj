@@ -185,15 +185,25 @@
   <ItemGroup>
     <ClInclude Include="FinalProject.h" />
     <ClInclude Include="FinalProjectDlg.h" />
+    <ClInclude Include="Hospitalized.h" />
+    <ClInclude Include="Isolated.h" />
+    <ClInclude Include="NonHospitalized.h" />
     <ClInclude Include="Person.h" />
+    <ClInclude Include="Recovered.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Sick.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FinalProject.cpp" />
     <ClCompile Include="FinalProjectDlg.cpp" />
+    <ClCompile Include="Hospitalized.cpp" />
+    <ClCompile Include="Isolated.cpp" />
+    <ClCompile Include="NonHospitalized.cpp" />
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="Recovered.cpp" />
+    <ClCompile Include="Sick.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

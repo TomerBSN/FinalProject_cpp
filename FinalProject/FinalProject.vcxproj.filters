@@ -33,6 +33,21 @@
     <ClInclude Include="Person.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Sick.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hospitalized.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Recovered.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Isolated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NonHospitalized.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FinalProject.cpp">
@@ -45,6 +60,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Person.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sick.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hospitalized.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NonHospitalized.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Isolated.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Recovered.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
