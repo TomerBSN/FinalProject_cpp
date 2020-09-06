@@ -8,13 +8,13 @@ Isolated::Isolated()
 
 }
 
-Isolated::Isolated(bool gender, const char* id, const char* name, Address addr, Date birthday,
-	Address whereisolated, Date Isolation, const char* exposedto="") : Person(gender, id, name, addr, birthday)
+Isolated::Isolated(bool gender, CString id, CString name, Address addr, Date birthday,
+	Address whereisolated, Date Isolation, CString exposedto) : Person(gender, id, name, addr, birthday)
 {
 	setAddress(whereisolated);
 	setDate(Isolation);
-	if (strlen(exposedto))
-		strcpy(ExposedTo, exposedto);
+	if (exposedto.GetLength())
+		ExposedTo = exposedto;
 }
 
 Isolated::~Isolated()
@@ -24,7 +24,7 @@ Isolated::~Isolated()
 
 void Isolated::setAddress(Address addr)
 {
-	strcpy(WhereIsolated.street, addr.street);
+	WhereIsolated.street = addr.street;
 	WhereIsolated.city = addr.city;
 }
 

@@ -8,11 +8,16 @@
 #include "afxdialogex.h"
 #include "CGraphDlg.h"
 #include "CSearchDlg.h"
+#include <string>
+#include "Hospitalized.h"
+#include "NonHospitalized.h"
+#include "Recovered.h"
+#include "Isolated.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-
+using namespace std;
 
 // CAboutDlg dialog used for App About
 
@@ -93,7 +98,7 @@ BOOL CFinalProjectDlg::OnInitDialog()
 	CDialogEx::OnInitDialog();
 
 	// Add "About..." menu item to system menu.
-
+	
 	// IDM_ABOUTBOX must be in the system command range.
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
@@ -366,4 +371,78 @@ Function: [Event-Driven] On click the data filled in the fields will be placed i
 void CFinalProjectDlg::OnBnClickedbtnaddperson()
 {
 	// TODO: Add your control notification handler code here
+	bool Gender, IsVentilated;
+	Hospitals Hospital;
+	SicknessLVL Level;
+	InfectionAreas Area;
+	Address Addr, SickIsolated;
+	Date Birthday, PositiveTest, HospitalEntry, Recovery;
+	CString ID, d, Name, DateBuffer, InfectedBy;
+	int selectedForm = comboDataTypeController.GetCurSel();
+	Gender = comboGenderController.GetCurSel();
+	GetDlgItemText(txtID, ID);
+	GetDlgItemText(txtFullName, Name);
+	GetDlgItemText(txtAddress, Addr.street);
+	Addr.city = static_cast<Citys>(comboCityController.GetCurSel());
+	GetDlgItemText(dtpBirthDate, DateBuffer);
+	Birthday.day = _ttoi(DateBuffer.Mid(0, 2));
+	Birthday.month = _ttoi(DateBuffer.Mid(3, 5));
+	Birthday.year = _ttoi(DateBuffer.Mid(6, 10));
+
+	if (selectedForm<=2)
+	{ 
+		GetDlgItemText(dtpPositiveTest, DateBuffer);
+		PositiveTest.day = _ttoi(DateBuffer.Mid(0, 2));
+		PositiveTest.month = _ttoi(DateBuffer.Mid(3, 5));
+		PositiveTest.year = _ttoi(DateBuffer.Mid(6, 10));
+		GetDlgItemText(txtInfectorID, InfectedBy); 
+		Area = static_cast<InfectionAreas>(comboInfectionAreaTypeController.GetCurSel());
+
+		switch (comboDataTypeController.GetCurSel())//Hospitalized;Not Hospitalized;Recovered;Self Isolation;
+		{
+			case 0://Hospitalized
+			{
+				Hospital = static_cast<Hospitals>(comboHospitalController.GetCurSel());
+				Level = static_cast<SicknessLVL>(comboSicknessLevelController.GetCurSel());
+				IsVentilated = comboVentilatedController.GetCurSel();
+				GetDlgItemText(dtpHospitalEntry, DateBuffer);
+				HospitalEntry.day = _ttoi(DateBuffer.Mid(0, 2));
+				HospitalEntry.month = _ttoi(DateBuffer.Mid(3, 5));
+				HospitalEntry.year = _ttoi(DateBuffer.Mid(6, 10));
+				Persons.push_back(Hospitalized(Gender, ID, Name, Addr, Birthday,
+					PositiveTest, Area, InfectedBy, Level, IsVentilated, Hospital, HospitalEntry));
+				break;
+			}
+			case 1://Not Hospitalized
+			{
+				GetDlgItemText(txtIsolationAddress, SickIsolated.street);
+				SickIsolated.city = static_cast<Citys>(comboIsolationCityController.GetCurSel());
+				Persons.push_back(NonHospitalized(Gender, ID, Name, Addr, Birthday,
+					PositiveTest, Area, InfectedBy, SickIsolated));
+				break;
+			}
+			case 2://Recovered
+			{
+				GetDlgItemText(dtpRecoveryDate, DateBuffer);
+				Recovery.day = _ttoi(DateBuffer.Mid(0, 2));
+				Recovery.month = _ttoi(DateBuffer.Mid(3, 5));
+				Recovery.year = _ttoi(DateBuffer.Mid(6, 10));
+				Persons.push_back(Recovered(Gender, ID, Name, Addr, Birthday, PositiveTest,
+					Area, InfectedBy, Recovery));
+				break;
+			}
+
+			default:
+			{
+				break;
+			}
+		}
+	}
+
+	else
+	{
+		// Need to complete, there are some missing items in GUI for this isolated person
+	}
+
 }
+

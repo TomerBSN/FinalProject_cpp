@@ -6,9 +6,9 @@ class NonHospitalized : public Sick
 {
 public:
 	NonHospitalized();
-	NonHospitalized(bool gender, const char* id, const char* name, Address addr, Date birthday,
-		Date positivetest, InfectionAreas infectionarea, const char* infectedby, Address whereisolated);
-	NonHospitalized(Isolated& I, Date positivetest, InfectionAreas infectionarea, const char* infectedby,
+	NonHospitalized(bool gender, CString id, CString name, Address addr, Date birthday,
+		Date positivetest, InfectionAreas infectionarea, CString infectedby, Address whereisolated);
+	NonHospitalized(Isolated& I, Date positivetest, InfectionAreas infectionarea, CString infectedby,
 		Address whereisolated);
 	~NonHospitalized();
 

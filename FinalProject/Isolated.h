@@ -5,18 +5,18 @@ class Isolated : public Person
 {
 public:
 	Isolated();
-	Isolated(bool gender, const char* id, const char* name, Address addr, Date birthday,
-		Address whereisolated, Date Isolation, const char* exposedto);
+	Isolated(bool gender, CString id, CString name, Address addr, Date birthday,
+		Address whereisolated, Date Isolation, CString exposedto);
 	~Isolated();
 	
 	Address get_WhereIsolated();
 	Date get_Isolation_date();
-	char* get_ExposedTo();
+	CString get_ExposedTo();
 
 private:
 	Address WhereIsolated;
 	Date Isolation;
-	char ExposedTo[MAX_ID];
+	CString ExposedTo;
 	void setAddress(Address addr);
 	void setDate(Date date);
 };

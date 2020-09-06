@@ -8,11 +8,11 @@ Person::Person()
 
 }
 
-Person::Person(bool gender, const char* id, const char* name, Address addr, Date birthday)
+Person::Person(bool gender, CString id, CString name, Address addr, Date birthday)
 {
 	Gender = gender;
-	strcpy(Name, name);
-	strcpy(ID, id);
+	Name = name;
+	ID = id;
 	setAddress(addr);
 	setDate(birthday);
 }
@@ -29,7 +29,7 @@ Person::~Person()
 
 void Person::setAddress(Address addr)
 {
-	strcpy(address.street, addr.street);
+	address.street = addr.street;
 	address.city = addr.city;
 }
 
@@ -45,12 +45,12 @@ bool Person::get_Gender()
 	return Gender;
 }
 
-char* Person::get_ID()
+CString Person::get_ID()
 {
 	return ID;
 }
 
-char* Person::get_Name()
+CString Person::get_Name()
 {
 	return Name;
 }

@@ -7,8 +7,8 @@ class Recovered : public Sick
 {
 public:
 	Recovered();
-	Recovered(bool gender, const char* id, const char* name, Address Address, Date birthday,
-		Date positivetest, InfectionAreas infectionarea, const char* infectedby, Date recovery);
+	Recovered(bool gender, CString id, CString name, Address Address, Date birthday,
+		Date positivetest, InfectionAreas infectionarea, CString infectedby, Date recovery);
 	Recovered(Hospitalized& H, Date recovery);
 	Recovered(NonHospitalized& NH, Date recovery);
 	~Recovered();

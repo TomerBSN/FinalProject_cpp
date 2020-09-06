@@ -9,19 +9,19 @@ class Sick : public Person
 {
 public:
 	Sick();
-	Sick(bool gender, const char* id, const char* name, Address addr, Date birthday,
-		Date positivetest, InfectionAreas infectionarea, const char* infectedby);
+	Sick(bool gender, CString id, CString name, Address addr, Date birthday,
+		Date positivetest, InfectionAreas infectionarea, CString infectedby);
 	Sick(Sick& S);
-	Sick(Isolated& I, Date positivetest, InfectionAreas infectionarea, const char* infectedby);
+	Sick(Isolated& I, Date positivetest, InfectionAreas infectionarea, CString infectedby);
 	~Sick();
 
 	Date get_PositiveTest_date();
-	char* get_InfectedBy();
+	CString get_InfectedBy();
 	InfectionAreas get_InfectionArea();
 
 protected:
 	Date PositiveTest;
-	char InfectedBy[MAX_ID];
+	CString InfectedBy;
 	InfectionAreas InfectionArea;
 	static int TotalSick;
 	void setDate(Date date);
