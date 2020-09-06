@@ -60,6 +60,14 @@ Address Person::get_Address()
 	return address;
 }
 
+//string Person::getCityString(const int ID)
+//{
+//	string str[NUM_OF_CITYS] = { "TelAviv", "BatYam", "Holon", "RamatGan", "Givataim", "BneiBrak", "OrYehuda", "ZichronYaakov", "Ramla", "Lod", "KfarChabad", "PetahTikva", "RishonLezion", "Rehovot", "KfarSaba", "Raanana", "Herzliya", "HodHasharon", "RamatHasharon", "Jerusalem", "BeitShemesh", "Modiin", "ModiinIllit", "Elad", "Efrat", "BeitarIllit", "Ashkelon", "Ashdod", "Netivot", "KiryatGat", "BeerSheva", "Sderot", "Netanya", "Haifa", "Hedera", "Tveria","Acre", "NofHagalil", "MigdalHaemek", "KiryatShmona" };
+//
+//	if (ID < 0 || ID > 39) return "Error";
+//	return str[ID];
+//}
+
 Date Person::get_Birthday()
 {
 	return Birthday;

@@ -4,7 +4,7 @@
 
 #pragma once
 #include "afxdialogex.h"
-
+#include "Person.h"
 // CFinalProjectDlg dialog
 class CFinalProjectDlg : public CDialogEx
 {
@@ -37,8 +37,19 @@ public:
 	afx_msg void OnBnClickedbtncreategraphs();
 	afx_msg void OnBnClickedbtnabout();
 	afx_msg void OnBnClickedbtncreate();
-	// Object handler for comboDataType
-	CComboBox comboDataTypeController;
+	
 	afx_msg void OnBnClickedbtnclearall();
 	void ToggleVisibilty(bool visiblity, int group);
+	Person person;
+	CComboBox comboDataTypeController;
+	CComboBox comboGenderController;
+	CComboBox comboStatusController;
+	CComboBox comboInfectionAreaTypeController;
+	CComboBox comboIsolationCityController;
+	CComboBox comboHospitalController;
+	CComboBox comboSicknessLevelController;
+	CComboBox comboVentilatedController;
+	CComboBox comboCityController;
+	CDateTimeCtrl dtpBirthDateController;
+	afx_msg void OnBnClickedbtnaddperson();
 };

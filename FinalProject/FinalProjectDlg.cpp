@@ -60,7 +60,17 @@ CFinalProjectDlg::CFinalProjectDlg(CWnd* pParent /*=nullptr*/)
 void CFinalProjectDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	//combobox controllers
 	DDX_Control(pDX, comboDataType, comboDataTypeController);
+	DDX_Control(pDX, comboGender, comboGenderController);
+	DDX_Control(pDX, comboStatus, comboStatusController);
+	DDX_Control(pDX, comboInfectionAreaType, comboInfectionAreaTypeController);
+	DDX_Control(pDX, comboIsolationCity, comboIsolationCityController);
+	DDX_Control(pDX, comboHospital, comboHospitalController);
+	DDX_Control(pDX, comboSicknessLevel, comboSicknessLevelController);
+	DDX_Control(pDX, comboVentilated, comboVentilatedController);
+	DDX_Control(pDX, comboCity, comboCityController);
+	DDX_Control(pDX, dtpBirthDate, dtpBirthDateController);
 }
 
 BEGIN_MESSAGE_MAP(CFinalProjectDlg, CDialogEx)
@@ -72,6 +82,7 @@ BEGIN_MESSAGE_MAP(CFinalProjectDlg, CDialogEx)
 	ON_BN_CLICKED(btnAbout, &CFinalProjectDlg::OnBnClickedbtnabout)
 	ON_BN_CLICKED(btnCreate, &CFinalProjectDlg::OnBnClickedbtncreate)
 	ON_BN_CLICKED(btnClearAll, &CFinalProjectDlg::OnBnClickedbtnclearall)
+	ON_BN_CLICKED(btnAddPerson, &CFinalProjectDlg::OnBnClickedbtnaddperson)
 END_MESSAGE_MAP()
 
 
@@ -193,6 +204,7 @@ Function: [Event-Driven] Will reveal all the corresponding fields within the IDD
 */
 void CFinalProjectDlg::OnBnClickedbtncreate()
 {
+	CString str;
 	ToggleVisibilty(true, 1);
 	
 	switch (comboDataTypeController.GetCurSel())//Hospitalized;Not Hospitalized;Recovered;Self Isolation;
@@ -230,15 +242,50 @@ void CFinalProjectDlg::OnBnClickedbtncreate()
 		}
 	}
 
+	////Load Combobox items
+	//string myString = "Hello";
 
+	//char *s = "Hey There";
+	//CString cstr;
+	//cstr = CString(s);
+
+	//CString help(myString.c_str());
+	//for (int i = 0; i < NUM_OF_CITYS; i++)
+	//{
+	//	//str.Format(person.getCity(i));
+	//	comboCityController.InsertString(i, help); // m_cbMyCombo.InsertString( i, _strData );
+	//}
+	//comboCityController.SetCurSel(-1);
+
+
+	GetDlgItem(btnCreate)->EnableWindow(false);
+	comboDataTypeController.EnableWindow(false);
 	//optional: lock the create button until add_person is clicked or if clear all is clicked?
 }
 
 void CFinalProjectDlg::OnBnClickedbtnclearall()
 {
 	// TODO: clear the text and all that shit.
-
+	CString cs;
+	cs.Format(_T(""));
+	SetDlgItemText(txtID, cs);
+	SetDlgItemText(txtAddress, cs);
+	SetDlgItemText(txtFullName, cs);
+	SetDlgItemText(txtInfectorID, cs);
+	SetDlgItemText(txtIsolationAddress, cs);
+	comboDataTypeController.SetCurSel(-1);
+	comboGenderController.SetCurSel(-1);
+	comboHospitalController.SetCurSel(-1);
+	comboInfectionAreaTypeController.SetCurSel(-1);
+	comboIsolationCityController.SetCurSel(-1);
+	comboSicknessLevelController.SetCurSel(-1);
+	comboStatusController.SetCurSel(-1);
+	comboVentilatedController.SetCurSel(-1);
+	comboCityController.SetCurSel(-1);
+	
 	for (int i = 1; i <= 5; i++) ToggleVisibilty(false, i);
+	GetDlgItem(btnCreate)->EnableWindow(true);
+	comboDataTypeController.EnableWindow(true);
 }
 
 /*
@@ -311,4 +358,12 @@ void CFinalProjectDlg::ToggleVisibilty(bool visiblity, int chunk)
 			break;
 		}
 	}
+}
+
+/*
+Function: [Event-Driven] On click the data filled in the fields will be placed into a Person type object.
+*/
+void CFinalProjectDlg::OnBnClickedbtnaddperson()
+{
+	// TODO: Add your control notification handler code here
 }
