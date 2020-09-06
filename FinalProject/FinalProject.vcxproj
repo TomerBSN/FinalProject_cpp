@@ -110,7 +110,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
@@ -183,6 +183,8 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CGraphDlg.h" />
+    <ClInclude Include="CSearchDlg.h" />
     <ClInclude Include="FinalProject.h" />
     <ClInclude Include="FinalProjectDlg.h" />
     <ClInclude Include="Hospitalized.h" />
@@ -196,6 +198,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CGraphDlg.cpp" />
+    <ClCompile Include="CSearchDlg.cpp" />
     <ClCompile Include="FinalProject.cpp" />
     <ClCompile Include="FinalProjectDlg.cpp" />
     <ClCompile Include="Hospitalized.cpp" />

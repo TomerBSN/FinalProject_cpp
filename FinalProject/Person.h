@@ -1,4 +1,5 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #define MAX_ID 10
 #define MAX_STR 25
 

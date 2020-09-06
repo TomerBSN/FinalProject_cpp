@@ -1,4 +1,4 @@
-
+#define _CRT_SECURE_NO_WARNINGS
 // FinalProjectDlg.cpp : implementation file
 //
 
@@ -6,6 +6,8 @@
 #include "FinalProject.h"
 #include "FinalProjectDlg.h"
 #include "afxdialogex.h"
+#include "CGraphDlg.h"
+#include "CSearchDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -58,13 +60,18 @@ CFinalProjectDlg::CFinalProjectDlg(CWnd* pParent /*=nullptr*/)
 void CFinalProjectDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, comboDataType, comboDataTypeController);
 }
 
 BEGIN_MESSAGE_MAP(CFinalProjectDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_BUTTON1, &CFinalProjectDlg::OnBnClickedButton1)
+	ON_BN_CLICKED(btnSearch, &CFinalProjectDlg::OnBnClickedbtnsearch)
+	ON_BN_CLICKED(btnCreateGraphs, &CFinalProjectDlg::OnBnClickedbtncreategraphs)
+	ON_BN_CLICKED(btnAbout, &CFinalProjectDlg::OnBnClickedbtnabout)
+	ON_BN_CLICKED(btnCreate, &CFinalProjectDlg::OnBnClickedbtncreate)
+	ON_BN_CLICKED(btnClearAll, &CFinalProjectDlg::OnBnClickedbtnclearall)
 END_MESSAGE_MAP()
 
 
@@ -154,10 +161,154 @@ HCURSOR CFinalProjectDlg::OnQueryDragIcon()
 }
 
 
-
-void CFinalProjectDlg::OnBnClickedButton1()
+/*
+Function: [Event-Driven] Will bring up the IDD_SEARCH_DIALOG.
+*/
+void CFinalProjectDlg::OnBnClickedbtnsearch()
 {
-	// jaskljf;kljsdkl;fjd;lk
-	CAboutDlg abt;
-	abt.DoModal();
+	CSearchDlg search;
+	search.DoModal();
+}
+
+/*
+Function: [Event-Driven] Will bring up the IDD_GRAPH_DIALOG.
+*/
+void CFinalProjectDlg::OnBnClickedbtncreategraphs()
+{
+	CGraphDlg gra;
+	gra.DoModal();
+}
+
+/*
+Function: [Event-Driven] Will bring up the IDD_ABOUTBOX.
+*/
+void CFinalProjectDlg::OnBnClickedbtnabout()
+{
+	CAboutDlg ab;
+	ab.DoModal();
+}
+
+/*
+Function: [Event-Driven] Will reveal all the corresponding fields within the IDD_FINALPROJECT_DIALOG.
+*/
+void CFinalProjectDlg::OnBnClickedbtncreate()
+{
+	ToggleVisibilty(true, 1);
+	
+	switch (comboDataTypeController.GetCurSel())//Hospitalized;Not Hospitalized;Recovered;Self Isolation;
+	{
+		case 0://Hospitalized
+		{
+			ToggleVisibilty(true, 2);
+			ToggleVisibilty(true, 4);
+			//Add a Hospitalized Object here, then refer to load info function
+			break;
+		}
+		case 1://Not Hospitalized
+		{
+			ToggleVisibilty(true, 2);
+			ToggleVisibilty(true, 3);
+			break;
+		}
+		case 2://Recovered
+		{
+			ToggleVisibilty(true, 2);
+			ToggleVisibilty(true, 5);
+			break;
+		}
+		case 3://Self Isolation
+		{
+			ToggleVisibilty(true, 2);
+			ToggleVisibilty(true, 3);
+			break;
+		}
+		default:
+		{
+			//Normally will go to Recovered one, or Self Isolation
+
+			break;
+		}
+	}
+
+
+	//optional: lock the create button until add_person is clicked or if clear all is clicked?
+}
+
+void CFinalProjectDlg::OnBnClickedbtnclearall()
+{
+	// TODO: clear the text and all that shit.
+
+	for (int i = 1; i <= 5; i++) ToggleVisibilty(false, i);
+}
+
+/*
+Function: [void] will toggle the ShowWindow of each DlgItem depending on their "chunk"/group affiliation.
+		Visibilty: True = Show, False = Hide
+		chunk: 1 - Top Row, 2 - first line second row, 3 - isolated row, 4 - hospital, 5 - recovered
+*/
+void CFinalProjectDlg::ToggleVisibilty(bool visiblity, int chunk)
+{
+	
+	switch (chunk)
+	{
+		case 1://chunk 1 - top rank
+		{
+			GetDlgItem(staHeader1)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE); //SW_HIDE
+			GetDlgItem(staID)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(txtID)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staName)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(txtFullName)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staBirthdate)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(dtpBirthDate)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staGender)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(comboGender)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staCity)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(comboCity)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staAddress)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(txtAddress)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staStatus)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(comboStatus)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			break;
+		}
+		case 2://chunk 2 - all* second tier
+		{	
+			GetDlgItem(staHeader2)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staPosTest)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(dtpPositiveTest)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staIDInfector)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(txtInfectorID)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staAreaType)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(comboInfectionAreaType)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			break;
+		}
+		case 3://chunk 3 - isolated
+		{
+			GetDlgItem(staHeader2)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staIsolatedCity)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(comboIsolationCity)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staIsolatedAddress)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);//
+			GetDlgItem(txtIsolationAddress)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);//
+			break;
+		}
+		case 4://chunk 4 - hospital
+		{
+			GetDlgItem(staHeader2)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staHospitalName)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(comboHospital)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staSicknessLevel)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(comboSicknessLevel)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staVentilated)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(comboVentilated)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staHospitalDate)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(dtpHospitalEntry)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			break;
+		}
+		case 5://chunk 5 - recovered
+		{
+			GetDlgItem(staHeader2)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staRecoveryDate)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(dtpRecoveryDate)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			break;
+		}
+	}
 }

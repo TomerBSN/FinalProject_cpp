@@ -48,6 +48,12 @@
     <ClInclude Include="NonHospitalized.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CGraphDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSearchDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FinalProject.cpp">
@@ -75,6 +81,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Recovered.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CGraphDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSearchDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

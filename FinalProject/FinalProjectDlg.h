@@ -3,7 +3,7 @@
 //
 
 #pragma once
-
+#include "afxdialogex.h"
 
 // CFinalProjectDlg dialog
 class CFinalProjectDlg : public CDialogEx
@@ -32,5 +32,13 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnBnClickedButton1();
+//	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedbtnsearch();
+	afx_msg void OnBnClickedbtncreategraphs();
+	afx_msg void OnBnClickedbtnabout();
+	afx_msg void OnBnClickedbtncreate();
+	// Object handler for comboDataType
+	CComboBox comboDataTypeController;
+	afx_msg void OnBnClickedbtnclearall();
+	void ToggleVisibilty(bool visiblity, int group);
 };
