@@ -59,6 +59,7 @@
 #define staHeader3                      1048
 #define btnSaveAll                      1049
 #define IDC_RADIO1                      1060
+#define dtpIsolationEntry               1060
 #define btnDelete_SH                    1062
 #define btnSearchID_SH                  1063
 #define txtSearchID_SH                  1064
@@ -101,6 +102,10 @@
 #define staHospitalDate_SH              1101
 #define staError_SH                     1102
 #define IDC_COMBO1                      1103
+#define txtExposedID                    1105
+#define staExpoedID                     1108
+#define staIsolationEntry               1109
+#define staExposedID                    1110
 
 // Next default values for new objects
 // 
@@ -108,7 +113,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        137
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1104
+#define _APS_NEXT_CONTROL_VALUE         1111
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -121,8 +121,16 @@ BOOL CFinalProjectDlg::OnInitDialog()
 	//  when the application's main window is not a dialog
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
-
-	// TODO: Add extra initialization here
+	
+	// Comboboxes initialization
+	for (int i = 0; i < NUM_OF_CITYS; i++) {
+		comboCityController.InsertString(i, CString(Citys[i].c_str()));
+		comboIsolationCityController.InsertString(i, CString(Citys[i].c_str()));
+	}
+	for (int i = 0; i < NUM_OF_HOSPITALS; i++)
+		comboHospitalController.InsertString(i, CString(Hospitals[i].c_str()));
+	for (int i = 0; i < NUM_OF_INFECTIONAREAS; i++)
+		comboInfectionAreaTypeController.InsertString(i, CString(InfectionAreas[i].c_str()));
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -223,8 +231,8 @@ void CFinalProjectDlg::OnBnClickedbtncreate()
 		}
 		case 1://Not Hospitalized
 		{
-			ToggleVisibilty(true, 2);
 			ToggleVisibilty(true, 3);
+			ToggleVisibilty(true, 2);
 			break;
 		}
 		case 2://Recovered
@@ -235,7 +243,6 @@ void CFinalProjectDlg::OnBnClickedbtncreate()
 		}
 		case 3://Self Isolation
 		{
-			ToggleVisibilty(true, 2);
 			ToggleVisibilty(true, 3);
 			break;
 		}
@@ -333,6 +340,10 @@ void CFinalProjectDlg::ToggleVisibilty(bool visiblity, int chunk)
 			GetDlgItem(txtInfectorID)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
 			GetDlgItem(staAreaType)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
 			GetDlgItem(comboInfectionAreaType)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(staExposedID)->ShowWindow(visiblity ? SW_HIDE : SW_SHOW);//	
+			GetDlgItem(txtExposedID)->ShowWindow(visiblity ? SW_HIDE : SW_SHOW);//
+			GetDlgItem(staIsolationEntry)->ShowWindow(visiblity ? SW_HIDE : SW_SHOW);
+			GetDlgItem(dtpIsolationEntry)->ShowWindow(visiblity ? SW_HIDE : SW_SHOW);
 			break;
 		}
 		case 3://chunk 3 - isolated
@@ -342,6 +353,10 @@ void CFinalProjectDlg::ToggleVisibilty(bool visiblity, int chunk)
 			GetDlgItem(comboIsolationCity)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
 			GetDlgItem(staIsolatedAddress)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);//
 			GetDlgItem(txtIsolationAddress)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);//
+			GetDlgItem(staExposedID)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);//	
+			GetDlgItem(txtExposedID)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);//
+			GetDlgItem(staIsolationEntry)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
+			GetDlgItem(dtpIsolationEntry)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
 			break;
 		}
 		case 4://chunk 4 - hospital
@@ -372,20 +387,17 @@ Function: [Event-Driven] On click the data filled in the fields will be placed i
 */
 void CFinalProjectDlg::OnBnClickedbtnaddperson()
 {
-	// TODO: Add your control notification handler code here
+	Person* NewPerson;
 	bool Gender, IsVentilated;
-	Hospitals Hospital;
-	SicknessLVL Level;
-	InfectionAreas Area;
-	Address Addr, SickIsolated;
-	Date Birthday, PositiveTest, HospitalEntry, Recovery;
-	CString ID, d, Name, DateBuffer, InfectedBy;
+	Address Addr, IsolationAddr;
+	Date Birthday, PositiveTest, HospitalEntry, Recovery, IsolationEntry;
+	CString ID, Name, DateBuffer, InfectedBy, ExposedTo, Hospital, Level, Area;
 	int selectedForm = comboDataTypeController.GetCurSel();
 	Gender = comboGenderController.GetCurSel();
 	GetDlgItemText(txtID, ID);
 	GetDlgItemText(txtFullName, Name);
 	GetDlgItemText(txtAddress, Addr.street);
-	Addr.city = static_cast<Citys>(comboCityController.GetCurSel());
+	comboCityController.GetLBText(comboCityController.GetCurSel(), Addr.city);
 	GetDlgItemText(dtpBirthDate, DateBuffer);
 	Birthday.day = _ttoi(DateBuffer.Mid(0, 2));
 	Birthday.month = _ttoi(DateBuffer.Mid(3, 5));
@@ -398,39 +410,39 @@ void CFinalProjectDlg::OnBnClickedbtnaddperson()
 		PositiveTest.month = _ttoi(DateBuffer.Mid(3, 5));
 		PositiveTest.year = _ttoi(DateBuffer.Mid(6, 10));
 		GetDlgItemText(txtInfectorID, InfectedBy); 
-		Area = static_cast<InfectionAreas>(comboInfectionAreaTypeController.GetCurSel());
+		comboSicknessLevelController.GetLBText(comboInfectionAreaTypeController.GetCurSel(), Area);
 
 		switch (comboDataTypeController.GetCurSel())//Hospitalized;Not Hospitalized;Recovered;Self Isolation;
 		{
-			case 0://Hospitalized
+			case 0:	//Hospitalized
 			{
-				Hospital = static_cast<Hospitals>(comboHospitalController.GetCurSel());
-				Level = static_cast<SicknessLVL>(comboSicknessLevelController.GetCurSel());
+				comboHospitalController.GetLBText(comboHospitalController.GetCurSel(), Hospital);
+				comboSicknessLevelController.GetLBText(comboSicknessLevelController.GetCurSel(), Level);
 				IsVentilated = comboVentilatedController.GetCurSel();
 				GetDlgItemText(dtpHospitalEntry, DateBuffer);
 				HospitalEntry.day = _ttoi(DateBuffer.Mid(0, 2));
 				HospitalEntry.month = _ttoi(DateBuffer.Mid(3, 5));
 				HospitalEntry.year = _ttoi(DateBuffer.Mid(6, 10));
-				Persons.push_back(Hospitalized(Gender, ID, Name, Addr, Birthday,
-					PositiveTest, Area, InfectedBy, Level, IsVentilated, Hospital, HospitalEntry));
+				NewPerson = new Hospitalized(Gender, ID, Name, Addr, Birthday,
+					PositiveTest, Area, InfectedBy, Level, IsVentilated, Hospital, HospitalEntry);
 				break;
 			}
-			case 1://Not Hospitalized
+			case 1:	//Not Hospitalized
 			{
-				GetDlgItemText(txtIsolationAddress, SickIsolated.street);
-				SickIsolated.city = static_cast<Citys>(comboIsolationCityController.GetCurSel());
-				Persons.push_back(NonHospitalized(Gender, ID, Name, Addr, Birthday,
-					PositiveTest, Area, InfectedBy, SickIsolated));
+				GetDlgItemText(txtIsolationAddress, IsolationAddr.street);
+				comboIsolationCityController.GetLBText(comboIsolationCityController.GetCurSel(), IsolationAddr.city);
+				NewPerson = new NonHospitalized(Gender, ID, Name, Addr, Birthday,
+					PositiveTest, Area, InfectedBy, IsolationAddr);
 				break;
 			}
-			case 2://Recovered
+			case 2: //Recovered
 			{
 				GetDlgItemText(dtpRecoveryDate, DateBuffer);
 				Recovery.day = _ttoi(DateBuffer.Mid(0, 2));
 				Recovery.month = _ttoi(DateBuffer.Mid(3, 5));
 				Recovery.year = _ttoi(DateBuffer.Mid(6, 10));
-				Persons.push_back(Recovered(Gender, ID, Name, Addr, Birthday, PositiveTest,
-					Area, InfectedBy, Recovery));
+				NewPerson = new Recovered(Gender, ID, Name, Addr, Birthday, PositiveTest,
+					Area, InfectedBy, Recovery);
 				break;
 			}
 
@@ -441,10 +453,17 @@ void CFinalProjectDlg::OnBnClickedbtnaddperson()
 		}
 	}
 
-	else
+	else  //Isolated
 	{
-		// Need to complete, there are some missing items in GUI for this isolated person
+		GetDlgItemText(txtIsolationAddress, IsolationAddr.street);
+		comboIsolationCityController.GetLBText(comboIsolationCityController.GetCurSel(), IsolationAddr.city);
+		GetDlgItemText(dtpIsolationEntry, DateBuffer);
+		IsolationEntry.day = _ttoi(DateBuffer.Mid(0, 2));
+		IsolationEntry.month = _ttoi(DateBuffer.Mid(3, 5));
+		IsolationEntry.year = _ttoi(DateBuffer.Mid(6, 10));
+		GetDlgItemText(txtExposedID, ExposedTo);
+		NewPerson = new Isolated(Gender, ID, Name, Addr, Birthday, IsolationAddr, IsolationEntry, ExposedTo);
 	}
 
+	Persons.push_back(NewPerson);
 }
-

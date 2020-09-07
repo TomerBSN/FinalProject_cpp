@@ -9,7 +9,7 @@ Sick::Sick()
 }
 
 Sick::Sick(bool gender, CString id, CString name, Address addr, Date birthday,
-	Date positivetest, InfectionAreas infectionarea, CString infectedby) : Person(gender, id, name, addr, birthday)
+	Date positivetest, CString infectionarea, CString infectedby) : Person(gender, id, name, addr, birthday)
 {
 	setDate(positivetest);
 	InfectionArea = infectionarea;
@@ -17,12 +17,12 @@ Sick::Sick(bool gender, CString id, CString name, Address addr, Date birthday,
 		InfectedBy = infectedby;
 }
 
-Sick::Sick(Sick& S)
+Sick::Sick(const Sick& S): Sick(S.Gender, S.ID, S.Name, S.address, S.Birthday, S.PositiveTest, S.InfectionArea, S.InfectedBy)
 {
-	Sick(S.Gender, S.ID, S.Name, S.address, S.Birthday, S.PositiveTest, S.InfectionArea, S.InfectedBy);
+
 }
 
-Sick::Sick(Isolated& I, Date positivetest, InfectionAreas infectionarea, CString infectedby) : Person(I)
+Sick::Sick(Isolated& I, Date positivetest, CString infectionarea, CString infectedby) : Person(I)
 {
 	setDate(positivetest);
 	InfectionArea = infectionarea;
@@ -52,7 +52,7 @@ CString Sick::get_InfectedBy()
 	return InfectedBy;
 }
 
-InfectionAreas Sick::get_InfectionArea()
+CString Sick::get_InfectionArea()
 {
 	return InfectionArea;
 }

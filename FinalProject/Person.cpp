@@ -17,9 +17,9 @@ Person::Person(bool gender, CString id, CString name, Address addr, Date birthda
 	setDate(birthday);
 }
 
-Person::Person(Person& P)
+Person::Person(const Person& P) : Person(P.Gender, P.ID, P.Name, P.address, P.Birthday)
 {
-	Person(P.Gender, P.ID, P.Name, P.address, P.Birthday);
+
 }
 
 Person::~Person()

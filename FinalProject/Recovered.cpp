@@ -8,7 +8,7 @@ Recovered::Recovered()
 }
 
 Recovered::Recovered(bool gender, CString id, CString name, Address addr, Date birthday,
-	Date positivetest, InfectionAreas infectionarea, CString infectedby, Date recovery) : Sick(gender,
+	Date positivetest, CString infectionarea, CString infectedby, Date recovery) : Sick(gender,
 		id, name, addr, birthday, positivetest, infectionarea, infectedby)
 
 {

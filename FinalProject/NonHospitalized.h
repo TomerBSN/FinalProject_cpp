@@ -7,8 +7,8 @@ class NonHospitalized : public Sick
 public:
 	NonHospitalized();
 	NonHospitalized(bool gender, CString id, CString name, Address addr, Date birthday,
-		Date positivetest, InfectionAreas infectionarea, CString infectedby, Address whereisolated);
-	NonHospitalized(Isolated& I, Date positivetest, InfectionAreas infectionarea, CString infectedby,
+		Date positivetest, CString infectionarea, CString infectedby, Address whereisolated);
+	NonHospitalized(Isolated& I, Date positivetest, CString infectionarea, CString infectedby,
 		Address whereisolated);
 	~NonHospitalized();
 
