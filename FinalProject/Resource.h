@@ -10,6 +10,7 @@
 #define IDD_SEARCH_DIALOG               130
 #define IDD_GRAPH_DIALOG                131
 #define IDC_BUTTON1                     1000
+#define btnSaveEdit_SH                  1000
 #define comboDataType                   1001
 #define btnAddPerson                    1003
 #define btnClearAll                     1004
@@ -58,15 +59,56 @@
 #define staHeader3                      1048
 #define btnSaveAll                      1049
 #define IDC_RADIO1                      1060
-#define staToDelete                     1061
+#define btnDelete_SH                    1062
+#define btnSearchID_SH                  1063
+#define txtSearchID_SH                  1064
+#define txtID_SH                        1065
+#define txtFullName_SH                  1066
+#define comboGender_SH                  1067
+#define comboCity_SH                    1068
+#define dtpBirthdate_SH                 1069
+#define comboStatus_SH                  1070
+#define txtInfectorID_SH                1071
+#define comboInfectionArea_SH           1072
+#define dtpPositiveTest_SH              1073
+#define dtpRecoveryDate_SH              1074
+#define comboIsolationCity_SH           1075
+#define comboIsolationAddress_SH        1076
+#define comboHospitalName_SH            1077
+#define comboSicknessLevel_SH           1078
+#define comboVentilated_SH              1079
+#define dtpHospitalDate_SH              1080
+#define txtAddress_SH                   1081
+#define comboDataType_SH                1082
+#define staSearchID_SH                  1083
+#define staID_SH                        1084
+#define staFullName_SH                  1085
+#define staGender_SH                    1086
+#define staCity_SH                      1087
+#define staAddress_SH                   1088
+#define staBirthdate_SH                 1089
+#define staStatus_SH                    1090
+#define staDataType_SH                  1091
+#define staInfectorID_SH                1092
+#define staInfectionArea_SH             1093
+#define staPositiveTest_SH              1094
+#define staRecoveryDate_SH              1095
+#define staIsolationCity_SH             1096
+#define staIsolationAddress_SH          1097
+#define staHospitalName_SH              1098
+#define staSicknessLevel_SH             1099
+#define staVentilated_SH                1100
+#define staHospitalDate_SH              1101
+#define staError_SH                     1102
+#define IDC_COMBO1                      1103
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        136
+#define _APS_NEXT_RESOURCE_VALUE        137
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1062
+#define _APS_NEXT_CONTROL_VALUE         1104
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

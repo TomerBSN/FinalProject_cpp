@@ -248,7 +248,9 @@ void CFinalProjectDlg::OnBnClickedbtncreate()
 	//char *s = "Hey There";
 	//CString cstr;
 	//cstr = CString(s);
-
+	//CString hip;
+	//hip.Format(_T(""));
+	//char* pChar = (char*)(LPCTSTR)hip;
 	//CString help(myString.c_str());
 	//for (int i = 0; i < NUM_OF_CITYS; i++)
 	//{
