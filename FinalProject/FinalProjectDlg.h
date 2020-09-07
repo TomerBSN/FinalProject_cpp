@@ -5,6 +5,7 @@
 #pragma once
 #include "afxdialogex.h"
 #include "Person.h"
+#include <list>
 // CFinalProjectDlg dialog
 class CFinalProjectDlg : public CDialogEx
 {
@@ -41,6 +42,7 @@ public:
 	afx_msg void OnBnClickedbtnclearall();
 	void ToggleVisibilty(bool visiblity, int group);
 	Person person;
+	list <Person> Persons;
 	CComboBox comboDataTypeController;
 	CComboBox comboGenderController;
 	CComboBox comboStatusController;

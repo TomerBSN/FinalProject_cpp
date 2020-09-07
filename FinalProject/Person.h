@@ -1,5 +1,4 @@
 #pragma once
-
 #include <string>
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -22,7 +21,7 @@ enum Citys {TelAviv, BatYam, Holon, RamatGan, Givataim, BneiBrak, OrYehuda, Zich
 			Acre, NofHagalil, MigdalHaemek, KiryatShmona};
 
 typedef struct address {
-	char street[MAX_STR];
+	CString street;
 	Citys city;
 }Address;
 
@@ -30,20 +29,20 @@ class Person
 {
 public:
 	Person();
-	Person(bool gender, const char* id, const char* name, Address addr, Date birthday);
+	Person(bool gender, CString id, CString name, Address addr, Date birthday);
 	Person(Person& P);
 	virtual ~Person();
 	bool get_Gender();
-	char* get_ID();
-	char* get_Name();
+	CString get_ID();
+	CString get_Name();
 	Address get_Address();
 	//string getCityString(const int ID);//To be removed if needed
 	Date get_Birthday();
 
 protected:
-	bool Gender;           // False -> male, True -> female
-	char ID[MAX_ID];
-	char Name[MAX_STR];
+	bool Gender;           // False -> Female, True -> Male
+	CString ID;
+	CString Name;
 	Address address;
 	Date Birthday;
 	//string cityName;
