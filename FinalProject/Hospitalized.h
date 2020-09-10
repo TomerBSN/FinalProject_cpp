@@ -3,7 +3,7 @@
 #include "Isolated.h"
 #define NUM_OF_HOSPITALS 12
 
-const string Hospitals[NUM_OF_CITYS] = { "Ichilov", "Sheba", "Rambam", "Shaare Zedek", "Meir", "Hasharon", "Assaf Harofeh", "Kaplan",
+const string Hospitals[NUM_OF_HOSPITALS] = { "Ichilov", "Sheba", "Rambam", "Shaare Zedek", "Meir", "Hasharon", "Assaf Harofeh", "Kaplan",
 				"Wolfson", "Poriya", "Barzilai", "Haemek" };
 
 class Hospitalized : public Sick
@@ -19,7 +19,7 @@ public:
 
 	CString get_Level();
 	bool get_IsVentilated();
-	bool get_Hospital();
+	CString get_Hospital();
 	Date get_HospitalizationDate();
 
 private:

@@ -88,6 +88,7 @@ BEGIN_MESSAGE_MAP(CFinalProjectDlg, CDialogEx)
 	ON_BN_CLICKED(btnCreate, &CFinalProjectDlg::OnBnClickedbtncreate)
 	ON_BN_CLICKED(btnClearAll, &CFinalProjectDlg::OnBnClickedbtnclearall)
 	ON_BN_CLICKED(btnAddPerson, &CFinalProjectDlg::OnBnClickedbtnaddperson)
+	ON_BN_CLICKED(btnSaveAll, &CFinalProjectDlg::OnBnClickedbtnsaveall)
 END_MESSAGE_MAP()
 
 
@@ -131,7 +132,10 @@ BOOL CFinalProjectDlg::OnInitDialog()
 		comboHospitalController.InsertString(i, CString(Hospitals[i].c_str()));
 	for (int i = 0; i < NUM_OF_INFECTIONAREAS; i++)
 		comboInfectionAreaTypeController.InsertString(i, CString(InfectionAreas[i].c_str()));
-
+	
+	comboDataTypeController.SetCurSel(0); //percaution so the user does not create a incorrect type of person into this field.
+	//To add: Load the persons vector from the personsSave.txt file properly.
+	
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -218,6 +222,7 @@ Function: [Event-Driven] Will reveal all the corresponding fields within the IDD
 void CFinalProjectDlg::OnBnClickedbtncreate()
 {
 	CString str;
+	GetDlgItem(staAddPerson)->ShowWindow(SW_HIDE);
 	ToggleVisibilty(true, 1);
 	
 	switch (comboDataTypeController.GetCurSel())//Hospitalized;Not Hospitalized;Recovered;Self Isolation;
@@ -226,7 +231,6 @@ void CFinalProjectDlg::OnBnClickedbtncreate()
 		{
 			ToggleVisibilty(true, 2);
 			ToggleVisibilty(true, 4);
-			//Add a Hospitalized Object here, then refer to load info function
 			break;
 		}
 		case 1://Not Hospitalized
@@ -248,38 +252,25 @@ void CFinalProjectDlg::OnBnClickedbtncreate()
 		}
 		default:
 		{
-			//Normally will go to Recovered one, or Self Isolation
-
 			break;
 		}
 	}
-
-	////Load Combobox items
-	//string myString = "Hello";
-
-	//char *s = "Hey There";
-	//CString cstr;
-	//cstr = CString(s);
-	//CString hip;
-	//hip.Format(_T(""));
-	//char* pChar = (char*)(LPCTSTR)hip;
-	//CString help(myString.c_str());
-	//for (int i = 0; i < NUM_OF_CITYS; i++)
-	//{
-	//	//str.Format(person.getCity(i));
-	//	comboCityController.InsertString(i, help); // m_cbMyCombo.InsertString( i, _strData );
-	//}
-	//comboCityController.SetCurSel(-1);
-
-
 	GetDlgItem(btnCreate)->EnableWindow(false);
 	comboDataTypeController.EnableWindow(false);
-	//optional: lock the create button until add_person is clicked or if clear all is clicked?
 }
 
+/*
+Function: [Event-Driven] When clicking the button it will reset the window to its clear position without any oddities.
+*/
 void CFinalProjectDlg::OnBnClickedbtnclearall()
 {
 	// TODO: clear the text and all that shit.
+	ClearFieldsOnScreen();
+	GetDlgItem(staAddPerson)->ShowWindow(SW_HIDE);
+
+}
+void CFinalProjectDlg::ClearFieldsOnScreen()
+{
 	CString cs;
 	cs.Format(_T(""));
 	SetDlgItemText(txtID, cs);
@@ -287,7 +278,7 @@ void CFinalProjectDlg::OnBnClickedbtnclearall()
 	SetDlgItemText(txtFullName, cs);
 	SetDlgItemText(txtInfectorID, cs);
 	SetDlgItemText(txtIsolationAddress, cs);
-	comboDataTypeController.SetCurSel(-1);
+	comboDataTypeController.SetCurSel(0);//always put it as 0, -1 can cause user generated issues.
 	comboGenderController.SetCurSel(-1);
 	comboHospitalController.SetCurSel(-1);
 	comboInfectionAreaTypeController.SetCurSel(-1);
@@ -296,12 +287,11 @@ void CFinalProjectDlg::OnBnClickedbtnclearall()
 	comboStatusController.SetCurSel(-1);
 	comboVentilatedController.SetCurSel(-1);
 	comboCityController.SetCurSel(-1);
-	
+
 	for (int i = 1; i <= 5; i++) ToggleVisibilty(false, i);
 	GetDlgItem(btnCreate)->EnableWindow(true);
 	comboDataTypeController.EnableWindow(true);
 }
-
 /*
 Function: [void] will toggle the ShowWindow of each DlgItem depending on their "chunk"/group affiliation.
 		Visibilty: True = Show, False = Hide
@@ -466,4 +456,116 @@ void CFinalProjectDlg::OnBnClickedbtnaddperson()
 	}
 
 	Persons.push_back(NewPerson);
+	ClearFieldsOnScreen();
+	
+	CString temp;
+	temp.Format(_T("ID %s has been added"), ID);
+	SetDlgItemText(staAddPerson, temp);
+	GetDlgItem(staAddPerson)->ShowWindow(SW_SHOW);
+}
+
+/*
+Function: [Event-Driven] Runs through the persons vector and saves all the data into a personsSave.txt file
+*/
+void CFinalProjectDlg::OnBnClickedbtnsaveall()
+{
+	/*
+		To add:
+			- Needs a proper way to discern if there is a file or not. In case we will need to "Run over" the existing file or not.
+			- We need to complete the "User line"
+			- Need a way to find a way to pull information of the other types through the Persons. Probably need to add a virtual function for each to see if it can be manipulated that way or not.
+	*/
+	vector<Person*>::iterator ptr;
+	CStdioFile f;
+	CString myLine;// , lineBreak, itemBreak;
+	CFileException e;
+	TCHAR* pszFileName = _T("peopleSave.txt");
+	if (!f.Open(pszFileName, CStdioFile::modeCreate | CStdioFile::modeWrite, &e))
+	{
+		TRACE(_T("File could not be opened %d\n"), e.m_cause);
+		return;
+	}
+
+	//loading here
+	int i = 0;
+	ptr = Persons.begin();
+	while (ptr != Persons.end())
+	{
+		//FORMAT: type; id; name; gender; address city; address street; birthday.day; birthday.month; birthday.year;
+		myLine.Format(_T("%d; %s; %s; %d; %s; %s; %s; %d; %d; %d; "), Persons[i]->get_itemType(), Persons[i]->get_ID(), Persons[i]->get_Name(), Persons[i]->get_Gender(), Persons[i]->get_Address().city, Persons[i]->get_Address().street, Persons[i]->get_Birthday().day, Persons[i]->get_Birthday().month, Persons[i]->get_Birthday().year);
+		f.WriteString(myLine);
+		//switch on type
+		if (Persons[i]->get_itemType() != 3) {
+			//not isolated, dump sick info
+			//FORMAT: PositiveTest.day; PositiveTest.month; PositiveTest.year; InfectorID; InfectionArea;
+			
+			//myLine.Format(_T("%d; %d; %d; %s; %s; "))
+			//f.WriteString(myLine);
+		}
+		switch (Persons[i]->get_itemType())
+		{
+			case 0://hospitalized
+			{
+				break;
+			}
+			case 1://non-hospitalized
+			{
+				break;
+			}
+			case 2://recovered
+			{
+				break;
+			}
+			case 3://isolated
+			{
+				break;
+			}
+			default:
+			{
+				TRACE(_T("ERROR IN HANDLING DATATYPE INFO DUMP"));
+				break;
+			}
+		}
+
+		i++;
+		ptr++;
+	}
+
+	f.Close();
+	myLine.Format(_T("All %d People have been added"), i+1);
+	SetDlgItemText(staAddPerson, myLine);
+	GetDlgItem(staAddPerson)->ShowWindow(SW_SHOW);
+	/*
+	
+		list<Person>::iterator ptr;
+		ptr = people.begin();
+		CStdioFile f;
+		CFileException e;
+		TCHAR* pszFileName = _T("peopleSave.txt");
+		if (!f.Open(pszFileName, CStdioFile::modeCreate | CStdioFile::modeWrite, &e))
+		{
+			TRACE(_T("File could not be opened %d\n"), e.m_cause);
+			return;
+		}
+		CString myJJ;
+		int i = 50;
+		while (ptr != people.end())
+		{
+			myJJ.Format(_T("%d"), i);
+			f.WriteString(myJJ);
+			f.WriteString(_T("; "));
+			myJJ.Format(_T("%s"), ptr._Ptr->_Myval.getName());
+			f.WriteString(myJJ);
+			f.WriteString(_T("; "));
+			myJJ.Format(_T("%d"), ptr._Ptr->_Myval.getInfected());// , ptr._Ptr->_Myval.getName());
+			f.WriteString(myJJ);
+			f.WriteString(_T(";\n"));
+			i++;
+			ptr++;
+		}
+
+		f.Close();
+		SetDlgItemText(IDC_STATIC, pszFileName);
+	
+	*/
 }

@@ -13,21 +13,29 @@ Recovered::Recovered(bool gender, CString id, CString name, Address addr, Date b
 
 {
 	setDate(recovery);
+	itemType = 2;
 }
 
 Recovered::Recovered(Hospitalized& H, Date recovery) : Sick(H)
 {
 	setDate(recovery);
+	itemType = 2;
 }
 
 Recovered::Recovered(NonHospitalized& NH, Date recovery) : Sick(NH)
 {
 	setDate(recovery);
+	itemType = 2;
 }
 
 Recovered::~Recovered()
 {
 
+}
+
+Date Recovered::get_RecoveryDate()
+{
+	return this->Recovery;
 }
 
 void Recovered::setDate(Date date)

@@ -17,6 +17,7 @@ Hospitalized::Hospitalized(bool gender, CString id, CString name, Address addr, 
 	IsVentilated = isventilated;
 	Hospital = hospital;
 	setDate(hospitalization);
+	itemType = 0;
 }
 
 Hospitalized::Hospitalized(Isolated& I, Date positivetest, CString infectionarea,
@@ -27,11 +28,32 @@ Hospitalized::Hospitalized(Isolated& I, Date positivetest, CString infectionarea
 	IsVentilated = isventilated;
 	Hospital = hospital;
 	setDate(hospitalization);
+	itemType = 0;
 }
 
 Hospitalized::~Hospitalized()
 {
 
+}
+
+CString Hospitalized::get_Level()
+{
+	return this->Level;
+}
+
+bool Hospitalized::get_IsVentilated()
+{
+	return this->IsVentilated;
+}
+
+CString Hospitalized::get_Hospital()
+{
+	return this->Hospital;
+}
+
+Date Hospitalized::get_HospitalizationDate()
+{
+	return this->Hospitalization;
 }
 
 void Hospitalized::setDate(Date date)

@@ -5,7 +5,7 @@
 
 Isolated::Isolated()
 {
-
+	itemType = 3;
 }
 
 Isolated::Isolated(bool gender, CString id, CString name, Address addr, Date birthday,
@@ -15,11 +15,27 @@ Isolated::Isolated(bool gender, CString id, CString name, Address addr, Date bir
 	setDate(Isolation);
 	if (exposedto.GetLength())
 		ExposedTo = exposedto;
+	itemType = 3;
 }
 
 Isolated::~Isolated()
 {
 
+}
+
+Address Isolated::get_WhereIsolated()
+{
+	return this->WhereIsolated;
+}
+
+Date Isolated::get_Isolation_date()
+{
+	return this->Isolation;
+}
+
+CString Isolated::get_ExposedTo()
+{
+	return this->ExposedTo;
 }
 
 void Isolated::setAddress(Address addr)

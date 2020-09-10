@@ -106,6 +106,7 @@
 #define staExpoedID                     1108
 #define staIsolationEntry               1109
 #define staExposedID                    1110
+#define staAddPerson                    1111
 
 // Next default values for new objects
 // 
@@ -113,7 +114,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        137
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1111
+#define _APS_NEXT_CONTROL_VALUE         1112
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

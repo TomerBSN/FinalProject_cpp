@@ -6,6 +6,7 @@
 #include "afxdialogex.h"
 #include "Person.h"
 #include <vector>
+using namespace std;
 // CFinalProjectDlg dialog
 class CFinalProjectDlg : public CDialogEx
 {
@@ -40,8 +41,8 @@ public:
 	afx_msg void OnBnClickedbtncreate();
 	
 	afx_msg void OnBnClickedbtnclearall();
+	void ClearFieldsOnScreen();
 	void ToggleVisibilty(bool visiblity, int group);
-	Person person;
 	vector <Person*> Persons;
 	CComboBox comboDataTypeController;
 	CComboBox comboGenderController;
@@ -54,4 +55,5 @@ public:
 	CComboBox comboCityController;
 	CDateTimeCtrl dtpBirthDateController;
 	afx_msg void OnBnClickedbtnaddperson();
+	afx_msg void OnBnClickedbtnsaveall();
 };

@@ -72,3 +72,8 @@ Date Person::get_Birthday()
 {
 	return Birthday;
 }
+
+int Person::get_itemType()
+{
+	return this->itemType;
+}

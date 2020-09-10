@@ -40,6 +40,7 @@ public:
 	Address get_Address();
 	//string getCityString(const int ID);//To be removed if needed
 	Date get_Birthday();
+	int get_itemType();
 
 protected:
 	bool Gender;           // False -> Female, True -> Male
@@ -47,6 +48,7 @@ protected:
 	CString Name;
 	Address address;
 	Date Birthday;
+	int itemType = -1;
 	//string cityName;
 	virtual void setAddress(Address addr);
 	virtual void setDate(Date date);

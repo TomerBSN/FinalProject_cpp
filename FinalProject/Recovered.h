@@ -13,7 +13,7 @@ public:
 	Recovered(NonHospitalized& NH, Date recovery);
 	~Recovered();
 
-	Date get_RecoeryDate();
+	Date get_RecoveryDate();
 
 private:
 	Date Recovery;
