@@ -458,8 +458,8 @@ void CFinalProjectDlg::OnBnClickedbtnaddperson()
 	Persons.push_back(NewPerson);
 	ClearFieldsOnScreen();
 	
-	CString temp;
-	temp.Format(_T("ID %s has been added"), ID);
+	CString temp = _T("");
+	temp.Format(_T("ID %s has been added"), (LPCTSTR)ID);
 	SetDlgItemText(staAddPerson, temp);
 	GetDlgItem(staAddPerson)->ShowWindow(SW_SHOW);
 }
@@ -469,19 +469,22 @@ Function: [Event-Driven] Runs through the persons vector and saves all the data 
 */
 void CFinalProjectDlg::OnBnClickedbtnsaveall()
 {
+	
 	/*
-		To add:
-			- Needs a proper way to discern if there is a file or not. In case we will need to "Run over" the existing file or not.
-			- We need to complete the "User line"
-			- Need a way to find a way to pull information of the other types through the Persons. Probably need to add a virtual function for each to see if it can be manipulated that way or not.
+		Formatting rules:
+			- Dates: Day -> Month -> Year
+			- Address: City -> Street
+			- Do it by the way the class members appear in each class.
 	*/
 	vector<Person*>::iterator ptr;
 	CStdioFile f;
-	CString myLine;// , lineBreak, itemBreak;
+	CString myLine;
 	CFileException e;
 	TCHAR* pszFileName = _T("peopleSave.txt");
 	if (!f.Open(pszFileName, CStdioFile::modeCreate | CStdioFile::modeWrite, &e))
 	{
+		myLine.Format(_T("Error in opening pszFileName/Path at:\n%s\nFile could not be opened %d"), (LPCTSTR)pszFileName, e.m_cause);
+		MessageBox((LPCTSTR)myLine);
 		TRACE(_T("File could not be opened %d\n"), e.m_cause);
 		return;
 	}
@@ -492,41 +495,55 @@ void CFinalProjectDlg::OnBnClickedbtnsaveall()
 	while (ptr != Persons.end())
 	{
 		//FORMAT: type; id; name; gender; address city; address street; birthday.day; birthday.month; birthday.year;
-		myLine.Format(_T("%d; %s; %s; %d; %s; %s; %s; %d; %d; %d; "), Persons[i]->get_itemType(), Persons[i]->get_ID(), Persons[i]->get_Name(), Persons[i]->get_Gender(), Persons[i]->get_Address().city, Persons[i]->get_Address().street, Persons[i]->get_Birthday().day, Persons[i]->get_Birthday().month, Persons[i]->get_Birthday().year);
-		f.WriteString(myLine);
-		//switch on type
-		if (Persons[i]->get_itemType() != 3) {
-			//not isolated, dump sick info
+		myLine.Format(_T("%d; %s; %s; %d; %s; %s; %d; %d; %d; #"), Persons[i]->get_itemType(), (LPCTSTR)Persons[i]->get_ID(), (LPCTSTR)Persons[i]->get_Name(), Persons[i]->get_Gender(), (LPCTSTR)Persons[i]->get_Address().city, (LPCTSTR)Persons[i]->get_Address().street, Persons[i]->get_Birthday().day, Persons[i]->get_Birthday().month, Persons[i]->get_Birthday().year);
+		f.WriteString((LPCTSTR)myLine);
+
+		if (Persons[i]->get_itemType() != 3)//not isolated, dump sick info
+		{
 			//FORMAT: PositiveTest.day; PositiveTest.month; PositiveTest.year; InfectorID; InfectionArea;
-			
-			//myLine.Format(_T("%d; %d; %d; %s; %s; "))
-			//f.WriteString(myLine);
+			myLine.Format(_T("%d; %d; %d; %s; %s; #"), Persons[i]->get_PositiveTest_date().day, Persons[i]->get_PositiveTest_date().day, Persons[i]->get_PositiveTest_date().day, (LPCTSTR)Persons[i]->get_InfectedBy(), (LPCTSTR)Persons[i]->get_InfectionArea());
+			f.WriteString((LPCTSTR)myLine);
 		}
 		switch (Persons[i]->get_itemType())
 		{
 			case 0://hospitalized
 			{
+				//format: Level; isVentilatyed; Hospital; HospitalizationDate.day; HD.month; HD.year;
+				myLine.Format(_T("%s; %d; %s; %d; %d; %d; #"), (LPCTSTR)Persons[i]->get_Level(), Persons[i]->get_IsVentilated(), (LPCTSTR)Persons[i]->get_Hospital(), Persons[i]->get_HospitalizationDate().day, Persons[i]->get_HospitalizationDate().month, Persons[i]->get_HospitalizationDate().year);
+				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
 			case 1://non-hospitalized
 			{
+				//format: whereIsolated city; whereIsolated street;
+				myLine.Format(_T("%s; %s; #"), (LPCTSTR)Persons[i]->get_WhereIsolated().city, (LPCTSTR)Persons[i]->get_WhereIsolated().street);
+				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
 			case 2://recovered
 			{
+				//format: recovery,day; recovery.month; recovery.year;
+				myLine.Format(_T("%d; %d; %d; #"), Persons[i]->get_RecoveryDate().day, Persons[i]->get_RecoveryDate().month, Persons[i]->get_RecoveryDate().year);
+				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
 			case 3://isolated
 			{
+				//format: whereIsolated.city; whereisolated.street; isolateddate.day; isolation.month; isolation.year; ExpostedTo;
+				myLine.Format(_T("%s; %s; %d; %d; %d; %s; #"), (LPCTSTR)Persons[i]->get_WhereIsolated().city, (LPCTSTR)Persons[i]->get_WhereIsolated().street, Persons[i]->get_Isolation_date().day, Persons[i]->get_Isolation_date().month, Persons[i]->get_Isolation_date().year, (LPCTSTR)Persons[i]->get_ExposedTo());
+				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
 			default:
 			{
+				myLine.Format(_T("Error in handling get_itemType()\nPerson ID: %s; Type: %d;"), (LPCTSTR)Persons[i]->get_ID(), Persons[i]->get_itemType());
+				MessageBox((LPCTSTR)myLine);
 				TRACE(_T("ERROR IN HANDLING DATATYPE INFO DUMP"));
 				break;
 			}
 		}
-
+		myLine.Format(_T("\n"));
+		f.WriteString(myLine);
 		i++;
 		ptr++;
 	}
@@ -535,37 +552,4 @@ void CFinalProjectDlg::OnBnClickedbtnsaveall()
 	myLine.Format(_T("All %d People have been added"), i+1);
 	SetDlgItemText(staAddPerson, myLine);
 	GetDlgItem(staAddPerson)->ShowWindow(SW_SHOW);
-	/*
-	
-		list<Person>::iterator ptr;
-		ptr = people.begin();
-		CStdioFile f;
-		CFileException e;
-		TCHAR* pszFileName = _T("peopleSave.txt");
-		if (!f.Open(pszFileName, CStdioFile::modeCreate | CStdioFile::modeWrite, &e))
-		{
-			TRACE(_T("File could not be opened %d\n"), e.m_cause);
-			return;
-		}
-		CString myJJ;
-		int i = 50;
-		while (ptr != people.end())
-		{
-			myJJ.Format(_T("%d"), i);
-			f.WriteString(myJJ);
-			f.WriteString(_T("; "));
-			myJJ.Format(_T("%s"), ptr._Ptr->_Myval.getName());
-			f.WriteString(myJJ);
-			f.WriteString(_T("; "));
-			myJJ.Format(_T("%d"), ptr._Ptr->_Myval.getInfected());// , ptr._Ptr->_Myval.getName());
-			f.WriteString(myJJ);
-			f.WriteString(_T(";\n"));
-			i++;
-			ptr++;
-		}
-
-		f.Close();
-		SetDlgItemText(IDC_STATIC, pszFileName);
-	
-	*/
 }

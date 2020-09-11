@@ -7,7 +7,6 @@
 #define MAX_STR 25
 #define NUM_OF_CITYS 40
 
-// TODO: think about replacing char array in string class
 using namespace std;
 
 typedef struct date {
@@ -38,9 +37,33 @@ public:
 	CString get_ID();
 	CString get_Name();
 	Address get_Address();
-	//string getCityString(const int ID);//To be removed if needed
 	Date get_Birthday();
 	int get_itemType();
+
+	//Functions that are pure abstract in a sense.
+
+	//Gets the sickness level; Hospitalized type;
+	virtual CString get_Level() { return NULL; };
+	//Gets if the person is Ventilated; Hospitalized type;
+	virtual bool get_IsVentilated() { return false; };
+	//Gets the hospital name; Hospitalized type;
+	virtual CString get_Hospital() { return NULL; };
+	//Gets the date they entered the hospital; Hospitalized type;
+	virtual Date get_HospitalizationDate() { Date d; d.day = 1; d.month = 1; d.year = 1; return d; };
+	//Gets the address of where they are isolated; Non-Hospitalized type & Isolated type;
+	virtual Address get_WhereIsolated() { Address ad; return ad; };
+	//Gets the date of when they recovered from sickness; Recovered type;
+	virtual Date get_RecoveryDate() { Date d; d.day = 1; d.month = 1; d.year = 1; return d; };
+	//Gets the date of when they entered isolation; Isolated type;
+	virtual Date get_Isolation_date() { Date d; d.day = 1; d.month = 1; d.year = 1; return d; };
+	//Gets the ID of who that was sick who exposed them to the illness; Isolated type;
+	virtual CString get_ExposedTo() { return NULL; };
+	//Gets the date of the Positive Covid test; Sick type;
+	virtual Date get_PositiveTest_date() { Date d; d.day = 1; d.month = 1; d.year = 1; return d; };
+	//Gets the ID of who infected them actually; Sick type;
+	virtual CString get_InfectedBy() { return NULL; };
+	//Gets the type of area they were in last that caused this positive test state; Sick type;
+	virtual CString get_InfectionArea() { return NULL; };
 
 protected:
 	bool Gender;           // False -> Female, True -> Male
@@ -49,7 +72,6 @@ protected:
 	Address address;
 	Date Birthday;
 	int itemType = -1;
-	//string cityName;
 	virtual void setAddress(Address addr);
 	virtual void setDate(Date date);
 };
