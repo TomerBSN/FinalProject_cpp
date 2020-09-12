@@ -17,5 +17,4 @@ public:
 
 private:
 	Date Recovery;
-	void setDate(Date date);
 };

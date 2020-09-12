@@ -39,6 +39,11 @@ public:
 	Address get_Address();
 	Date get_Birthday();
 	int get_itemType();
+	void set_Gender(const bool gender);
+	void set_ID(const CString id);
+	void set_Name(const CString name);
+	void set_Address(const Address addr);
+	void set_Birthday(const Date birthday);
 
 	//Functions that are pure abstract in a sense.
 
@@ -65,6 +70,7 @@ public:
 	//Gets the type of area they were in last that caused this positive test state; Sick type;
 	virtual CString get_InfectionArea() { return NULL; };
 
+
 protected:
 	bool Gender;           // False -> Female, True -> Male
 	CString ID;
@@ -72,6 +78,4 @@ protected:
 	Address address;
 	Date Birthday;
 	int itemType = -1;
-	virtual void setAddress(Address addr);
-	virtual void setDate(Date date);
 };

@@ -13,8 +13,8 @@ public:
 	~NonHospitalized();
 
 	Address get_WhereIsolated();
+	void set_WhereIsolated(const Address addr);
 
 private:
 	Address WhereIsolated;
-	void setAddress(Address addr);
 };

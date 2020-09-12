@@ -25,6 +25,4 @@ protected:
 	CString InfectedBy;
 	CString InfectionArea;
 	static int TotalSick;
-	void setDate(Date date);
-
 };

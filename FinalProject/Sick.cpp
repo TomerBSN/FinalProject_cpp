@@ -11,7 +11,7 @@ Sick::Sick()
 Sick::Sick(bool gender, CString id, CString name, Address addr, Date birthday,
 	Date positivetest, CString infectionarea, CString infectedby) : Person(gender, id, name, addr, birthday)
 {
-	setDate(positivetest);
+	PositiveTest = positivetest;
 	InfectionArea = infectionarea;
 	if (infectedby.GetLength())
 		InfectedBy = infectedby;
@@ -24,7 +24,7 @@ Sick::Sick(const Sick& S): Sick(S.Gender, S.ID, S.Name, S.address, S.Birthday, S
 
 Sick::Sick(Isolated& I, Date positivetest, CString infectionarea, CString infectedby) : Person(I)
 {
-	setDate(positivetest);
+	PositiveTest = positivetest;
 	InfectionArea = infectionarea;
 	if (infectedby.GetLength())
 		InfectedBy = infectedby;
@@ -33,13 +33,6 @@ Sick::Sick(Isolated& I, Date positivetest, CString infectionarea, CString infect
 Sick::~Sick()
 {
 
-}
-
-void Sick::setDate(Date date)
-{
-	PositiveTest.day = date.day;
-	PositiveTest.month = date.month;
-	PositiveTest.year = date.year;
 }
 
 Date Sick::get_PositiveTest_date()

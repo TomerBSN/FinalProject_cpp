@@ -9,10 +9,10 @@ Isolated::Isolated()
 }
 
 Isolated::Isolated(bool gender, CString id, CString name, Address addr, Date birthday,
-	Address whereisolated, Date Isolation, CString exposedto) : Person(gender, id, name, addr, birthday)
+	Address whereisolated, Date isolation, CString exposedto) : Person(gender, id, name, addr, birthday)
 {
-	setAddress(whereisolated);
-	setDate(Isolation);
+	WhereIsolated = whereisolated;
+	Isolation = isolation;
 	if (exposedto.GetLength())
 		ExposedTo = exposedto;
 	itemType = 3;
@@ -36,17 +36,4 @@ Date Isolated::get_Isolation_date()
 CString Isolated::get_ExposedTo()
 {
 	return this->ExposedTo;
-}
-
-void Isolated::setAddress(Address addr)
-{
-	WhereIsolated.street = addr.street;
-	WhereIsolated.city = addr.city;
-}
-
-void Isolated::setDate(Date date)
-{
-	Isolation.day = date.day;
-	Isolation.month = date.month;
-	Isolation.year = date.year;
 }

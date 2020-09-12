@@ -13,8 +13,8 @@ Person::Person(bool gender, CString id, CString name, Address addr, Date birthda
 	Gender = gender;
 	Name = name;
 	ID = id;
-	setAddress(addr);
-	setDate(birthday);
+	address = addr;
+	Birthday = birthday;
 }
 
 Person::Person(const Person& P) : Person(P.Gender, P.ID, P.Name, P.address, P.Birthday)
@@ -25,19 +25,6 @@ Person::Person(const Person& P) : Person(P.Gender, P.ID, P.Name, P.address, P.Bi
 Person::~Person()
 {
 
-}
-
-void Person::setAddress(Address addr)
-{
-	address.street = addr.street;
-	address.city = addr.city;
-}
-
-void Person::setDate(Date date)
-{
-	Birthday.day = date.day;
-	Birthday.month = date.month;
-	Birthday.year = date.year;
 }
 
 bool Person::get_Gender()
@@ -60,20 +47,38 @@ Address Person::get_Address()
 	return address;
 }
 
-//string Person::getCityString(const int ID)
-//{
-//	string str[NUM_OF_CITYS] = { "TelAviv", "BatYam", "Holon", "RamatGan", "Givataim", "BneiBrak", "OrYehuda", "ZichronYaakov", "Ramla", "Lod", "KfarChabad", "PetahTikva", "RishonLezion", "Rehovot", "KfarSaba", "Raanana", "Herzliya", "HodHasharon", "RamatHasharon", "Jerusalem", "BeitShemesh", "Modiin", "ModiinIllit", "Elad", "Efrat", "BeitarIllit", "Ashkelon", "Ashdod", "Netivot", "KiryatGat", "BeerSheva", "Sderot", "Netanya", "Haifa", "Hedera", "Tveria","Acre", "NofHagalil", "MigdalHaemek", "KiryatShmona" };
-//
-//	if (ID < 0 || ID > 39) return "Error";
-//	return str[ID];
-//}
-
 Date Person::get_Birthday()
 {
 	return Birthday;
+}
+
+void Person::set_Gender(const bool gender)
+{
+	Gender = gender;
+}
+
+void Person::set_ID(const CString id)
+{
+	ID = id;
+}
+
+void Person::set_Name(const CString name)
+{
+	Name = name;
+}
+
+void Person::set_Address(const Address addr)
+{
+	address = addr;
+}
+
+void Person::set_Birthday(const Date birthday)
+{
+	Birthday = birthday;
 }
 
 int Person::get_itemType()
 {
 	return this->itemType;
 }
+

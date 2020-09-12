@@ -2,17 +2,19 @@
 #include "Sick.h"
 #include "Isolated.h"
 #define NUM_OF_HOSPITALS 12
+#define NUM_OF_LEVELS 3
 
 const string Hospitals[NUM_OF_HOSPITALS] = { "Ichilov", "Sheba", "Rambam", "Shaare Zedek", "Meir", "Hasharon", "Assaf Harofeh", "Kaplan",
 				"Wolfson", "Poriya", "Barzilai", "Haemek" };
+const string SicknessLVL[NUM_OF_LEVELS] = { "Easy", "Medium", "Critical" };
 
 class Hospitalized : public Sick
 {
 public:
 	Hospitalized();
 	Hospitalized(bool gender, CString id, CString name, Address addr, Date birthday,
-				 Date positivetest, CString infectionarea, CString infectedby,
-				 CString level, bool isventilated, CString hospital, Date hospitalization);
+		Date positivetest, CString infectionarea, CString infectedby,
+		CString level, bool isventilated, CString hospital, Date hospitalization);
 	Hospitalized(Isolated& I, Date positivetest, CString infectionarea, CString infectedby,
 		CString level, bool isventilated, CString hospital, Date hospitalization);
 	~Hospitalized();
@@ -27,5 +29,4 @@ private:
 	bool IsVentilated;
 	CString Hospital;
 	Date Hospitalization;
-	void setDate(Date date);
 };

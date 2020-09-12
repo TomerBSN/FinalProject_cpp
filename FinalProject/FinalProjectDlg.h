@@ -40,11 +40,9 @@ public:
 	afx_msg void OnBnClickedbtncreategraphs();
 	afx_msg void OnBnClickedbtnabout();
 	afx_msg void OnBnClickedbtncreate();
-	
 	afx_msg void OnBnClickedbtnclearall();
 	void ClearFieldsOnScreen();
 	void ToggleVisibilty(bool visiblity, int group);
-	vector <Person*> Persons;
 	CComboBox comboDataTypeController;
 	CComboBox comboGenderController;
 	CComboBox comboStatusController;

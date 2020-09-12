@@ -13,11 +13,22 @@
 #include "NonHospitalized.h"
 #include "Recovered.h"
 #include "Isolated.h"
+#include "Global.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 using namespace std;
+
+vector <Person*> Persons;
+map<CString, int> CountByCity;
+map<CString, int> CountByLevel;
+map<CString, int> CountByArea;
+map<CString, int> CountByHostital;
+int TotalHospitalized;
+int TotalNonHospitalized;
+int TotalRecovered;
+int TotalIsolated;
 
 // CAboutDlg dialog used for App About
 
@@ -123,15 +134,32 @@ BOOL CFinalProjectDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	
-	// Comboboxes initialization
+	// Comboboxes + counters initialization
 	for (int i = 0; i < NUM_OF_CITYS; i++) {
-		comboCityController.InsertString(i, CString(Citys[i].c_str()));
-		comboIsolationCityController.InsertString(i, CString(Citys[i].c_str()));
+		CString City = CString(Citys[i].c_str());
+		comboCityController.InsertString(i, City);
+		comboIsolationCityController.InsertString(i, City);
+		CountByCity[City] = 0;
 	}
-	for (int i = 0; i < NUM_OF_HOSPITALS; i++)
-		comboHospitalController.InsertString(i, CString(Hospitals[i].c_str()));
-	for (int i = 0; i < NUM_OF_INFECTIONAREAS; i++)
-		comboInfectionAreaTypeController.InsertString(i, CString(InfectionAreas[i].c_str()));
+	for (int i = 0; i < NUM_OF_HOSPITALS; i++) {
+		CString Hospital = CString(Hospitals[i].c_str());
+		comboHospitalController.InsertString(i, Hospital);
+		CountByHostital[Hospital] = 0;
+	}
+	for (int i = 0; i < NUM_OF_INFECTIONAREAS; i++) {
+		CString Area = CString(InfectionAreas[i].c_str());
+		comboInfectionAreaTypeController.InsertString(i, Area);
+		CountByArea[Area] = 0;
+	}
+	for (int i = 0; i < NUM_OF_LEVELS; i++) {
+		CString Level = CString(SicknessLVL[i].c_str());
+		CountByLevel[Level] = 0;
+	}
+
+	TotalHospitalized = 0;
+	TotalNonHospitalized = 0;
+	TotalRecovered = 0;
+	TotalIsolated = 0;
 	
 	comboDataTypeController.SetCurSel(0); //percaution so the user does not create a incorrect type of person into this field.
 	//Loads the persons vector from the personsSave.txt file properly.
@@ -400,67 +428,72 @@ void CFinalProjectDlg::OnBnClickedbtnaddperson()
 	Birthday.month = _ttoi(DateBuffer.Mid(3, 5));
 	Birthday.year = _ttoi(DateBuffer.Mid(6, 10));
 
-	if (selectedForm<=2)
-	{ 
+	if (selectedForm != 3) //Except from isolated
+	{
 		GetDlgItemText(dtpPositiveTest, DateBuffer);
 		PositiveTest.day = _ttoi(DateBuffer.Mid(0, 2));
 		PositiveTest.month = _ttoi(DateBuffer.Mid(3, 5));
 		PositiveTest.year = _ttoi(DateBuffer.Mid(6, 10));
-		GetDlgItemText(txtInfectorID, InfectedBy); 
-		comboSicknessLevelController.GetLBText(comboInfectionAreaTypeController.GetCurSel(), Area);
-
-		switch (comboDataTypeController.GetCurSel())//Hospitalized;Not Hospitalized;Recovered;Self Isolation;
-		{
-			case 0:	//Hospitalized
-			{
-				comboHospitalController.GetLBText(comboHospitalController.GetCurSel(), Hospital);
-				comboSicknessLevelController.GetLBText(comboSicknessLevelController.GetCurSel(), Level);
-				IsVentilated = comboVentilatedController.GetCurSel();
-				GetDlgItemText(dtpHospitalEntry, DateBuffer);
-				HospitalEntry.day = _ttoi(DateBuffer.Mid(0, 2));
-				HospitalEntry.month = _ttoi(DateBuffer.Mid(3, 5));
-				HospitalEntry.year = _ttoi(DateBuffer.Mid(6, 10));
-				NewPerson = new Hospitalized(Gender, ID, Name, Addr, Birthday,
-					PositiveTest, Area, InfectedBy, Level, IsVentilated, Hospital, HospitalEntry);
-				break;
-			}
-			case 1:	//Not Hospitalized
-			{
-				GetDlgItemText(txtIsolationAddress, IsolationAddr.street);
-				comboIsolationCityController.GetLBText(comboIsolationCityController.GetCurSel(), IsolationAddr.city);
-				NewPerson = new NonHospitalized(Gender, ID, Name, Addr, Birthday,
-					PositiveTest, Area, InfectedBy, IsolationAddr);
-				break;
-			}
-			case 2: //Recovered
-			{
-				GetDlgItemText(dtpRecoveryDate, DateBuffer);
-				Recovery.day = _ttoi(DateBuffer.Mid(0, 2));
-				Recovery.month = _ttoi(DateBuffer.Mid(3, 5));
-				Recovery.year = _ttoi(DateBuffer.Mid(6, 10));
-				NewPerson = new Recovered(Gender, ID, Name, Addr, Birthday, PositiveTest,
-					Area, InfectedBy, Recovery);
-				break;
-			}
-
-			default:
-			{
-				break;
-			}
-		}
+		GetDlgItemText(txtInfectorID, InfectedBy);
+		comboInfectionAreaTypeController.GetLBText(comboInfectionAreaTypeController.GetCurSel(), Area);
 	}
 
-	else  //Isolated
+	switch (selectedForm)	//Hospitalized;Not Hospitalized;Recovered;Self Isolation;
 	{
-		GetDlgItemText(txtIsolationAddress, IsolationAddr.street);
-		comboIsolationCityController.GetLBText(comboIsolationCityController.GetCurSel(), IsolationAddr.city);
-		GetDlgItemText(dtpIsolationEntry, DateBuffer);
-		IsolationEntry.day = _ttoi(DateBuffer.Mid(0, 2));
-		IsolationEntry.month = _ttoi(DateBuffer.Mid(3, 5));
-		IsolationEntry.year = _ttoi(DateBuffer.Mid(6, 10));
-		GetDlgItemText(txtExposedID, ExposedTo);
-		NewPerson = new Isolated(Gender, ID, Name, Addr, Birthday, IsolationAddr, IsolationEntry, ExposedTo);
+		case 0:	//Hospitalized
+		{
+			comboHospitalController.GetLBText(comboHospitalController.GetCurSel(), Hospital);
+			comboSicknessLevelController.GetLBText(comboSicknessLevelController.GetCurSel(), Level);
+			IsVentilated = comboVentilatedController.GetCurSel();
+			GetDlgItemText(dtpHospitalEntry, DateBuffer);
+			HospitalEntry.day = _ttoi(DateBuffer.Mid(0, 2));
+			HospitalEntry.month = _ttoi(DateBuffer.Mid(3, 5));
+			HospitalEntry.year = _ttoi(DateBuffer.Mid(6, 10));
+			TotalHospitalized++;
+			NewPerson = new Hospitalized(Gender, ID, Name, Addr, Birthday,
+				PositiveTest, Area, InfectedBy, Level, IsVentilated, Hospital, HospitalEntry);
+			break;
+		}
+
+		case 1:	//Not Hospitalized
+		{
+			GetDlgItemText(txtIsolationAddress, IsolationAddr.street);
+			comboIsolationCityController.GetLBText(comboIsolationCityController.GetCurSel(), IsolationAddr.city);
+			TotalNonHospitalized++;
+			NewPerson = new NonHospitalized(Gender, ID, Name, Addr, Birthday,
+				PositiveTest, Area, InfectedBy, IsolationAddr);
+			break;
+		}
+
+		case 2: //Recovered
+		{
+			GetDlgItemText(dtpRecoveryDate, DateBuffer);
+			Recovery.day = _ttoi(DateBuffer.Mid(0, 2));
+			Recovery.month = _ttoi(DateBuffer.Mid(3, 5));
+			Recovery.year = _ttoi(DateBuffer.Mid(6, 10));
+			TotalRecovered++;
+			NewPerson = new Recovered(Gender, ID, Name, Addr, Birthday, PositiveTest,
+				Area, InfectedBy, Recovery);
+			break;
+		}
+
+		case 3: //Isolated
+		{
+			GetDlgItemText(txtIsolationAddress, IsolationAddr.street);
+			comboIsolationCityController.GetLBText(comboIsolationCityController.GetCurSel(), IsolationAddr.city);
+			GetDlgItemText(dtpIsolationEntry, DateBuffer);
+			IsolationEntry.day = _ttoi(DateBuffer.Mid(0, 2));
+			IsolationEntry.month = _ttoi(DateBuffer.Mid(3, 5));
+			IsolationEntry.year = _ttoi(DateBuffer.Mid(6, 10));
+			GetDlgItemText(txtExposedID, ExposedTo);
+			TotalIsolated++;
+			NewPerson = new Isolated(Gender, ID, Name, Addr, Birthday, IsolationAddr, IsolationEntry, ExposedTo);
+		}
+
+		default:
+			break;
 	}
+
 
 	Persons.push_back(NewPerson);
 	ClearFieldsOnScreen();

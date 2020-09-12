@@ -13,14 +13,14 @@ NonHospitalized::NonHospitalized(bool gender, CString id, CString name, Address 
 		id, name, addr, birthday, positivetest, infectionarea, infectedby)
 
 {
-	setAddress(whereisolated);
+	WhereIsolated = whereisolated;
 	itemType = 1;
 }
 
 NonHospitalized::NonHospitalized(Isolated& I, Date positivetest, CString infectionarea,
 	CString infectedby, Address whereisolated) : Sick(I, positivetest, infectionarea, infectedby)
 {
-	setAddress(whereisolated);
+	WhereIsolated = whereisolated;
 	itemType = 1;
 }
 
@@ -35,8 +35,7 @@ Address NonHospitalized::get_WhereIsolated()
 	return this->WhereIsolated;
 }
 
-void NonHospitalized::setAddress(Address addr)
+void NonHospitalized::set_WhereIsolated(const Address addr)
 {
-	WhereIsolated.street = addr.street;
-	WhereIsolated.city = addr.city;
+	WhereIsolated = addr;
 }

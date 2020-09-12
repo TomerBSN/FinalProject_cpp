@@ -187,6 +187,7 @@
     <ClInclude Include="CSearchDlg.h" />
     <ClInclude Include="FinalProject.h" />
     <ClInclude Include="FinalProjectDlg.h" />
+    <ClInclude Include="Global.h" />
     <ClInclude Include="Hospitalized.h" />
     <ClInclude Include="Isolated.h" />
     <ClInclude Include="NonHospitalized.h" />
