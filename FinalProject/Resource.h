@@ -11,6 +11,7 @@
 #define IDD_GRAPH_DIALOG                131
 #define IDC_BUTTON1                     1000
 #define btnSaveEdit_SH                  1000
+#define btnTest                         1000
 #define comboDataType                   1001
 #define btnAddPerson                    1003
 #define btnClearAll                     1004

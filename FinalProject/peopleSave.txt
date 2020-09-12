@@ -1,1 +1,4 @@
-0; 7634; asaf d; 0; Holon; fsd 34; 9; 1; 20; Easy; 0; Sheba; 9; 1; 20;
+0;123;asaf;0;Tel Aviv;das;9;2;20;9;9;9;890;Easy;Critical;1;Kaplan;8;1;20;#
+1;432;asdsa;1;Tel Aviv;gfdf 234;9;0;20;9;9;9;4343;Easy;Tel Aviv;fsd 31;#
+2;44333;utyt;0;Tel Aviv;street 1241;1;4;9;8;8;8;413341;Medium;9;2;20;#
+3;8585;jhmh ghjgh;0;Bat Yam;fff 4564;12;29;2008;Tel Aviv;reter 25;9;0;20;2352;#

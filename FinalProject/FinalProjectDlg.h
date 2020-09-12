@@ -6,6 +6,7 @@
 #include "afxdialogex.h"
 #include "Person.h"
 #include <vector>
+#include <list>
 using namespace std;
 // CFinalProjectDlg dialog
 class CFinalProjectDlg : public CDialogEx
@@ -56,4 +57,7 @@ public:
 	CDateTimeCtrl dtpBirthDateController;
 	afx_msg void OnBnClickedbtnaddperson();
 	afx_msg void OnBnClickedbtnsaveall();
+	void fillCstringList(CString wholeFile);
+	list <CString> seperateLine(CString theLine, CString seperator);
+	CString loadFile(TCHAR* FileName);
 };

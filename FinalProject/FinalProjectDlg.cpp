@@ -134,7 +134,12 @@ BOOL CFinalProjectDlg::OnInitDialog()
 		comboInfectionAreaTypeController.InsertString(i, CString(InfectionAreas[i].c_str()));
 	
 	comboDataTypeController.SetCurSel(0); //percaution so the user does not create a incorrect type of person into this field.
-	//To add: Load the persons vector from the personsSave.txt file properly.
+	//Loads the persons vector from the personsSave.txt file properly.
+	
+		TCHAR* fname = _T("peopleSave.txt");
+		CString wholeStr = loadFile(fname);
+		if(!(wholeStr.IsEmpty()))
+			fillCstringList(wholeStr);
 	
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -155,7 +160,6 @@ void CFinalProjectDlg::OnSysCommand(UINT nID, LPARAM lParam)
 // If you add a minimize button to your dialog, you will need the code below
 //  to draw the icon.  For MFC applications using the document/view model,
 //  this is automatically done for you by the framework.
-
 void CFinalProjectDlg::OnPaint()
 {
 	if (IsIconic())
@@ -269,6 +273,8 @@ void CFinalProjectDlg::OnBnClickedbtnclearall()
 	GetDlgItem(staAddPerson)->ShowWindow(SW_HIDE);
 
 }
+
+/*Function: [Event-Driven] Will reset all the corresponding fields within the main Dialog Window.*/
 void CFinalProjectDlg::ClearFieldsOnScreen()
 {
 	CString cs;
@@ -292,6 +298,7 @@ void CFinalProjectDlg::ClearFieldsOnScreen()
 	GetDlgItem(btnCreate)->EnableWindow(true);
 	comboDataTypeController.EnableWindow(true);
 }
+
 /*
 Function: [void] will toggle the ShowWindow of each DlgItem depending on their "chunk"/group affiliation.
 		Visibilty: True = Show, False = Hide
@@ -494,14 +501,14 @@ void CFinalProjectDlg::OnBnClickedbtnsaveall()
 	ptr = Persons.begin();
 	while (ptr != Persons.end())
 	{
-		//FORMAT: type; id; name; gender; address city; address street; birthday.day; birthday.month; birthday.year;
-		myLine.Format(_T("%d; %s; %s; %d; %s; %s; %d; %d; %d; #"), Persons[i]->get_itemType(), (LPCTSTR)Persons[i]->get_ID(), (LPCTSTR)Persons[i]->get_Name(), Persons[i]->get_Gender(), (LPCTSTR)Persons[i]->get_Address().city, (LPCTSTR)Persons[i]->get_Address().street, Persons[i]->get_Birthday().day, Persons[i]->get_Birthday().month, Persons[i]->get_Birthday().year);
+		//Base FORMAT: type; id; name; gender; address city; address street; birthday.day; birthday.month; birthday.year;
+		myLine.Format(_T("%d;%s;%s;%d;%s;%s;%d;%d;%d;"), Persons[i]->get_itemType(), (LPCTSTR)Persons[i]->get_ID(), (LPCTSTR)Persons[i]->get_Name(), Persons[i]->get_Gender(), (LPCTSTR)Persons[i]->get_Address().city, (LPCTSTR)Persons[i]->get_Address().street, Persons[i]->get_Birthday().day, Persons[i]->get_Birthday().month, Persons[i]->get_Birthday().year);
 		f.WriteString((LPCTSTR)myLine);
 
 		if (Persons[i]->get_itemType() != 3)//not isolated, dump sick info
 		{
 			//FORMAT: PositiveTest.day; PositiveTest.month; PositiveTest.year; InfectorID; InfectionArea;
-			myLine.Format(_T("%d; %d; %d; %s; %s; #"), Persons[i]->get_PositiveTest_date().day, Persons[i]->get_PositiveTest_date().day, Persons[i]->get_PositiveTest_date().day, (LPCTSTR)Persons[i]->get_InfectedBy(), (LPCTSTR)Persons[i]->get_InfectionArea());
+			myLine.Format(_T("%d;%d;%d;%s;%s;"), Persons[i]->get_PositiveTest_date().day, Persons[i]->get_PositiveTest_date().day, Persons[i]->get_PositiveTest_date().day, (LPCTSTR)Persons[i]->get_InfectedBy(), (LPCTSTR)Persons[i]->get_InfectionArea());
 			f.WriteString((LPCTSTR)myLine);
 		}
 		switch (Persons[i]->get_itemType())
@@ -509,28 +516,28 @@ void CFinalProjectDlg::OnBnClickedbtnsaveall()
 			case 0://hospitalized
 			{
 				//format: Level; isVentilatyed; Hospital; HospitalizationDate.day; HD.month; HD.year;
-				myLine.Format(_T("%s; %d; %s; %d; %d; %d; #"), (LPCTSTR)Persons[i]->get_Level(), Persons[i]->get_IsVentilated(), (LPCTSTR)Persons[i]->get_Hospital(), Persons[i]->get_HospitalizationDate().day, Persons[i]->get_HospitalizationDate().month, Persons[i]->get_HospitalizationDate().year);
+				myLine.Format(_T("%s;%d;%s;%d;%d;%d;#"), (LPCTSTR)Persons[i]->get_Level(), Persons[i]->get_IsVentilated(), (LPCTSTR)Persons[i]->get_Hospital(), Persons[i]->get_HospitalizationDate().day, Persons[i]->get_HospitalizationDate().month, Persons[i]->get_HospitalizationDate().year);
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
 			case 1://non-hospitalized
 			{
 				//format: whereIsolated city; whereIsolated street;
-				myLine.Format(_T("%s; %s; #"), (LPCTSTR)Persons[i]->get_WhereIsolated().city, (LPCTSTR)Persons[i]->get_WhereIsolated().street);
+				myLine.Format(_T("%s;%s;#"), (LPCTSTR)Persons[i]->get_WhereIsolated().city, (LPCTSTR)Persons[i]->get_WhereIsolated().street);
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
 			case 2://recovered
 			{
 				//format: recovery,day; recovery.month; recovery.year;
-				myLine.Format(_T("%d; %d; %d; #"), Persons[i]->get_RecoveryDate().day, Persons[i]->get_RecoveryDate().month, Persons[i]->get_RecoveryDate().year);
+				myLine.Format(_T("%d;%d;%d;#"), Persons[i]->get_RecoveryDate().day, Persons[i]->get_RecoveryDate().month, Persons[i]->get_RecoveryDate().year);
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
 			case 3://isolated
 			{
 				//format: whereIsolated.city; whereisolated.street; isolateddate.day; isolation.month; isolation.year; ExpostedTo;
-				myLine.Format(_T("%s; %s; %d; %d; %d; %s; #"), (LPCTSTR)Persons[i]->get_WhereIsolated().city, (LPCTSTR)Persons[i]->get_WhereIsolated().street, Persons[i]->get_Isolation_date().day, Persons[i]->get_Isolation_date().month, Persons[i]->get_Isolation_date().year, (LPCTSTR)Persons[i]->get_ExposedTo());
+				myLine.Format(_T("%s;%s;%d;%d;%d;%s;#"), (LPCTSTR)Persons[i]->get_WhereIsolated().city, (LPCTSTR)Persons[i]->get_WhereIsolated().street, Persons[i]->get_Isolation_date().day, Persons[i]->get_Isolation_date().month, Persons[i]->get_Isolation_date().year, (LPCTSTR)Persons[i]->get_ExposedTo());
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
@@ -552,4 +559,175 @@ void CFinalProjectDlg::OnBnClickedbtnsaveall()
 	myLine.Format(_T("All %d People have been added"), i+1);
 	SetDlgItemText(staAddPerson, myLine);
 	GetDlgItem(staAddPerson)->ShowWindow(SW_SHOW);
+}
+
+/*Function: [void] Gets a CString that has all the user inputed info from a previous run, and "chops" the data into proper formatting, adding each line of data as a new person within the persons vector*/
+void CFinalProjectDlg::fillCstringList(CString wholeFile)
+{
+	list <CString> wholePersonItemList = seperateLine(wholeFile, (LPCTSTR)_T("#"));
+	list <CString>::iterator ptr_person = wholePersonItemList.begin();
+	list <CString> singlePersonItemList;
+	list <CString>::iterator ptr_single;
+	int todel = 0;
+	CString todel2;
+	Person* per;
+	int itemType;
+	bool Gender, IsVentilated;
+	Address Addr, IsolationAddr;
+	Date Birthday, PositiveTest, HospitalEntry, Recovery, IsolationEntry;
+	CString ID, Name, DateBuffer, InfectedBy, ExposedTo, Hospital, Level, Area, line;
+	while (ptr_person._Ptr->_Next != NULL)
+	{
+		if (ptr_person._Ptr->_Myval.IsEmpty())
+			break;
+		line = ptr_person._Ptr->_Myval;
+		singlePersonItemList = seperateLine(line, (LPCTSTR)_T(";"));//split new line
+		//load info of personal person here
+		ptr_single = singlePersonItemList.begin();
+		//Base FORMAT: type; id; name; gender; address city; address street; birthday.day; birthday.month; birthday.year;
+
+		itemType = _ttoi(ptr_single._Ptr->_Myval);
+		ptr_single++;
+		Name = ptr_single._Ptr->_Myval;
+		ptr_single++;
+		Gender = _ttoi(ptr_single._Ptr->_Myval);
+		ptr_single++;
+		Addr.city = ptr_single._Ptr->_Myval;
+		ptr_single++;
+		Addr.street = ptr_single._Ptr->_Myval;
+		ptr_single++;
+		Birthday.day = _ttoi(ptr_single._Ptr->_Myval);
+		ptr_single++;
+		Birthday.month = _ttoi(ptr_single._Ptr->_Myval);
+		ptr_single++;
+		Birthday.year = _ttoi(ptr_single._Ptr->_Myval);
+		ptr_single++;
+
+		if (itemType != 3)//Not Isolated, so it needs Sick class members
+		{
+			//Sick FORMAT: PositiveTest.day; PositiveTest.month; PositiveTest.year; InfectorID; InfectionArea;
+			PositiveTest.day = _ttoi(ptr_single._Ptr->_Myval);
+			ptr_single++;
+			PositiveTest.month = _ttoi(ptr_single._Ptr->_Myval);
+			ptr_single++;
+			PositiveTest.year = _ttoi(ptr_single._Ptr->_Myval);
+			ptr_single++;
+			InfectedBy = ptr_single._Ptr->_Myval;
+			ptr_single++;
+			Area = ptr_single._Ptr->_Myval;
+			ptr_single++;
+		}
+		switch (itemType)
+		{
+			case 0://Hospitalized format: Level; isVentilatyed; Hospital; HospitalizationDate.day; HD.month; HD.year;
+			{
+				Level = ptr_single._Ptr->_Myval;
+				ptr_single++;
+				IsVentilated = _ttoi(ptr_single._Ptr->_Myval);
+				ptr_single++;
+				Hospital = ptr_single._Ptr->_Myval;
+				ptr_single++;
+				HospitalEntry.day = _ttoi(ptr_single._Ptr->_Myval);
+				ptr_single++;
+				HospitalEntry.month = _ttoi(ptr_single._Ptr->_Myval);
+				ptr_single++;
+				HospitalEntry.year = _ttoi(ptr_single._Ptr->_Myval);
+				ptr_single++;
+				per = new Hospitalized(Gender, ID, Name, Addr, Birthday, PositiveTest, Area, InfectedBy, Level, IsVentilated, Hospital, HospitalEntry);
+				break;
+			}
+			case 1://non-Hospitalized: whereIsolated city; whereIsolated street;
+			{
+				IsolationAddr.city = ptr_single._Ptr->_Myval;
+				ptr_single++;
+				IsolationAddr.street = ptr_single._Ptr->_Myval;
+				ptr_single++;
+				per = new NonHospitalized(Gender, ID, Name, Addr, Birthday, PositiveTest, Area, InfectedBy, IsolationAddr);
+				break;
+			}
+			case 2://recovered format: recovery,day; recovery.month; recovery.year;
+			{
+				Recovery.day = _ttoi(ptr_single._Ptr->_Myval);
+				ptr_single++;
+				Recovery.month = _ttoi(ptr_single._Ptr->_Myval);
+				ptr_single++;
+				Recovery.year = _ttoi(ptr_single._Ptr->_Myval);
+				ptr_single++;
+				per = new Recovered(Gender, ID, Name, Addr, Birthday, PositiveTest, Area, InfectedBy, Recovery);
+				break;
+			}
+			case 3://isolated format: whereIsolated.city; whereisolated.street; isolateddate.day; isolation.month; isolation.year; ExpostedTo;
+			{
+				IsolationAddr.city = ptr_single._Ptr->_Myval;
+				ptr_single++;
+				IsolationAddr.street = ptr_single._Ptr->_Myval;
+				ptr_single++;
+				IsolationEntry.day = _ttoi(ptr_single._Ptr->_Myval);
+				ptr_single++;
+				IsolationEntry.month = _ttoi(ptr_single._Ptr->_Myval);
+				ptr_single++;
+				IsolationEntry.year = _ttoi(ptr_single._Ptr->_Myval);
+				ptr_single++;
+				ExposedTo = ptr_single._Ptr->_Myval;
+				ptr_single++;
+				per = new Isolated(Gender, ID, Name, Addr, Birthday, IsolationAddr, IsolationEntry, ExposedTo);
+				break;
+			}
+			default:
+			{
+				MessageBox(_T("Error at fillCstringList"));
+				break;
+			}
+		}
+		Persons.push_back(per);
+		todel++;
+		todel2.Format(_T("%d   %s"), todel, (LPCTSTR)line);
+		MessageBox(todel2);
+		ptr_person++;
+	}
+}
+
+/*Function: [list] Gets a line and seperator that will tokenize the line, returning a list of the untokenized CString that we got.*/
+list <CString> CFinalProjectDlg::seperateLine(CString theLine, CString seperator)
+{
+	list <CString> myList;
+	int pos = 0, items = 0;
+	CString sc = seperator;//Seperator
+	CString tokenLine = theLine.Tokenize(sc, pos);
+	items++;
+	myList.push_back(tokenLine);
+	while (!tokenLine.IsEmpty())
+	{
+		tokenLine = theLine.Tokenize(sc, pos);
+		myList.push_back(tokenLine);
+		items++;
+	}
+	return myList;
+}
+
+/*Function: [CString] Gets a TCHAR* which is the filename, and if accessable, it will place all the data from that file into a CString, returning it.*/
+CString CFinalProjectDlg::loadFile(TCHAR* FileName)
+{
+	CStdioFile f;
+	CString line = _T(""), error, wholeStr = _T("");
+	CFileException e;
+	TCHAR* pszFileName = _T("peopleSave.txt");
+	if (!f.Open(pszFileName, CStdioFile::modeRead, &e))
+	{
+		TRACE(_T("File could not be opened %d\n"), e.m_cause);
+		error.Format(_T("Could not find %s file to read from.\nException: %d"), pszFileName, e.m_cause);
+		MessageBox(error); // Error Message
+		return NULL;
+	}
+
+	f.SeekToBegin();
+	while (f.ReadString(line))
+	{
+		if (!line.IsEmpty())
+		{
+			wholeStr += line;
+		}
+	}
+	f.Close();
+	return wholeStr;
 }
