@@ -58,4 +58,6 @@ public:
 	void fillCstringList(CString wholeFile);
 	vector <CString> seperateLine(CString theLine, CString seperator);
 	CString loadFile(TCHAR* FileName);
+	bool checkUserInputData(int selectedFormType);
+	bool CheckDate(Date d1, Date d2);
 };

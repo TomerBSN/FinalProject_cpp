@@ -412,12 +412,17 @@ Function: [Event-Driven] On click the data filled in the fields will be placed i
 */
 void CFinalProjectDlg::OnBnClickedbtnaddperson()
 {
-	Person* NewPerson;
+	int selectedForm = comboDataTypeController.GetCurSel();
+	if (!checkUserInputData(selectedForm))//Implement a function that check data of all input. Dates vs Dates, CString lengths, etc.
+	{
+		return;
+	}
+	Person* NewPerson = NULL;
 	bool Gender, IsVentilated;
 	Address Addr, IsolationAddr;
 	Date Birthday, PositiveTest, HospitalEntry, Recovery, IsolationEntry;
 	CString ID, Name, DateBuffer, InfectedBy, ExposedTo, Hospital, Level, Area;
-	int selectedForm = comboDataTypeController.GetCurSel();
+	
 	Gender = comboGenderController.GetCurSel();
 	GetDlgItemText(txtID, ID);
 	GetDlgItemText(txtFullName, Name);
@@ -493,11 +498,10 @@ void CFinalProjectDlg::OnBnClickedbtnaddperson()
 		default:
 			break;
 	}
-
-
+	
 	Persons.push_back(NewPerson);
 	ClearFieldsOnScreen();
-	
+
 	CString temp = _T("");
 	temp.Format(_T("ID %s has been added"), (LPCTSTR)ID);
 	SetDlgItemText(staAddPerson, temp);
@@ -593,7 +597,9 @@ void CFinalProjectDlg::OnBnClickedbtnsaveall()
 	GetDlgItem(staAddPerson)->ShowWindow(SW_SHOW);
 }
 
-/*Function: [void] Gets a CString that has all the user inputed info from a previous run, and "chops" the data into proper formatting, adding each line of data as a new person within the persons vector*/
+/*
+Function: [void] Gets a CString that has all the user inputed info from a previous run, and "chops" the data into proper formatting, adding each line of data as a new person within the persons vector
+*/
 void CFinalProjectDlg::fillCstringList(CString wholeFile)
 {
 	vector <CString> wholePersonItemList = seperateLine(wholeFile, (LPCTSTR)_T("#"));
@@ -679,7 +685,9 @@ void CFinalProjectDlg::fillCstringList(CString wholeFile)
 	}
 }
 
-/*Function: [vector] Gets a line and seperator that will tokenize the line, returning a list of the untokenized CString that we got.*/
+/*
+Function: [vector] Gets a line and seperator that will tokenize the line, returning a list of the untokenized CString that we got.
+*/
 vector <CString> CFinalProjectDlg::seperateLine(CString theLine, CString seperator)
 {
 	vector <CString> myList;
@@ -694,7 +702,8 @@ vector <CString> CFinalProjectDlg::seperateLine(CString theLine, CString seperat
 	return myList;
 }
 
-/*Function: [CString] Gets a TCHAR* which is the filename, and if accessable, it will place all the data from that file into a CString, returning it.*/
+/*
+Function: [CString] Gets a TCHAR* which is the filename, and if accessable, it will place all the data from that file into a CString, returning it.*/
 CString CFinalProjectDlg::loadFile(TCHAR* FileName)
 {
 	CStdioFile f;
@@ -719,4 +728,212 @@ CString CFinalProjectDlg::loadFile(TCHAR* FileName)
 	}
 	f.Close();
 	return wholeStr;
+}
+
+/*
+Function: [void] Goes through the whole dialog inputs and checks to see if all the data is accurately inputed.
+	- ID must be a number at a length of up to 9 digits.
+	- Dates must not conflict
+	- Checks the allocation of the strings.
+
+	If the input is incorrect it will pop a message box and return false.
+*/
+bool CFinalProjectDlg::checkUserInputData(int selectedForm)
+{
+	bool isCorrect = true;
+	CString fullMsg, smallMsg, temp, DateBuffer;
+	Date Birthday, PositiveTest, HospitalEntry, Recovery, IsolationEntry;
+	GetDlgItemText(dtpBirthDate, DateBuffer);
+	Birthday.day = _ttoi(DateBuffer.Mid(0, 2));
+	Birthday.month = _ttoi(DateBuffer.Mid(3, 5));
+	Birthday.year = _ttoi(DateBuffer.Mid(6, 10));
+	smallMsg.Format(_T("The following issues have been found in your input:\n"));
+	fullMsg += smallMsg;
+	GetDlgItemText(txtFullName, temp);
+	if (temp.IsEmpty()) {
+		smallMsg.Format(_T("The Name is not set.\n"));
+		fullMsg += smallMsg;
+		isCorrect = false;
+	}
+	//check if the starter combo boxes are not at -1
+	if (comboGenderController.GetCurSel() == -1) {
+		smallMsg.Format(_T("Gender is not set.\n"));
+		fullMsg += smallMsg;
+		isCorrect = false;
+	}
+	if (comboCityController.GetCurSel() == -1) {
+		smallMsg.Format(_T("City is not set.\n"));
+		fullMsg += smallMsg;
+		isCorrect = false;
+	}
+	GetDlgItemText(txtAddress, temp);
+	if (temp.IsEmpty()) {
+		smallMsg.Format(_T("The Street Address is not set.\n"));
+		fullMsg += smallMsg;
+		isCorrect = false;
+	}
+	if (comboStatusController.GetCurSel() == -1)
+	{
+		smallMsg.Format(_T("Status is not set.\n"));
+		fullMsg += smallMsg;
+		isCorrect = false;
+	}
+	//check the ID here
+	GetDlgItemText(txtID, temp);
+	if (temp.GetLength() != 9) {
+		smallMsg.Format(_T("The ID is not 9 digits long.\n"));
+		fullMsg += smallMsg;
+		isCorrect = false;
+	}
+
+	if (selectedForm != 3)//if it has Sick.h properties
+	{
+		GetDlgItemText(txtInfectorID, temp);
+		if (temp.GetLength() != 9) {
+			smallMsg.Format(_T("The Infector ID is not 9 digits long.\n"));
+			fullMsg += smallMsg;
+			isCorrect = false;
+		}
+		if (comboInfectionAreaTypeController.GetCurSel() == -1)
+		{
+			smallMsg.Format(_T("Area type of infection is not set.\n"));
+			fullMsg += smallMsg;
+			isCorrect = false;
+		}
+		GetDlgItemText(dtpPositiveTest, DateBuffer);
+		PositiveTest.day = _ttoi(DateBuffer.Mid(0, 2));
+		PositiveTest.month = _ttoi(DateBuffer.Mid(3, 5));
+		PositiveTest.year = _ttoi(DateBuffer.Mid(6, 10));
+		if (CheckDate(Birthday, PositiveTest))
+		{
+			smallMsg.Format(_T("The Positive Test date can't be before the Birthdate.\n"));
+			fullMsg += smallMsg;
+			isCorrect = false;
+		}
+	}
+	//switch between the type of the person data then check as per that
+	switch (selectedForm) {
+		case 0://hospitalized
+		{
+			GetDlgItemText(dtpHospitalEntry, DateBuffer);
+			HospitalEntry.day = _ttoi(DateBuffer.Mid(0, 2));
+			HospitalEntry.month = _ttoi(DateBuffer.Mid(3, 5));
+			HospitalEntry.year = _ttoi(DateBuffer.Mid(6, 10));
+			if (CheckDate(Birthday, HospitalEntry)) {
+				smallMsg.Format(_T("The Hospital Entry date can't be before the Birthdate.\n"));
+				fullMsg += smallMsg;
+				isCorrect = false;
+			}
+			if (CheckDate(PositiveTest, HospitalEntry))
+			{
+				smallMsg.Format(_T("The Hospital Entry date can't be before the Positive Test Date.\n"));
+				fullMsg += smallMsg;
+				isCorrect = false;
+			}
+			if (comboHospitalController.GetCurSel() == -1)
+			{
+				smallMsg.Format(_T("Hospital Name is not set.\n"));
+				fullMsg += smallMsg;
+				isCorrect = false;
+			}
+			if (comboSicknessLevelController.GetCurSel() == -1)
+			{
+				smallMsg.Format(_T("Sickness Level is not set.\n"));
+				fullMsg += smallMsg;
+				isCorrect = false;
+			}
+			if (comboVentilatedController.GetCurSel() == -1)
+			{
+				smallMsg.Format(_T("Ventilated is not set.\n"));
+				fullMsg += smallMsg;
+				isCorrect = false;
+			}
+			break;
+		}
+		case 1://non-hospitalized
+		{
+			GetDlgItemText(txtIsolationAddress, temp);
+			if (temp.IsEmpty()) {
+				smallMsg.Format(_T("The Isolation Street Address is not set.\n"));
+				fullMsg += smallMsg;
+				isCorrect = false;
+			}
+			if (comboIsolationCityController.GetCurSel() == -1)
+			{
+				smallMsg.Format(_T("The Isolation City is not set.\n"));
+				fullMsg += smallMsg;
+				isCorrect = false;
+			}
+			break;
+		}
+		case 2://recovered
+		{
+			GetDlgItemText(dtpRecoveryDate, DateBuffer);
+			Recovery.day = _ttoi(DateBuffer.Mid(0, 2));
+			Recovery.month = _ttoi(DateBuffer.Mid(3, 5));
+			Recovery.year = _ttoi(DateBuffer.Mid(6, 10));
+			if (CheckDate(Birthday, Recovery)) {
+				smallMsg.Format(_T("The Recovery date can't be before the Birthdate.\n"));
+				fullMsg += smallMsg;
+				isCorrect = false;
+			}
+			if (CheckDate(PositiveTest, Recovery)) {
+				smallMsg.Format(_T("The Recovery date can't be before the Positive Test Date.\n"));
+				fullMsg += smallMsg;
+				isCorrect = false;
+			}
+			break;
+		}
+		case 3://isolated
+		{
+			GetDlgItemText(dtpIsolationEntry, DateBuffer);
+			IsolationEntry.day = _ttoi(DateBuffer.Mid(0, 2));
+			IsolationEntry.month = _ttoi(DateBuffer.Mid(3, 5));
+			IsolationEntry.year = _ttoi(DateBuffer.Mid(6, 10));
+			if (CheckDate(Birthday, IsolationEntry)) {
+				smallMsg.Format(_T("The Isolation Entry date can't be before the Birthdate.\n"));
+				fullMsg += smallMsg;
+				isCorrect = false;
+			}
+			GetDlgItemText(txtIsolationAddress, temp);
+			if (temp.IsEmpty()) {
+				smallMsg.Format(_T("The Isolation Street Address is not set.\n"));
+				fullMsg += smallMsg;
+				isCorrect = false;
+			}
+			GetDlgItemText(txtExposedID, temp);
+			if (temp.GetLength() != 9)
+			{
+				smallMsg.Format(_T("The Exposed ID is not 9 digits long.\n"));
+				fullMsg += smallMsg;
+				isCorrect = false;
+			}
+			if (comboIsolationCityController.GetCurSel() == -1)
+			{
+				smallMsg.Format(_T("The Isolation City is not set.\n"));
+				fullMsg += smallMsg;
+				isCorrect = false;
+			}
+			break;
+		}
+		default:
+		{
+			break;
+		}
+	}
+
+	//pops message box if needed
+	if (isCorrect == false) MessageBox((LPCTSTR)fullMsg);
+	return isCorrect;
+}
+
+/*
+Function: [bool] Gets 2 dates, and returns false if the left date is before the right one, and returns true if the right date is before the left one.
+*/
+bool CFinalProjectDlg::CheckDate(Date d1, Date d2)
+{
+	if (d1.year <= d2.year) return false;
+	else if (d1.month <= d2.month) return false;
+	else if (d1.day <= d2.day) return false;
+	return true;
 }
