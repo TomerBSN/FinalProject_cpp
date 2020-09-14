@@ -535,42 +535,41 @@ void CFinalProjectDlg::OnBnClickedbtnsaveall()
 	while (ptr != Persons.end())
 	{
 		//Base FORMAT: type; id; name; gender; address city; address street; birthday.day; birthday.month; birthday.year;
-		myLine.Format(_T("%d;%s;%s;%d;%s;%s;%d;%d;%d;"), Persons[i]->get_itemType(), (LPCTSTR)Persons[i]->get_ID(), (LPCTSTR)Persons[i]->get_Name(), Persons[i]->get_Gender(), (LPCTSTR)Persons[i]->get_Address().city, (LPCTSTR)Persons[i]->get_Address().street, Persons[i]->get_Birthday().day, Persons[i]->get_Birthday().month, Persons[i]->get_Birthday().year);
+		
+		myLine.Format(_T("%d;%s;%s;%d;%s;%s;%d;%d;%d;"), Persons[i]->get_itemType(), (LPCTSTR)Persons[i]->get_ID(), (LPCTSTR)Persons[i]->get_Name(), Persons[i]->get_Gender(), (LPCTSTR)Persons[i]->get_Address().city, (LPCTSTR)Persons[i]->get_Address().street, Persons[i]->get_Birthday().day, Persons[i]->get_Birthday().month, Persons[i]->get_Birthday().year);//No need for dynamic cast since i can reach these class members.
 		f.WriteString((LPCTSTR)myLine);
 
-		if (Persons[i]->get_itemType() != 3)//not isolated, dump sick info
-		{
-			//FORMAT: PositiveTest.day; PositiveTest.month; PositiveTest.year; InfectorID; InfectionArea;
-			myLine.Format(_T("%d;%d;%d;%s;%s;"), Persons[i]->get_PositiveTest_date().day, Persons[i]->get_PositiveTest_date().day, Persons[i]->get_PositiveTest_date().day, (LPCTSTR)Persons[i]->get_InfectedBy(), (LPCTSTR)Persons[i]->get_InfectionArea());
-			f.WriteString((LPCTSTR)myLine);
-		}
 		switch (Persons[i]->get_itemType())
 		{
 			case 0://hospitalized
 			{
 				//format: Level; isVentilatyed; Hospital; HospitalizationDate.day; HD.month; HD.year;
-				myLine.Format(_T("%s;%d;%s;%d;%d;%d;#"), (LPCTSTR)Persons[i]->get_Level(), Persons[i]->get_IsVentilated(), (LPCTSTR)Persons[i]->get_Hospital(), Persons[i]->get_HospitalizationDate().day, Persons[i]->get_HospitalizationDate().month, Persons[i]->get_HospitalizationDate().year);
+				Hospitalized *hos = dynamic_cast<Hospitalized*>(Persons[i]);
+				myLine.Format(_T("%d;%d;%d;%s;%s;%s;%d;%s;%d;%d;%d;#"), hos->get_PositiveTest_date().day, hos->get_PositiveTest_date().day, hos->get_PositiveTest_date().day, (LPCTSTR)hos->get_InfectedBy(), (LPCTSTR)hos->get_InfectionArea(), (LPCTSTR)hos->get_Level(), hos->get_IsVentilated(), (LPCTSTR)hos->get_Hospital(), hos->get_HospitalizationDate().day, hos->get_HospitalizationDate().month, hos->get_HospitalizationDate().year);
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
 			case 1://non-hospitalized
 			{
 				//format: whereIsolated city; whereIsolated street;
-				myLine.Format(_T("%s;%s;#"), (LPCTSTR)Persons[i]->get_WhereIsolated().city, (LPCTSTR)Persons[i]->get_WhereIsolated().street);
+				NonHospitalized* nonhos = dynamic_cast<NonHospitalized*>(Persons[i]);
+				myLine.Format(_T("%d;%d;%d;%s;%s;%s;%s;#"), nonhos->get_PositiveTest_date().day, nonhos->get_PositiveTest_date().day, nonhos->get_PositiveTest_date().day, (LPCTSTR)nonhos->get_InfectedBy(), (LPCTSTR)nonhos->get_InfectionArea(), (LPCTSTR)nonhos->get_WhereIsolated().city, (LPCTSTR)nonhos->get_WhereIsolated().street);
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
 			case 2://recovered
 			{
 				//format: recovery,day; recovery.month; recovery.year;
-				myLine.Format(_T("%d;%d;%d;#"), Persons[i]->get_RecoveryDate().day, Persons[i]->get_RecoveryDate().month, Persons[i]->get_RecoveryDate().year);
+				Recovered* rec = dynamic_cast<Recovered*>(Persons[i]);
+				myLine.Format(_T("%d;%d;%d;%s;%s;%d;%d;%d;#"), rec->get_PositiveTest_date().day, rec->get_PositiveTest_date().day, rec->get_PositiveTest_date().day, (LPCTSTR)rec->get_InfectedBy(), (LPCTSTR)rec->get_InfectionArea(), rec->get_RecoveryDate().day, rec->get_RecoveryDate().month, rec->get_RecoveryDate().year);
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
 			case 3://isolated
 			{
 				//format: whereIsolated.city; whereisolated.street; isolateddate.day; isolation.month; isolation.year; ExpostedTo;
-				myLine.Format(_T("%s;%s;%d;%d;%d;%s;#"), (LPCTSTR)Persons[i]->get_WhereIsolated().city, (LPCTSTR)Persons[i]->get_WhereIsolated().street, Persons[i]->get_Isolation_date().day, Persons[i]->get_Isolation_date().month, Persons[i]->get_Isolation_date().year, (LPCTSTR)Persons[i]->get_ExposedTo());
+				Isolated* iso = dynamic_cast<Isolated*>(Persons[i]);
+				myLine.Format(_T("%s;%s;%d;%d;%d;%s;#"), (LPCTSTR)iso->get_WhereIsolated().city, (LPCTSTR)iso->get_WhereIsolated().street, iso->get_Isolation_date().day, iso->get_Isolation_date().month, iso->get_Isolation_date().year, (LPCTSTR)iso->get_ExposedTo());
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
@@ -589,7 +588,7 @@ void CFinalProjectDlg::OnBnClickedbtnsaveall()
 	}
 
 	f.Close();
-	myLine.Format(_T("All %d People have been added"), i+1);
+	myLine.Format(_T("All %d People have been added"), i);
 	SetDlgItemText(staAddPerson, myLine);
 	GetDlgItem(staAddPerson)->ShowWindow(SW_SHOW);
 }
@@ -597,112 +596,75 @@ void CFinalProjectDlg::OnBnClickedbtnsaveall()
 /*Function: [void] Gets a CString that has all the user inputed info from a previous run, and "chops" the data into proper formatting, adding each line of data as a new person within the persons vector*/
 void CFinalProjectDlg::fillCstringList(CString wholeFile)
 {
-	list <CString> wholePersonItemList = seperateLine(wholeFile, (LPCTSTR)_T("#"));
-	list <CString>::iterator ptr_person = wholePersonItemList.begin();
-	list <CString> singlePersonItemList;
-	list <CString>::iterator ptr_single;
-	int todel = 0;
-	CString todel2;
+	vector <CString> wholePersonItemList = seperateLine(wholeFile, (LPCTSTR)_T("#"));
+	vector <CString> singlePersonItemList;
 	Person* per;
-	int itemType;
+	int itemType, whole = 0, single;
 	bool Gender, IsVentilated;
 	Address Addr, IsolationAddr;
 	Date Birthday, PositiveTest, HospitalEntry, Recovery, IsolationEntry;
 	CString ID, Name, DateBuffer, InfectedBy, ExposedTo, Hospital, Level, Area, line;
-	while (ptr_person._Ptr->_Next != NULL)
+	while (!wholePersonItemList[whole].IsEmpty())
 	{
-		if (ptr_person._Ptr->_Myval.IsEmpty())
-			break;
-		line = ptr_person._Ptr->_Myval;
+		line = wholePersonItemList[whole];
 		singlePersonItemList = seperateLine(line, (LPCTSTR)_T(";"));//split new line
-		//load info of personal person here
-		ptr_single = singlePersonItemList.begin();
+		single = 0;
 		//Base FORMAT: type; id; name; gender; address city; address street; birthday.day; birthday.month; birthday.year;
 
-		itemType = _ttoi(ptr_single._Ptr->_Myval);
-		ptr_single++;
-		Name = ptr_single._Ptr->_Myval;
-		ptr_single++;
-		Gender = _ttoi(ptr_single._Ptr->_Myval);
-		ptr_single++;
-		Addr.city = ptr_single._Ptr->_Myval;
-		ptr_single++;
-		Addr.street = ptr_single._Ptr->_Myval;
-		ptr_single++;
-		Birthday.day = _ttoi(ptr_single._Ptr->_Myval);
-		ptr_single++;
-		Birthday.month = _ttoi(ptr_single._Ptr->_Myval);
-		ptr_single++;
-		Birthday.year = _ttoi(ptr_single._Ptr->_Myval);
-		ptr_single++;
+		itemType = _ttoi(singlePersonItemList[single++]);
+		Name = singlePersonItemList[single++];
+		Gender = _ttoi(singlePersonItemList[single++]);
+		Addr.city = singlePersonItemList[single++];
+		Addr.street = singlePersonItemList[single++];
+		Birthday.day = _ttoi(singlePersonItemList[single++]);
+		Birthday.month = _ttoi(singlePersonItemList[single++]);
+		Birthday.year = _ttoi(singlePersonItemList[single++]);
 
 		if (itemType != 3)//Not Isolated, so it needs Sick class members
 		{
 			//Sick FORMAT: PositiveTest.day; PositiveTest.month; PositiveTest.year; InfectorID; InfectionArea;
-			PositiveTest.day = _ttoi(ptr_single._Ptr->_Myval);
-			ptr_single++;
-			PositiveTest.month = _ttoi(ptr_single._Ptr->_Myval);
-			ptr_single++;
-			PositiveTest.year = _ttoi(ptr_single._Ptr->_Myval);
-			ptr_single++;
-			InfectedBy = ptr_single._Ptr->_Myval;
-			ptr_single++;
-			Area = ptr_single._Ptr->_Myval;
-			ptr_single++;
+			PositiveTest.day = _ttoi(singlePersonItemList[single++]);
+			PositiveTest.month = _ttoi(singlePersonItemList[single++]);
+			PositiveTest.year = _ttoi(singlePersonItemList[single++]);
+			InfectedBy = singlePersonItemList[single++];
+			Area = singlePersonItemList[single++];
 		}
 		switch (itemType)
 		{
 			case 0://Hospitalized format: Level; isVentilatyed; Hospital; HospitalizationDate.day; HD.month; HD.year;
 			{
-				Level = ptr_single._Ptr->_Myval;
-				ptr_single++;
-				IsVentilated = _ttoi(ptr_single._Ptr->_Myval);
-				ptr_single++;
-				Hospital = ptr_single._Ptr->_Myval;
-				ptr_single++;
-				HospitalEntry.day = _ttoi(ptr_single._Ptr->_Myval);
-				ptr_single++;
-				HospitalEntry.month = _ttoi(ptr_single._Ptr->_Myval);
-				ptr_single++;
-				HospitalEntry.year = _ttoi(ptr_single._Ptr->_Myval);
-				ptr_single++;
+				Level = singlePersonItemList[single++];
+				IsVentilated = _ttoi(singlePersonItemList[single++]);
+				Hospital = singlePersonItemList[single++];
+				HospitalEntry.day = _ttoi(singlePersonItemList[single++]);
+				HospitalEntry.month = _ttoi(singlePersonItemList[single++]);
+				HospitalEntry.year = _ttoi(singlePersonItemList[single++]);
 				per = new Hospitalized(Gender, ID, Name, Addr, Birthday, PositiveTest, Area, InfectedBy, Level, IsVentilated, Hospital, HospitalEntry);
 				break;
 			}
 			case 1://non-Hospitalized: whereIsolated city; whereIsolated street;
 			{
-				IsolationAddr.city = ptr_single._Ptr->_Myval;
-				ptr_single++;
-				IsolationAddr.street = ptr_single._Ptr->_Myval;
-				ptr_single++;
+				IsolationAddr.city = singlePersonItemList[single++];
+				IsolationAddr.street = singlePersonItemList[single++];
 				per = new NonHospitalized(Gender, ID, Name, Addr, Birthday, PositiveTest, Area, InfectedBy, IsolationAddr);
 				break;
 			}
 			case 2://recovered format: recovery,day; recovery.month; recovery.year;
 			{
-				Recovery.day = _ttoi(ptr_single._Ptr->_Myval);
-				ptr_single++;
-				Recovery.month = _ttoi(ptr_single._Ptr->_Myval);
-				ptr_single++;
-				Recovery.year = _ttoi(ptr_single._Ptr->_Myval);
-				ptr_single++;
+				Recovery.day = _ttoi(singlePersonItemList[single++]);
+				Recovery.month = _ttoi(singlePersonItemList[single++]);
+				Recovery.year = _ttoi(singlePersonItemList[single++]);
 				per = new Recovered(Gender, ID, Name, Addr, Birthday, PositiveTest, Area, InfectedBy, Recovery);
 				break;
 			}
 			case 3://isolated format: whereIsolated.city; whereisolated.street; isolateddate.day; isolation.month; isolation.year; ExpostedTo;
 			{
-				IsolationAddr.city = ptr_single._Ptr->_Myval;
-				ptr_single++;
-				IsolationAddr.street = ptr_single._Ptr->_Myval;
-				ptr_single++;
-				IsolationEntry.day = _ttoi(ptr_single._Ptr->_Myval);
-				ptr_single++;
-				IsolationEntry.month = _ttoi(ptr_single._Ptr->_Myval);
-				ptr_single++;
-				IsolationEntry.year = _ttoi(ptr_single._Ptr->_Myval);
-				ptr_single++;
-				ExposedTo = ptr_single._Ptr->_Myval;
-				ptr_single++;
+				IsolationAddr.city = singlePersonItemList[single++];
+				IsolationAddr.street = singlePersonItemList[single++];
+				IsolationEntry.day = _ttoi(singlePersonItemList[single++]);
+				IsolationEntry.month = _ttoi(singlePersonItemList[single++]);
+				IsolationEntry.year = _ttoi(singlePersonItemList[single++]);
+				ExposedTo = singlePersonItemList[single++];
 				per = new Isolated(Gender, ID, Name, Addr, Birthday, IsolationAddr, IsolationEntry, ExposedTo);
 				break;
 			}
@@ -713,27 +675,21 @@ void CFinalProjectDlg::fillCstringList(CString wholeFile)
 			}
 		}
 		Persons.push_back(per);
-		todel++;
-		todel2.Format(_T("%d   %s"), todel, (LPCTSTR)line);
-		MessageBox(todel2);
-		ptr_person++;
+		whole++;
 	}
 }
 
-/*Function: [list] Gets a line and seperator that will tokenize the line, returning a list of the untokenized CString that we got.*/
-list <CString> CFinalProjectDlg::seperateLine(CString theLine, CString seperator)
+/*Function: [vector] Gets a line and seperator that will tokenize the line, returning a list of the untokenized CString that we got.*/
+vector <CString> CFinalProjectDlg::seperateLine(CString theLine, CString seperator)
 {
-	list <CString> myList;
-	int pos = 0, items = 0;
-	CString sc = seperator;//Seperator
-	CString tokenLine = theLine.Tokenize(sc, pos);
-	items++;
+	vector <CString> myList;
+	int pos = 0;
+	CString tokenLine = theLine.Tokenize(seperator, pos);
 	myList.push_back(tokenLine);
 	while (!tokenLine.IsEmpty())
 	{
-		tokenLine = theLine.Tokenize(sc, pos);
+		tokenLine = theLine.Tokenize(seperator, pos);
 		myList.push_back(tokenLine);
-		items++;
 	}
 	return myList;
 }

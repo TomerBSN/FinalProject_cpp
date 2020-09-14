@@ -56,6 +56,6 @@ public:
 	afx_msg void OnBnClickedbtnaddperson();
 	afx_msg void OnBnClickedbtnsaveall();
 	void fillCstringList(CString wholeFile);
-	list <CString> seperateLine(CString theLine, CString seperator);
+	vector <CString> seperateLine(CString theLine, CString seperator);
 	CString loadFile(TCHAR* FileName);
 };
