@@ -140,6 +140,8 @@ void CSearchDlg::OnBnProceedClickedSh()
 		case 2:       // Delete
 		{
 			Persons.erase(Persons.begin() + searchPersonID);
+			EndDialog(0);
+			MessageBox(_T("Person deleted!"));
 			break;
 		}
 

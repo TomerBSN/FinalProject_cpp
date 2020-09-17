@@ -11,7 +11,7 @@
 #define IDD_GRAPH_DIALOG                131
 #define IDC_BUTTON1                     1000
 #define btnSaveEdit_SH                  1000
-#define btnTest                         1000
+#define btnSearchProceed_SH             1000
 #define comboDataType                   1001
 #define btnAddPerson                    1003
 #define btnClearAll                     1004
@@ -19,6 +19,8 @@
 #define btnCreateGraphs                 1006
 #define txtID                           1007
 #define txtFullName                     1008
+#define btnAddPerson2                   1009
+#define btnSaveDetails                  1009
 #define txtAddress                      1010
 #define comboGender                     1011
 #define comboStatus                     1012
@@ -82,6 +84,7 @@
 #define dtpHospitalDate_SH              1080
 #define txtAddress_SH                   1081
 #define comboDataType_SH                1082
+#define comboSearchOpt                  1082
 #define staSearchID_SH                  1083
 #define staID_SH                        1084
 #define staFullName_SH                  1085
@@ -92,6 +95,7 @@
 #define staStatus_SH                    1090
 #define staDataType_SH                  1091
 #define staInfectorID_SH                1092
+#define staDataType_SH2                 1092
 #define staInfectionArea_SH             1093
 #define staPositiveTest_SH              1094
 #define staRecoveryDate_SH              1095
@@ -108,6 +112,7 @@
 #define staIsolationEntry               1109
 #define staExposedID                    1110
 #define staAddPerson                    1111
+#define comboSearchStat                 1112
 
 // Next default values for new objects
 // 
@@ -115,7 +120,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        137
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1112
+#define _APS_NEXT_CONTROL_VALUE         1113
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
