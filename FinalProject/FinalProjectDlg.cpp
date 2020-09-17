@@ -14,6 +14,7 @@
 #include "Recovered.h"
 #include "Isolated.h"
 #include "Global.h"
+#include <algorithm>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -87,6 +88,11 @@ void CFinalProjectDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, comboVentilated, comboVentilatedController);
 	DDX_Control(pDX, comboCity, comboCityController);
 	DDX_Control(pDX, dtpBirthDate, dtpBirthDateController);
+	DDX_Control(pDX, dtpPositiveTest, dtpPositiveTestController);
+	DDX_Control(pDX, dtpHospitalEntry, dtpHospitalEntryController);
+	DDX_Control(pDX, dtpIsolationEntry, dtpIsolationEntryController);
+	DDX_Control(pDX, dtpRecoveryDate, dtpRecoveryDateController);
+	DDX_Control(pDX, btnSearch, comboSearchController);
 }
 
 BEGIN_MESSAGE_MAP(CFinalProjectDlg, CDialogEx)
@@ -100,6 +106,7 @@ BEGIN_MESSAGE_MAP(CFinalProjectDlg, CDialogEx)
 	ON_BN_CLICKED(btnClearAll, &CFinalProjectDlg::OnBnClickedbtnclearall)
 	ON_BN_CLICKED(btnAddPerson, &CFinalProjectDlg::OnBnClickedbtnaddperson)
 	ON_BN_CLICKED(btnSaveAll, &CFinalProjectDlg::OnBnClickedbtnsaveall)
+	ON_BN_CLICKED(btnSaveDetails, &CFinalProjectDlg::OnBnClickedbtnsavedetails)
 END_MESSAGE_MAP()
 
 
@@ -136,24 +143,20 @@ BOOL CFinalProjectDlg::OnInitDialog()
 	
 	// Comboboxes + counters initialization
 	for (int i = 0; i < NUM_OF_CITYS; i++) {
-		CString City = CString(Citys[i].c_str());
-		comboCityController.InsertString(i, City);
-		comboIsolationCityController.InsertString(i, City);
-		CountByCity[City] = 0;
+		comboCityController.InsertString(i, Citys[i]);
+		comboIsolationCityController.InsertString(i, Citys[i]);
+		CountByCity[Citys[i]] = 0;
 	}
 	for (int i = 0; i < NUM_OF_HOSPITALS; i++) {
-		CString Hospital = CString(Hospitals[i].c_str());
-		comboHospitalController.InsertString(i, Hospital);
-		CountByHostital[Hospital] = 0;
+		comboHospitalController.InsertString(i, Hospitals[i]);
+		CountByHostital[Hospitals[i]] = 0;
 	}
 	for (int i = 0; i < NUM_OF_INFECTIONAREAS; i++) {
-		CString Area = CString(InfectionAreas[i].c_str());
-		comboInfectionAreaTypeController.InsertString(i, Area);
-		CountByArea[Area] = 0;
+		comboInfectionAreaTypeController.InsertString(i, InfectionAreas[i]);
+		CountByArea[InfectionAreas[i]] = 0;
 	}
 	for (int i = 0; i < NUM_OF_LEVELS; i++) {
-		CString Level = CString(SicknessLVL[i].c_str());
-		CountByLevel[Level] = 0;
+		CountByLevel[SicknessLVL[i]] = 0;
 	}
 
 	TotalHospitalized = 0;
@@ -218,16 +221,6 @@ void CFinalProjectDlg::OnPaint()
 HCURSOR CFinalProjectDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
-}
-
-
-/*
-Function: [Event-Driven] Will bring up the IDD_SEARCH_DIALOG.
-*/
-void CFinalProjectDlg::OnBnClickedbtnsearch()
-{
-	CSearchDlg search;
-	search.DoModal();
 }
 
 /*
@@ -324,6 +317,7 @@ void CFinalProjectDlg::ClearFieldsOnScreen()
 
 	for (int i = 1; i <= 5; i++) ToggleVisibilty(false, i);
 	GetDlgItem(btnCreate)->EnableWindow(true);
+	comboSearchController.EnableWindow(true);
 	comboDataTypeController.EnableWindow(true);
 }
 
@@ -421,7 +415,8 @@ void CFinalProjectDlg::OnBnClickedbtnaddperson()
 	bool Gender, IsVentilated;
 	Address Addr, IsolationAddr;
 	Date Birthday, PositiveTest, HospitalEntry, Recovery, IsolationEntry;
-	CString ID, Name, DateBuffer, InfectedBy, ExposedTo, Hospital, Level, Area;
+	CString ID, Name, DateBuffer, InfectedBy, ExposedTo, Hospital, Level, Area, temp = _T("");
+	;
 	
 	Gender = comboGenderController.GetCurSel();
 	GetDlgItemText(txtID, ID);
@@ -499,11 +494,20 @@ void CFinalProjectDlg::OnBnClickedbtnaddperson()
 			break;
 	}
 	
-	Persons.push_back(NewPerson);
-	ClearFieldsOnScreen();
+	if (callfromSearch)
+	{
+		Persons[searchPersonID] = NewPerson;
+		temp.Format(_T("ID %s has been edited"), (LPCTSTR)ID);
 
-	CString temp = _T("");
-	temp.Format(_T("ID %s has been added"), (LPCTSTR)ID);
+	}
+
+	else
+	{
+		Persons.push_back(NewPerson);
+		temp.Format(_T("ID %s has been added"), (LPCTSTR)ID);
+	}
+
+	ClearFieldsOnScreen();
 	SetDlgItemText(staAddPerson, temp);
 	GetDlgItem(staAddPerson)->ShowWindow(SW_SHOW);
 }
@@ -549,7 +553,7 @@ void CFinalProjectDlg::OnBnClickedbtnsaveall()
 			{
 				//format: Level; isVentilatyed; Hospital; HospitalizationDate.day; HD.month; HD.year;
 				Hospitalized *hos = dynamic_cast<Hospitalized*>(Persons[i]);
-				myLine.Format(_T("%d;%d;%d;%s;%s;%s;%d;%s;%d;%d;%d;#"), hos->get_PositiveTest_date().day, hos->get_PositiveTest_date().day, hos->get_PositiveTest_date().day, (LPCTSTR)hos->get_InfectedBy(), (LPCTSTR)hos->get_InfectionArea(), (LPCTSTR)hos->get_Level(), hos->get_IsVentilated(), (LPCTSTR)hos->get_Hospital(), hos->get_HospitalizationDate().day, hos->get_HospitalizationDate().month, hos->get_HospitalizationDate().year);
+				myLine.Format(_T("%d;%d;%d;%s;%s;%s;%d;%s;%d;%d;%d;#"), hos->get_PositiveTest_date().day, hos->get_PositiveTest_date().month, hos->get_PositiveTest_date().year, (LPCTSTR)hos->get_InfectedBy(), (LPCTSTR)hos->get_InfectionArea(), (LPCTSTR)hos->get_Level(), hos->get_IsVentilated(), (LPCTSTR)hos->get_Hospital(), hos->get_HospitalizationDate().day, hos->get_HospitalizationDate().month, hos->get_HospitalizationDate().year);
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
@@ -557,7 +561,7 @@ void CFinalProjectDlg::OnBnClickedbtnsaveall()
 			{
 				//format: whereIsolated city; whereIsolated street;
 				NonHospitalized* nonhos = dynamic_cast<NonHospitalized*>(Persons[i]);
-				myLine.Format(_T("%d;%d;%d;%s;%s;%s;%s;#"), nonhos->get_PositiveTest_date().day, nonhos->get_PositiveTest_date().day, nonhos->get_PositiveTest_date().day, (LPCTSTR)nonhos->get_InfectedBy(), (LPCTSTR)nonhos->get_InfectionArea(), (LPCTSTR)nonhos->get_WhereIsolated().city, (LPCTSTR)nonhos->get_WhereIsolated().street);
+				myLine.Format(_T("%d;%d;%d;%s;%s;%s;%s;#"), nonhos->get_PositiveTest_date().day, nonhos->get_PositiveTest_date().month, nonhos->get_PositiveTest_date().year, (LPCTSTR)nonhos->get_InfectedBy(), (LPCTSTR)nonhos->get_InfectionArea(), (LPCTSTR)nonhos->get_WhereIsolated().city, (LPCTSTR)nonhos->get_WhereIsolated().street);
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
@@ -565,7 +569,7 @@ void CFinalProjectDlg::OnBnClickedbtnsaveall()
 			{
 				//format: recovery,day; recovery.month; recovery.year;
 				Recovered* rec = dynamic_cast<Recovered*>(Persons[i]);
-				myLine.Format(_T("%d;%d;%d;%s;%s;%d;%d;%d;#"), rec->get_PositiveTest_date().day, rec->get_PositiveTest_date().day, rec->get_PositiveTest_date().day, (LPCTSTR)rec->get_InfectedBy(), (LPCTSTR)rec->get_InfectionArea(), rec->get_RecoveryDate().day, rec->get_RecoveryDate().month, rec->get_RecoveryDate().year);
+				myLine.Format(_T("%d;%d;%d;%s;%s;%d;%d;%d;#"), rec->get_PositiveTest_date().day, rec->get_PositiveTest_date().month, rec->get_PositiveTest_date().year, (LPCTSTR)rec->get_InfectedBy(), (LPCTSTR)rec->get_InfectionArea(), rec->get_RecoveryDate().day, rec->get_RecoveryDate().month, rec->get_RecoveryDate().year);
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
@@ -618,6 +622,7 @@ void CFinalProjectDlg::fillCstringList(CString wholeFile)
 		//Base FORMAT: type; id; name; gender; address city; address street; birthday.day; birthday.month; birthday.year;
 
 		itemType = _ttoi(singlePersonItemList[single++]);
+		ID = singlePersonItemList[single++];
 		Name = singlePersonItemList[single++];
 		Gender = _ttoi(singlePersonItemList[single++]);
 		Addr.city = singlePersonItemList[single++];
@@ -713,8 +718,6 @@ CString CFinalProjectDlg::loadFile(TCHAR* FileName)
 	if (!f.Open(pszFileName, CStdioFile::modeRead, &e))
 	{
 		TRACE(_T("File could not be opened %d\n"), e.m_cause);
-		error.Format(_T("Could not find %s file to read from.\nException: %d"), pszFileName, e.m_cause);
-		MessageBox(error); // Error Message
 		return NULL;
 	}
 
@@ -772,12 +775,7 @@ bool CFinalProjectDlg::checkUserInputData(int selectedForm)
 		fullMsg += smallMsg;
 		isCorrect = false;
 	}
-	if (comboStatusController.GetCurSel() == -1)
-	{
-		smallMsg.Format(_T("Status is not set.\n"));
-		fullMsg += smallMsg;
-		isCorrect = false;
-	}
+
 	//check the ID here
 	GetDlgItemText(txtID, temp);
 	if (temp.GetLength() != 9) {
@@ -789,7 +787,7 @@ bool CFinalProjectDlg::checkUserInputData(int selectedForm)
 	if (selectedForm != 3)//if it has Sick.h properties
 	{
 		GetDlgItemText(txtInfectorID, temp);
-		if (temp.GetLength() != 9) {
+		if (temp.GetLength() && temp.GetLength() != 9) {
 			smallMsg.Format(_T("The Infector ID is not 9 digits long.\n"));
 			fullMsg += smallMsg;
 			isCorrect = false;
@@ -902,7 +900,7 @@ bool CFinalProjectDlg::checkUserInputData(int selectedForm)
 				isCorrect = false;
 			}
 			GetDlgItemText(txtExposedID, temp);
-			if (temp.GetLength() != 9)
+			if (temp.GetLength() && temp.GetLength() != 9)
 			{
 				smallMsg.Format(_T("The Exposed ID is not 9 digits long.\n"));
 				fullMsg += smallMsg;
@@ -936,4 +934,117 @@ bool CFinalProjectDlg::CheckDate(Date d1, Date d2)
 	else if (d1.month <= d2.month) return false;
 	else if (d1.day <= d2.day) return false;
 	return true;
+}
+
+/*
+Function: [Event-Driven] Will bring up the IDD_SEARCH_DIALOG.
+*/
+
+
+void CFinalProjectDlg::OnBnClickedbtnsearch()
+{
+	CSearchDlg search;
+	int status = search.DoModal();
+
+	if (status >= 5)
+	{
+		status -= 5;
+		int itemType = Persons[searchPersonID]->get_itemType();
+		comboDataTypeController.SetCurSel(status);
+		GetDlgItem(btnAddPerson)->EnableWindow(false);
+		GetDlgItem(btnSaveDetails)->ShowWindow(SW_SHOW);
+		this->OnBnClickedbtncreate();
+
+		comboSearchController.EnableWindow(false);
+		SetDlgItemText(txtID, Persons[searchPersonID]->get_ID());
+		SetDlgItemText(txtFullName, Persons[searchPersonID]->get_Name());
+		Date birthday = Persons[searchPersonID]->get_Birthday();
+		CTime birthdayTime(birthday.year, birthday.month, birthday.day, 0, 0, 0);
+		dtpBirthDateController.SetTime(&birthdayTime);
+		comboGenderController.SetCurSel(Persons[searchPersonID]->get_Gender());
+		int city = distance(Citys, find(Citys, Citys + NUM_OF_CITYS, Persons[searchPersonID]->get_Address().city));
+		comboCityController.SetCurSel(city);
+		SetDlgItemText(txtAddress, Persons[searchPersonID]->get_Address().street);
+
+		if (status != 3 && itemType != 3)
+		{
+			Sick *tempSick = dynamic_cast<Sick*>(Persons[searchPersonID]);
+
+			Date positivetest = tempSick->get_PositiveTest_date();
+			CTime positivetestTime(positivetest.year, positivetest.month, positivetest.day, 0, 0, 0);
+			dtpPositiveTestController.SetTime(&positivetestTime);
+			SetDlgItemText(txtInfectorID, tempSick->get_InfectedBy());
+			int area = distance(InfectionAreas, find(InfectionAreas, InfectionAreas + NUM_OF_INFECTIONAREAS,
+				tempSick->get_InfectionArea()));
+			comboInfectionAreaTypeController.SetCurSel(area);
+		}
+
+		if (status == itemType)
+		{ 
+			switch (status)
+			{
+				case 0:		// Hospitalized
+				{
+					Hospitalized* tempHospitalized = dynamic_cast<Hospitalized*>(Persons[searchPersonID]);
+
+					Date hospitalentry = tempHospitalized->get_HospitalizationDate();
+					CTime hospitalentrytTime(hospitalentry.year, hospitalentry.month, hospitalentry.day, 0, 0, 0);
+					dtpHospitalEntryController.SetTime(&hospitalentrytTime);
+					int hospital = distance(Hospitals, find(Hospitals, Hospitals + NUM_OF_HOSPITALS,
+						tempHospitalized->get_Hospital()));
+					comboHospitalController.SetCurSel(hospital);
+					int level = distance(SicknessLVL, find(SicknessLVL, SicknessLVL + NUM_OF_LEVELS,
+						tempHospitalized->get_Level()));
+					comboSicknessLevelController.SetCurSel(level);
+					comboVentilatedController.SetCurSel(tempHospitalized->get_IsVentilated());
+					break;
+				}
+
+				case 1: // NonHospitalized
+				{
+					NonHospitalized* tempNonHospitalized = dynamic_cast<NonHospitalized*>(Persons[searchPersonID]);
+
+					SetDlgItemText(txtIsolationAddress, tempNonHospitalized->get_WhereIsolated().street);
+					int isolationcity_h = distance(Citys, find(Citys, Citys + NUM_OF_CITYS,
+						tempNonHospitalized->get_WhereIsolated().city));
+					comboIsolationCityController.SetCurSel(isolationcity_h);
+					break;
+				}
+				case 2: // Recovered
+				{
+					Recovered* tempRecovered = dynamic_cast<Recovered*>(Persons[searchPersonID]);
+
+					Date recovery = tempRecovered->get_RecoveryDate();
+					CTime recoveryTime(recovery.year, recovery.month, recovery.day, 0, 0, 0);
+					dtpRecoveryDateController.SetTime(&recoveryTime);
+					break;
+				}
+				case 3: // Isolated
+				{
+					Isolated* tempIsolated = dynamic_cast<Isolated*>(Persons[searchPersonID]);
+
+					Date isolationentry = tempIsolated->get_Isolation_date();
+					CTime isolationentryTime(isolationentry.year, isolationentry.month, isolationentry.day, 0, 0, 0);
+					dtpIsolationEntryController.SetTime(&isolationentryTime);
+					SetDlgItemText(txtIsolationAddress, tempIsolated->get_WhereIsolated().street);
+					int isolationcity_i = distance(Citys, find(Citys, Citys + NUM_OF_CITYS,
+						tempIsolated->get_WhereIsolated().city));
+					comboIsolationCityController.SetCurSel(isolationcity_i);
+					SetDlgItemText(txtExposedID, tempIsolated->get_ExposedTo());
+					break;
+				}
+
+				default:
+					break;
+			}
+		}
+	}
+}
+
+void CFinalProjectDlg::OnBnClickedbtnsavedetails()
+{
+	// TODO: Add your control notification handler code here
+	callfromSearch = 1;
+	OnBnClickedbtnaddperson();
+	callfromSearch = 0;
 }

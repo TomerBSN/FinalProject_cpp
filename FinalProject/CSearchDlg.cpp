@@ -7,6 +7,8 @@
 #include "afxdialogex.h"
 #include "Global.h"
 
+int searchPersonID;
+
 // CSearchDlg dialog
 
 IMPLEMENT_DYNAMIC(CSearchDlg, CDialogEx)
@@ -24,11 +26,16 @@ CSearchDlg::~CSearchDlg()
 void CSearchDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, comboSearchOpt, comboSearchOptController);
+	DDX_Control(pDX, comboSearchStat, comboSearchStatController);
+	DDX_Control(pDX, btnSearchID_SH, comboSearchController);
 }
 
 
 BEGIN_MESSAGE_MAP(CSearchDlg, CDialogEx)
 	ON_BN_CLICKED(btnSearchID_SH, &CSearchDlg::OnBnClickedbtnSearchSh)
+	ON_CBN_SELCHANGE(comboSearchOpt, &CSearchDlg::OnCbnSelchangecombosearchopt)
+	ON_BN_CLICKED(btnSearchProceed_SH, &CSearchDlg::OnBnProceedClickedSh)
 END_MESSAGE_MAP()
 
 
@@ -43,24 +50,27 @@ void CSearchDlg::OnBnClickedbtnSearchSh()
 	// TODO: Add the actual search code here.
 	bool found = false;
 	CString ID;
+	int i;
 	vector<Person*>::iterator ptr;
 	ptr = Persons.begin();
-	while (ptr != Persons.end())
+	for (i = 0, ptr = Persons.begin(); ptr != Persons.end(); ptr++, i++)
 	{
 		GetDlgItemText(txtSearchID_SH, ID);
 
 		if ((*ptr)->get_ID() == ID)
 		{
 			found = true;
+			searchPersonID = i;
 			break;
 		}
-
-		ptr++;
 	}
-
+	
 
 	if (found)
 	{
+		comboSearchController.EnableWindow(false);
+		GetDlgItem(btnSearchProceed_SH)->EnableWindow(true);
+		comboSearchOptController.EnableWindow(true);
 		for (int i = 1; i <= 3; i++) ToggleVisibilty(true, i);
 		//TODO: Showcase the information into the places already.
 		switch ((*ptr)->get_itemType())
@@ -85,67 +95,55 @@ void CSearchDlg::OnBnClickedbtnSearchSh()
 		}
 
 	}
-	else {
-		//ERROR IN FINDING THIS PERSON
-		GetDlgItem(staError_SH)->ShowWindow(SW_SHOW);
-		//to be edited as per the info we will get in the type of it, though idk, maybe we should showcase it all.
-
-	}
+	else	//ERROR IN FINDING THIS PERSON
+		MessageBox(_T("Person not found!"));
 }
 
 
 void CSearchDlg::ToggleVisibilty(bool visiblity, int chunk)
 {
-	GetDlgItem(staDataType_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-	GetDlgItem(comboDataType_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
 
-	switch (chunk)
+}
+
+void CSearchDlg::OnCbnSelchangecombosearchopt()
+{
+	// TODO: Add your control notification handler code here
+	if (comboSearchOptController.GetCurSel() == 0)
 	{
-	case 1://chunk 1 - left fields
-	{
-		GetDlgItem(staAddress_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(txtAddress_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(txtID_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staID_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(txtFullName_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staFullName_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(dtpBirthdate_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staBirthdate_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(comboGender_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staGender_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(comboCity_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staCity_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staStatus_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(comboStatus_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		break;
+		comboSearchStatController.EnableWindow(true);
+		comboSearchStatController.SetCurSel(Persons[searchPersonID]->get_itemType());
 	}
-	case 2://chunk 2 - middle fields
+	else
+		comboSearchStatController.EnableWindow(false);
+	printf("Heelo");
+}
+
+
+void CSearchDlg::OnBnProceedClickedSh()
+{
+	int selectedNum = comboSearchOptController.GetCurSel();
+	
+	switch (selectedNum)
 	{
-		GetDlgItem(staInfectorID_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(txtInfectorID_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(comboInfectionArea_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staInfectionArea_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(dtpPositiveTest_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staPositiveTest_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(dtpRecoveryDate_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staRecoveryDate_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(comboIsolationAddress_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staIsolationAddress_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(comboIsolationCity_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staIsolationCity_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		break;
-	}
-	case 3://chunk 3 - right fields
-	{
-		GetDlgItem(staHospitalDate_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(dtpHospitalDate_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staVentilated_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(comboVentilated_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staHospitalName_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(comboHospitalName_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(comboSicknessLevel_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		GetDlgItem(staSicknessLevel_SH)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-		break;
-	}
+		case 0:       // Update status
+		{
+			EndDialog(comboSearchStatController.GetCurSel() + 5);
+			break;
+		}
+
+		case 1:       // Edit details
+		{
+			EndDialog(Persons[searchPersonID]->get_itemType() + 5);
+			break;
+		}
+
+		case 2:       // Delete
+		{
+			Persons.erase(Persons.begin() + searchPersonID);
+			break;
+		}
+
+		default:
+			break;
 	}
 }

@@ -27,6 +27,7 @@ public:
 // Implementation
 protected:
 	HICON m_hIcon;
+	int callfromSearch = 0;
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
@@ -60,4 +61,10 @@ public:
 	CString loadFile(TCHAR* FileName);
 	bool checkUserInputData(int selectedFormType);
 	bool CheckDate(Date d1, Date d2);
+	afx_msg void OnBnClickedbtnsavedetails();
+	CDateTimeCtrl dtpPositiveTestController;
+	CDateTimeCtrl dtpHospitalEntryController;
+	CDateTimeCtrl dtpIsolationEntryController;
+	CDateTimeCtrl dtpRecoveryDateController;
+	CButton comboSearchController;
 };

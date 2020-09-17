@@ -1,6 +1,6 @@
-0;;5443543;0;1;Bat Yam;1231;9;4;20;20;20;9;123131;Synagogue;0;1;0;9;4;#
-0;;123123;0;0;Bat Yam;1231;9;4;20;20;20;9;1223321;Synagogue;0;0;0;9;4;#
-0;;31337;0;0;Holon;0;7;0;99;99;99;9; 666474;Work;0;1;0;9;0;#
-1;7647;Non-Hos;1;Petah Tikva;some address 2;5;1;20;8;8;8;12312;Synagogue;Ramat Gan;fill add iso 23;#
-2;984989;recovered man;1;Kiryat Shmona;kiryat eight 782;6;4;17;5;5;5;8874;Unknown;9;4;20;#
-3;8784;asdas;0;Bat Yam;1231;6;4;17;Ramat Gan;asda;9;0;20;21312;#
+0;123123123;sdasda;1;Raanana;asdasdw;19;9;2020;18;9;2020;Synagogue;Medium;0;0;18;9;2020;0;#
+0;123123122;TTT;0;Ramat Gan;EREEE;26;9;2020;6;6;2020;666939999;Restaurent;Medium;1;Shaare Zedek;4;9;2020;#
+1;123123121;rtert erterte;1;Rishon Lezion;asdaer 12;7;9;2020;11;11;2020;123123121;Synagogue;Raanana;asderwer 1232;#
+2;123123124;erte erterwe;0;Kiryat Shmona;seerwer 12;12;9;2020;9;9;2020;121212121;Mall;16;10;2020;#
+0;111111111;erter wewe;1;Bat Yam;1231ssa 2;18;9;2020;18;9;2020;222222222;Event;Critical;0;Sheba;18;9;2020;#
+2;222222222;asdasd asdasda;1;Holon;asdasda asdasd2;18;9;2020;18;9;2020;222222222;Mall;18;9;2020;#

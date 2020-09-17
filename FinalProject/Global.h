@@ -13,3 +13,4 @@ extern int TotalHospitalized;
 extern int TotalNonHospitalized;
 extern int TotalRecovered;
 extern int TotalIsolated;
+extern int searchPersonID;

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <map>
-
+#include <array>
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX_ID 10
 #define MAX_STR 25
@@ -15,11 +15,12 @@ typedef struct date {
 	int year;
 }Date;
 
-const string Citys[NUM_OF_CITYS] = { "Tel Aviv", "Bat Yam", "Holon", "Ramat Gan", "Givataim", "Bnei Brak", "Or Yehuda", "Zichron Yaakov", "Ramla", "Lod",
-			"Kfar Chabad", "Petah Tikva", "Rishon Lezion", "Rehovot", "Kfar Saba", "Raanana", "Herzliya", "Hod Hasharon",
-			"Ramat Hasharon", "Jerusalem", "Beit Shemesh", "Modiin", "Modiin Illit", "Elad", "Efrat", "Beitar Illit",
-			"Ashkelon", "Ashdod", "Netivot", "Kiryat Gat", "Beer Sheva", "Sderot", "Netanya", "Haifa", "Hedera", "Tveria",
-			"Acre", "Nof Hagalil", "Migdal Haemek", "Kiryat Shmona" };
+
+const CString Citys[NUM_OF_CITYS] = { _T("Tel Aviv"), _T("Bat Yam"), _T("Holon"), _T("Ramat Gan"), _T("Givataim"), _T("Bnei Brak"), _T("Or Yehuda"), _T("Zichron Yaakov"), _T("Ramla"), _T("Lod"),
+			_T("Kfar Chabad"), _T("Petah Tikva"), _T("Rishon Lezion"), _T("Rehovot"), _T("Kfar Saba"), _T("Raanana"), _T("Herzliya"), _T("Hod Hasharon"),
+			_T("Ramat Hasharon"), _T("Jerusalem"), _T("Beit Shemesh"), _T("Modiin"), _T("Modiin Illit"), _T("Elad"), _T("Efrat"), _T("Beitar Illit"),
+			_T("Ashkelon"), _T("Ashdod"), _T("Netivot"), _T("Kiryat Gat"), _T("Beer Sheva"), _T("Sderot"), _T("Netanya"), _T("Haifa"), _T("Hedera"), _T("Tveria"),
+			_T("Acre"), _T("Nof Hagalil"), _T("Migdal Haemek"), _T("Kiryat Shmona") };
 
 typedef struct address {
 	CString street;

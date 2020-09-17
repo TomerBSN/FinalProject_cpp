@@ -23,4 +23,9 @@ protected:
 public:
 	afx_msg void OnBnClickedbtnSearchSh();
 	void ToggleVisibilty(bool visiblity, int chunk);
+	afx_msg void OnCbnSelchangecombosearchopt();
+	CComboBox comboSearchOptController;
+	CComboBox comboSearchStatController;
+	afx_msg void OnBnProceedClickedSh();
+	CButton comboSearchController;
 };
