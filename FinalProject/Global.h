@@ -17,3 +17,4 @@ extern int TotalIsolated;
 extern int searchPersonID;
 
 bool searchPersonByID(CString ID);
+int getDifference(Date dt1, Date dt2);

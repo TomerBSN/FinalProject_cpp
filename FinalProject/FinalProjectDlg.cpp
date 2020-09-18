@@ -103,6 +103,7 @@ BEGIN_MESSAGE_MAP(CFinalProjectDlg, CDialogEx)
 	ON_BN_CLICKED(btnAddPerson, &CFinalProjectDlg::OnBnClickedbtnaddperson)
 	ON_BN_CLICKED(btnSaveAll, &CFinalProjectDlg::OnBnClickedbtnsaveall)
 	ON_BN_CLICKED(btnSaveDetails, &CFinalProjectDlg::OnBnClickedbtnsavedetails)
+	ON_WM_DESTROY()
 END_MESSAGE_MAP()
 
 
@@ -167,7 +168,9 @@ BOOL CFinalProjectDlg::OnInitDialog()
 		CString wholeStr = loadFile(fname);
 		if(!(wholeStr.IsEmpty()))
 			fillCstringList(wholeStr);
-	
+
+	Clear_InvalidIsolated();
+
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -517,10 +520,15 @@ void CFinalProjectDlg::OnBnClickedbtnaddperson()
 	GetDlgItem(staAddPerson)->ShowWindow(SW_SHOW);
 }
 
+void CFinalProjectDlg::OnBnClickedbtnsaveall()
+{
+	savePersonsToFile();
+}
+
 /*
 Function: [Event-Driven] Runs through the persons vector and saves all the data into a personsSave.txt file
 */
-void CFinalProjectDlg::OnBnClickedbtnsaveall()
+void CFinalProjectDlg::savePersonsToFile()
 {
 	
 	/*
@@ -601,7 +609,7 @@ void CFinalProjectDlg::OnBnClickedbtnsaveall()
 	}
 
 	f.Close();
-	myLine.Format(_T("All %d People have been added"), i);
+	myLine.Format(_T("All %d People have been saved"), i);
 	SetDlgItemText(staAddPerson, myLine);
 	GetDlgItem(staAddPerson)->ShowWindow(SW_SHOW);
 }
@@ -739,6 +747,35 @@ CString CFinalProjectDlg::loadFile(TCHAR* FileName)
 }
 
 /*
+Function: [void] Remove all isolated person whose their isolation period has finished
+*/
+void CFinalProjectDlg::Clear_InvalidIsolated()
+{
+	Date current;
+	int i;
+	vector<Person*>::iterator ptr;
+	vector<int> toDel_inds;
+	ptr = Persons.begin();
+	for (i = 0, ptr = Persons.begin(); ptr != Persons.end(); i++, ptr++)
+	{
+		if ((*ptr)->get_itemType() == 3)
+		{
+			time_t curr_time = time(0);   // get time now
+			tm* now = localtime(&curr_time);
+			current.year = now->tm_year + 1900;
+			current.month = now->tm_mon + 1;
+			current.day = now->tm_mday;
+			int diff = getDifference(dynamic_cast<Isolated*>(*ptr)->get_Isolation_date(), current);
+			if (diff >= 5)	// two weeks left from isolation entry date
+				toDel_inds.push_back(i);
+		}	
+	}
+
+	for (i = 0; i < toDel_inds.size(); i++)
+		Persons.erase(Persons.begin() + (toDel_inds[i]-i));	// if person was deleted, number of items decreased in 1
+}
+
+/*
 Function: [void] Goes through the whole dialog inputs and checks to see if all the data is accurately inputed.
 	- ID must be a number at a length of up to 9 digits.
 	- Dates must not conflict
@@ -863,16 +900,6 @@ bool CFinalProjectDlg::checkUserInputData(int selectedForm)
 	return isCorrect;
 }
 
-/*
-Function: [bool] Gets 2 dates, and returns false if the left date is before the right one, and returns true if the right date is before the left one.
-*/
-bool CFinalProjectDlg::CheckDate(Date d1, Date d2)
-{
-	if (d1.year < d2.year) return false;
-	else if (d1.month < d2.month) return false;
-	else if (d1.day < d2.day) return false;
-	return true;
-}
 
 /*
 Function: [Event-Driven] Will bring up the IDD_SEARCH_DIALOG.
@@ -1006,7 +1033,7 @@ void CFinalProjectDlg::ValidateUserInput(T& Controller, bool& isCorrect, CString
 		b.day = _ttoi(Item2.Mid(0, 2));
 		b.month = _ttoi(Item2.Mid(3, 5));
 		b.year = _ttoi(Item2.Mid(6, 10));
-		if (!CheckDate(a, b))
+		if (getDifference(b, a) < 0)
 			temp_isCorrect = false;
 	}
 
@@ -1043,4 +1070,10 @@ void CFinalProjectDlg::SetBorderColor(T& Controller, int R, int G, int B)
 	FrameRect(dc->m_hDC, rc, hBrush);
 	DeleteObject(hBrush);
 	ReleaseDC(dc);
+}
+
+void CFinalProjectDlg::OnDestroy()
+{
+	savePersonsToFile();
+	CDialogEx::OnDestroy();
 }

@@ -56,11 +56,11 @@ public:
 	CDateTimeCtrl dtpBirthDateController;
 	afx_msg void OnBnClickedbtnaddperson();
 	afx_msg void OnBnClickedbtnsaveall();
+	void savePersonsToFile();
 	void fillCstringList(CString wholeFile);
 	vector <CString> seperateLine(CString theLine, CString seperator);
 	CString loadFile(TCHAR* FileName);
 	bool checkUserInputData(int selectedFormType);
-	bool CheckDate(Date d1, Date d2);
 	afx_msg void OnBnClickedbtnsavedetails();
 	CDateTimeCtrl dtpPositiveTestController;
 	CDateTimeCtrl dtpHospitalEntryController;
@@ -73,9 +73,11 @@ public:
 	CEdit txtIsolationAddressController;
 	CEdit txtExposedIDController;
 	CEdit txtInfectorIDController;
+	void Clear_InvalidIsolated();
 	template <class T>
 	void SetBorderColor(T &Controller, int R, int G, int B);
 	template <class T>
 	void ValidateUserInput(T& Controller, bool& isCorrect, CString Item1 = _T(""), CString Item2 = _T(""));
 	void ValidateUserInput(CComboBox& Controller, bool& isCorrect);
+	afx_msg void OnDestroy();
 };

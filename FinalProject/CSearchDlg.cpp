@@ -55,29 +55,6 @@ void CSearchDlg::OnBnClickedbtnSearchSh()
 		comboSearchController.EnableWindow(false);
 		GetDlgItem(btnSearchProceed_SH)->EnableWindow(true);
 		comboSearchOptController.EnableWindow(true);
-		for (int i = 1; i <= 3; i++) ToggleVisibilty(true, i);
-		//TODO: Showcase the information into the places already.
-		switch (Persons[searchPersonID]->get_itemType())
-		{
-		case 0:
-		{
-			break;
-
-		}
-		case 1:
-		{
-			break;
-
-		}
-
-		case 2:
-		{
-			break;
-		}
-		default:
-			break;
-		}
-
 	}
 	else	//ERROR IN FINDING THIS PERSON
 		MessageBox(_T("Person not found!"));

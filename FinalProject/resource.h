@@ -19,7 +19,6 @@
 #define btnCreateGraphs                 1006
 #define txtID                           1007
 #define txtFullName                     1008
-#define btnAddPerson2                   1009
 #define btnSaveDetails                  1009
 #define txtAddress                      1010
 #define comboGender                     1011
@@ -118,7 +117,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        137
+#define _APS_NEXT_RESOURCE_VALUE        138
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1113
 #define _APS_NEXT_SYMED_VALUE           101

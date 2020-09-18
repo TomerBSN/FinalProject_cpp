@@ -1,6 +1,5 @@
-0;123123122;TTT;0;Ramat Gan;EREEE;26;9;2020;6;6;2020;666939999;Restaurent;Medium;1;Shaare Zedek;4;9;2020;#
-1;123123121;rtert erterte;1;Rishon Lezion;asdaer 12;7;9;2020;11;11;2020;123123121;Synagogue;Raanana;asderwer 1232;#
-2;123123124;erte erterwe;0;Kiryat Shmona;seerwer 12;12;9;2020;9;9;2020;121212121;Mall;16;10;2020;#
-2;111111111;erter wewe;1;Bat Yam;1231ssa 2;18;9;2020;18;9;2020;222222222;Event;20;9;2020;#
-2;222222222;asdasd asdasda;1;Holon;asdasda asdasd2;18;9;2020;18;9;2020;222222222;Mall;18;9;2020;#
-0;121121121;wer 221;1;Givataim;adasda e;18;9;2020;18;9;2020;111111222;Synagogue;Medium;1;Ichilov;18;9;2020;#
+0;123123123;asdasd;1;Holon;asdasd;18;9;2020;18;9;2020;222222222;Work;Easy;1;Shaare Zedek;18;9;2020;#
+3;111111111;auuuuuu;1;Holon;asdasdasd;18;9;2020;Efrat;asdasdas;18;9;2020;222222222;#
+3;111222111;asdasd;1;Holon;asdasd;18;9;2020;Modiin Illit;asdasd;18;9;2020;222222222;#
+3;222202111;asdasd;1;Bat Yam;asdasd;18;9;2020;Elad;asdasd;18;9;2020;111222111;#
+0;444444444;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
