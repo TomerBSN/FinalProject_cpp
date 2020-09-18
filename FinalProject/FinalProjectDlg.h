@@ -67,4 +67,15 @@ public:
 	CDateTimeCtrl dtpIsolationEntryController;
 	CDateTimeCtrl dtpRecoveryDateController;
 	CButton comboSearchController;
+	CEdit txtIDController;
+	CEdit txtFullNameController;
+	CEdit txtAddressController;
+	CEdit txtIsolationAddressController;
+	CEdit txtExposedIDController;
+	CEdit txtInfectorIDController;
+	template <class T>
+	void SetBorderColor(T &Controller, int R, int G, int B);
+	template <class T>
+	void ValidateUserInput(T& Controller, bool& isCorrect, CString Item1 = _T(""), CString Item2 = _T(""));
+	void ValidateUserInput(CComboBox& Controller, bool& isCorrect);
 };

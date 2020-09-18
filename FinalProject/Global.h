@@ -1,6 +1,7 @@
 #pragma once
 #include "Person.h"
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -14,3 +15,5 @@ extern int TotalNonHospitalized;
 extern int TotalRecovered;
 extern int TotalIsolated;
 extern int searchPersonID;
+
+bool searchPersonByID(CString ID);

@@ -7,8 +7,6 @@
 #include "afxdialogex.h"
 #include "Global.h"
 
-int searchPersonID;
-
 // CSearchDlg dialog
 
 IMPLEMENT_DYNAMIC(CSearchDlg, CDialogEx)
@@ -48,24 +46,10 @@ Function: [Event-Driven] After the button is clicked, the function loops through
 void CSearchDlg::OnBnClickedbtnSearchSh()
 {
 	// TODO: Add the actual search code here.
-	bool found = false;
 	CString ID;
-	int i;
-	vector<Person*>::iterator ptr;
-	ptr = Persons.begin();
-	for (i = 0, ptr = Persons.begin(); ptr != Persons.end(); ptr++, i++)
-	{
-		GetDlgItemText(txtSearchID_SH, ID);
-
-		if ((*ptr)->get_ID() == ID)
-		{
-			found = true;
-			searchPersonID = i;
-			break;
-		}
-	}
+	GetDlgItemText(txtSearchID_SH, ID);
+	bool found = searchPersonByID(ID);
 	
-
 	if (found)
 	{
 		comboSearchController.EnableWindow(false);
@@ -73,7 +57,7 @@ void CSearchDlg::OnBnClickedbtnSearchSh()
 		comboSearchOptController.EnableWindow(true);
 		for (int i = 1; i <= 3; i++) ToggleVisibilty(true, i);
 		//TODO: Showcase the information into the places already.
-		switch ((*ptr)->get_itemType())
+		switch (Persons[searchPersonID]->get_itemType())
 		{
 		case 0:
 		{
