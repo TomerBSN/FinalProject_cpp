@@ -152,7 +152,7 @@ BOOL CFinalProjectDlg::OnInitDialog()
 		CountByArea[Area] = 0;
 	}
 	for (int i = 0; i < NUM_OF_LEVELS; i++) {
-		CString Level = CString(SicknessLVL[i].c_str());
+		CString Level = CString(SicknessLVL[i].c_str());             
 		CountByLevel[Level] = 0;
 	}
 
@@ -618,6 +618,7 @@ void CFinalProjectDlg::fillCstringList(CString wholeFile)
 		//Base FORMAT: type; id; name; gender; address city; address street; birthday.day; birthday.month; birthday.year;
 
 		itemType = _ttoi(singlePersonItemList[single++]);
+		ID = singlePersonItemList[single++];
 		Name = singlePersonItemList[single++];
 		Gender = _ttoi(singlePersonItemList[single++]);
 		Addr.city = singlePersonItemList[single++];
