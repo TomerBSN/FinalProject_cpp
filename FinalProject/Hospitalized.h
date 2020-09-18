@@ -4,9 +4,9 @@
 #define NUM_OF_HOSPITALS 12
 #define NUM_OF_LEVELS 3
 
-const string Hospitals[NUM_OF_HOSPITALS] = { "Ichilov", "Sheba", "Rambam", "Shaare Zedek", "Meir", "Hasharon", "Assaf Harofeh", "Kaplan",
-				"Wolfson", "Poriya", "Barzilai", "Haemek" };
-const string SicknessLVL[NUM_OF_LEVELS] = { "Easy", "Medium", "Critical" };
+const CString Hospitals[NUM_OF_HOSPITALS] = { _T("Ichilov"), _T("Sheba"), _T("Rambam"), _T("Shaare Zedek"), _T("Meir"), _T("Hasharon"), _T("Assaf Harofeh"), _T("Kaplan"),
+				_T("Wolfson"), _T("Poriya"), _T("Barzilai"), _T("Haemek") };
+const CString SicknessLVL[NUM_OF_LEVELS] = { _T("Easy"), _T("Medium"), _T("Critical") };
 
 class Hospitalized : public Sick
 {

@@ -203,6 +203,7 @@
     <ClCompile Include="CSearchDlg.cpp" />
     <ClCompile Include="FinalProject.cpp" />
     <ClCompile Include="FinalProjectDlg.cpp" />
+    <ClCompile Include="Global.cpp" />
     <ClCompile Include="Hospitalized.cpp" />
     <ClCompile Include="Isolated.cpp" />
     <ClCompile Include="NonHospitalized.cpp" />
