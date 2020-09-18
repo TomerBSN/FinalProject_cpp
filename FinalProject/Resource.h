@@ -12,7 +12,6 @@
 #define IDC_BUTTON1                     1000
 #define btnSaveEdit_SH                  1000
 #define btnTest                         1000
-#define btnViewGraph_GH                 1000
 #define comboDataType                   1001
 #define btnAddPerson                    1003
 #define btnClearAll                     1004
@@ -104,15 +103,11 @@
 #define staHospitalDate_SH              1101
 #define staError_SH                     1102
 #define IDC_COMBO1                      1103
-#define comboGraphSelection_GH          1103
 #define txtExposedID                    1105
 #define staExpoedID                     1108
 #define staIsolationEntry               1109
 #define staExposedID                    1110
 #define staAddPerson                    1111
-#define btnSaveData_GH                  1112
-#define btnLoadData_Graph               1113
-#define btnLoadData_GH                  1113
 
 // Next default values for new objects
 // 
@@ -120,7 +115,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        137
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1114
+#define _APS_NEXT_CONTROL_VALUE         1112
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
