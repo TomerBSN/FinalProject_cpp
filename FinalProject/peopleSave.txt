@@ -1,4 +1,4 @@
-0;123123123;asdasd;1;Holon;asdasd;18;9;2020;18;9;2020;222222222;Work;Easy;1;Shaare Zedek;18;9;2020;#
+0;123123123;asdasd;1;Holon;asdasd;9;8;20;9;8;20;222222222;Work;Easy;1;Shaare Zedek;9;8;20;#
 3;111111111;auuuuuu;1;Holon;asdasdasd;18;9;2020;Efrat;asdasdas;18;9;2020;222222222;#
 3;111222111;asdasd;1;Holon;asdasd;18;9;2020;Modiin Illit;asdasd;18;9;2020;222222222;#
 3;222202111;asdasd;1;Bat Yam;asdasd;18;9;2020;Elad;asdasd;18;9;2020;111222111;#

@@ -187,10 +187,13 @@
     <ClInclude Include="CSearchDlg.h" />
     <ClInclude Include="FinalProject.h" />
     <ClInclude Include="FinalProjectDlg.h" />
+    <ClInclude Include="framework.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="GraphObject.h" />
     <ClInclude Include="Hospitalized.h" />
     <ClInclude Include="Isolated.h" />
     <ClInclude Include="NonHospitalized.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="Recovered.h" />
     <ClInclude Include="Resource.h" />
@@ -204,9 +207,11 @@
     <ClCompile Include="FinalProject.cpp" />
     <ClCompile Include="FinalProjectDlg.cpp" />
     <ClCompile Include="Global.cpp" />
+    <ClCompile Include="GraphObject.cpp" />
     <ClCompile Include="Hospitalized.cpp" />
     <ClCompile Include="Isolated.cpp" />
     <ClCompile Include="NonHospitalized.cpp" />
+    <ClCompile Include="pch.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="Recovered.cpp" />
     <ClCompile Include="Sick.cpp" />
