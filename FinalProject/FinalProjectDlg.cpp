@@ -566,7 +566,7 @@ void CFinalProjectDlg::savePersonsToFile()
 			{
 				//format: Level; isVentilatyed; Hospital; HospitalizationDate.day; HD.month; HD.year;
 				Hospitalized *hos = dynamic_cast<Hospitalized*>(Persons[i]);
-				myLine.Format(_T("%d;%d;%d;%s;%s;%s;%d;%s;%d;%d;%d;#"), hos->get_PositiveTest_date().day, hos->get_PositiveTest_date().month, hos->get_PositiveTest_date().year, (LPCTSTR)hos->get_InfectedBy(), (LPCTSTR)hos->get_InfectionArea(), (LPCTSTR)hos->get_Level(), hos->get_IsVentilated(), (LPCTSTR)hos->get_Hospital(), hos->get_HospitalizationDate().day, hos->get_HospitalizationDate().month, hos->get_HospitalizationDate().year);
+				myLine.Format(_T("%d;%d;%d;%s;%s;%d;%s;%d;%d;%d;%s#"), hos->get_PositiveTest_date().day, hos->get_PositiveTest_date().month, hos->get_PositiveTest_date().year, (LPCTSTR)hos->get_InfectionArea(), (LPCTSTR)hos->get_Level(), hos->get_IsVentilated(), (LPCTSTR)hos->get_Hospital(), hos->get_HospitalizationDate().day, hos->get_HospitalizationDate().month, hos->get_HospitalizationDate().year, (LPCTSTR)hos->get_InfectedBy());
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
@@ -574,7 +574,7 @@ void CFinalProjectDlg::savePersonsToFile()
 			{
 				//format: whereIsolated city; whereIsolated street;
 				NonHospitalized* nonhos = dynamic_cast<NonHospitalized*>(Persons[i]);
-				myLine.Format(_T("%d;%d;%d;%s;%s;%s;%s;#"), nonhos->get_PositiveTest_date().day, nonhos->get_PositiveTest_date().month, nonhos->get_PositiveTest_date().year, (LPCTSTR)nonhos->get_InfectedBy(), (LPCTSTR)nonhos->get_InfectionArea(), (LPCTSTR)nonhos->get_WhereIsolated().city, (LPCTSTR)nonhos->get_WhereIsolated().street);
+				myLine.Format(_T("%d;%d;%d;%s;%s;%s;%s;#"), nonhos->get_PositiveTest_date().day, nonhos->get_PositiveTest_date().month, nonhos->get_PositiveTest_date().year, (LPCTSTR)nonhos->get_InfectionArea(), (LPCTSTR)nonhos->get_WhereIsolated().city, (LPCTSTR)nonhos->get_WhereIsolated().street, (LPCTSTR)nonhos->get_InfectedBy());
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
@@ -582,7 +582,7 @@ void CFinalProjectDlg::savePersonsToFile()
 			{
 				//format: recovery,day; recovery.month; recovery.year;
 				Recovered* rec = dynamic_cast<Recovered*>(Persons[i]);
-				myLine.Format(_T("%d;%d;%d;%s;%s;%d;%d;%d;#"), rec->get_PositiveTest_date().day, rec->get_PositiveTest_date().month, rec->get_PositiveTest_date().year, (LPCTSTR)rec->get_InfectedBy(), (LPCTSTR)rec->get_InfectionArea(), rec->get_RecoveryDate().day, rec->get_RecoveryDate().month, rec->get_RecoveryDate().year);
+				myLine.Format(_T("%d;%d;%d;%s;%d;%d;%d;%s#"), rec->get_PositiveTest_date().day, rec->get_PositiveTest_date().month, rec->get_PositiveTest_date().year, (LPCTSTR)rec->get_InfectionArea(), rec->get_RecoveryDate().day, rec->get_RecoveryDate().month, rec->get_RecoveryDate().year, (LPCTSTR)rec->get_InfectedBy());
 				f.WriteString((LPCTSTR)myLine);
 				break;
 			}
@@ -650,7 +650,6 @@ void CFinalProjectDlg::fillCstringList(CString wholeFile)
 			PositiveTest.day = _ttoi(singlePersonItemList[single++]);
 			PositiveTest.month = _ttoi(singlePersonItemList[single++]);
 			PositiveTest.year = _ttoi(singlePersonItemList[single++]);
-			InfectedBy = singlePersonItemList[single++];
 			Area = singlePersonItemList[single++];
 		}
 		switch (itemType)
@@ -663,6 +662,7 @@ void CFinalProjectDlg::fillCstringList(CString wholeFile)
 				HospitalEntry.day = _ttoi(singlePersonItemList[single++]);
 				HospitalEntry.month = _ttoi(singlePersonItemList[single++]);
 				HospitalEntry.year = _ttoi(singlePersonItemList[single++]);
+				InfectedBy = singlePersonItemList[single++];
 				per = new Hospitalized(Gender, ID, Name, Addr, Birthday, PositiveTest, Area, InfectedBy, Level, IsVentilated, Hospital, HospitalEntry);
 				break;
 			}
@@ -670,6 +670,7 @@ void CFinalProjectDlg::fillCstringList(CString wholeFile)
 			{
 				IsolationAddr.city = singlePersonItemList[single++];
 				IsolationAddr.street = singlePersonItemList[single++];
+				InfectedBy = singlePersonItemList[single++];
 				per = new NonHospitalized(Gender, ID, Name, Addr, Birthday, PositiveTest, Area, InfectedBy, IsolationAddr);
 				break;
 			}
@@ -678,6 +679,7 @@ void CFinalProjectDlg::fillCstringList(CString wholeFile)
 				Recovery.day = _ttoi(singlePersonItemList[single++]);
 				Recovery.month = _ttoi(singlePersonItemList[single++]);
 				Recovery.year = _ttoi(singlePersonItemList[single++]);
+				InfectedBy = singlePersonItemList[single++];
 				per = new Recovered(Gender, ID, Name, Addr, Birthday, PositiveTest, Area, InfectedBy, Recovery);
 				break;
 			}
@@ -772,7 +774,10 @@ void CFinalProjectDlg::Clear_InvalidIsolated()
 	}
 
 	for (i = 0; i < toDel_inds.size(); i++)
-		Persons.erase(Persons.begin() + (toDel_inds[i]-i));	// if person was deleted, number of items decreased in 1
+	{
+		decreaseCounters(toDel_inds[i] - i);
+		Persons.erase(Persons.begin() + (toDel_inds[i] - i));	// if person was deleted, number of items decreased in 1
+	}
 }
 
 /*
@@ -914,6 +919,7 @@ void CFinalProjectDlg::OnBnClickedbtnsearch()
 	if (status >= 5)
 	{
 		status -= 5;
+		decreaseCounters(searchPersonID);
 		int itemType = Persons[searchPersonID]->get_itemType();
 		comboDataTypeController.SetCurSel(status);
 		GetDlgItem(btnSaveDetails)->ShowWindow(SW_SHOW);
