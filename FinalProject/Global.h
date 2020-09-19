@@ -9,18 +9,23 @@
 
 using namespace std;
 
-extern map<CString, int> CountByCity;
-extern map<CString, int> CountByLevel;
-extern map<CString, int> CountByArea;
-extern map<CString, int> CountByHostital;
-extern int TotalHospitalized;
-extern int TotalNonHospitalized;
-extern int TotalRecovered;
-extern int TotalIsolated;
+typedef struct cntContainer
+{
+	map<CString, int> CountByCity;
+	map<CString, int> CountByLevel;
+	map<CString, int> CountByArea;
+	map<CString, int> CountByHostital;
+	int TotalHospitalized;
+	int TotalNonHospitalized;
+	int TotalSicks;
+	int TotalRecovered;
+	int TotalIsolated;
+} cntContainer;
 
+extern cntContainer Counters;
 extern vector <Person*> Persons;
 extern int searchPersonID;
 
 bool searchPersonByID(CString ID);
 int getDifference(Date dt1, Date dt2);
-void decreaseCounters(int index);
+void updateCounters(Person* p, bool flag);

@@ -4,15 +4,8 @@
 
 using namespace std;
 
-map<CString, int> CountByCity;
-map<CString, int> CountByLevel;
-map<CString, int> CountByArea;
-map<CString, int> CountByHostital;
-int TotalHospitalized;
-int TotalNonHospitalized;
-int TotalRecovered;
-int TotalIsolated;
 vector <Person*> Persons;
+cntContainer Counters;
 int searchPersonID;
 
 bool searchPersonByID(CString ID)
@@ -69,44 +62,82 @@ int getDifference(Date dt1, Date dt2)
     return (n2 - n1);
 }
 
-void decreaseCounters(int index)
+void updateCounters(Person* p, bool flag)    // flag = 0 -> decrease counters, flag = 1 -> increase counters
 {
-    int itemType = Persons[index]->get_itemType();
+    int itemType = p->get_itemType();
 
-    CountByCity[Persons[index]->get_Address().city]--;
+    if (flag)
+        Counters.CountByCity[p->get_Address().city]++;
+    else
+        Counters.CountByCity[p->get_Address().city]--;
+
     if (itemType != 3)
-        CountByArea[dynamic_cast<Sick*>(Persons[index])->get_InfectionArea()]--;
+    {
+        Sick* s = (Sick*)(p);
+        if (flag)
+            Counters.CountByArea[s->get_InfectionArea()]--;
+        else
+            Counters.CountByArea[s->get_InfectionArea()]--;
+    }
 
     switch (itemType)
     {
         case 0:
         {
-            Hospitalized* h = dynamic_cast<Hospitalized*>(Persons[index]);
-            CountByHostital[h->get_Hospital()]--;
-            CountByLevel[h->get_Level()]--;
-            TotalHospitalized--;
+            Hospitalized* h = (Hospitalized*)(p);
+            if (flag)
+            {
+                Counters.CountByHostital[h->get_Hospital()]++;
+                Counters.CountByLevel[h->get_Level()]++;
+                Counters.TotalHospitalized++;
+            }
+            else
+            {
+                Counters.CountByHostital[h->get_Hospital()]--;
+                Counters.CountByLevel[h->get_Level()]--;
+                Counters.TotalHospitalized--;
+            }
+
             break;
         }
 
         case 1:
         {
-            CountByLevel[_T("Easy")]--;
-            TotalNonHospitalized--;
+            if (flag)
+            {
+                Counters.CountByLevel[_T("Easy")]++;
+                Counters.TotalNonHospitalized++;
+            }
+            else
+            {
+                Counters.CountByLevel[_T("Easy")]--;
+                Counters.TotalNonHospitalized--;
+            }
+
             break;
         }
 
         case 2:
         {
-            TotalRecovered--;
+            if (flag)
+                Counters.TotalRecovered++;
+            else
+                Counters.TotalRecovered--;
+
             break;
         }
 
         case 3:
         {
-            TotalIsolated--;
+            if (flag)
+                Counters.TotalIsolated++;
+            else
+                Counters.TotalIsolated--;
+
             break;
         }
 
     }
 
+    Counters.TotalSicks = Counters.TotalHospitalized + Counters.TotalNonHospitalized;
 }

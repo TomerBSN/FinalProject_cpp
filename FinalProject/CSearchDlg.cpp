@@ -100,7 +100,7 @@ void CSearchDlg::OnBnProceedClickedSh()
 
 		case 2:       // Delete
 		{
-			decreaseCounters(searchPersonID);
+			updateCounters(Persons[searchPersonID], false);
 			Persons.erase(Persons.begin() + searchPersonID);
 			EndDialog(0);
 			MessageBox(_T("Person deleted!"));

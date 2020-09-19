@@ -1,5 +1,2 @@
-0;123123123;asdasd;1;Holon;asdasd;9;8;20;9;8;20;222222222;Work;Easy;1;Shaare Zedek;9;8;20;#
-3;111111111;auuuuuu;1;Holon;asdasdasd;18;9;2020;Efrat;asdasdas;18;9;2020;222222222;#
-3;111222111;asdasd;1;Holon;asdasd;18;9;2020;Modiin Illit;asdasd;18;9;2020;222222222;#
-3;222202111;asdasd;1;Bat Yam;asdasd;18;9;2020;Elad;asdasd;18;9;2020;111222111;#
-0;444444444;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
+0;111111112;sdfsdf;1;Tel Aviv;asdad;19;9;2020;19;9;2020;Synagogue;Medium;1;Sheba;19;9;2020;#
+0;111111123;asdasd;1;Tel Aviv;asdasd;19;9;2020;19;9;2020;Mall;Medium;1;Sheba;19;9;2020;#
