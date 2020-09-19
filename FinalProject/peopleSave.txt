@@ -1,31 +1,25 @@
-0;123123123;asdasd;1;Holon;asdasd;9;8;20;9;8;20;222222222;Work;Easy;1;Shaare Zedek;9;8;20;#
-3;111111111;auuuuuu;1;Holon;asdasdasd;18;9;2020;Efrat;asdasdas;18;9;2020;222222222;#
-3;111222111;asdasd;1;Holon;asdasd;18;9;2020;Modiin Illit;asdasd;18;9;2020;222222222;#
-3;222202111;asdasd;1;Bat Yam;asdasd;18;9;2020;Elad;asdasd;18;9;2020;111222111;#
-0;444444444;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;189189189;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;178178178;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;156156156;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;562562565;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000888;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000023;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000001231;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000012312;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000222;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000001;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000002;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000003;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000004;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000005;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000006;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000007;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000008;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000009;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000011;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000012930;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;009123892;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000192939;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000827837;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000136227;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000382763;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000123868;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
+2;762645265;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;562563562;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;097875645;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;123123123;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;234234234;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;345345345;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;567567567;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;890890890;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;567567567;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+0;000000001;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000002;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000003;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000004;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000005;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000006;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000007;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000008;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000009;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000010;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000021;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000031;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000041;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000051;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000061;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000071;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#

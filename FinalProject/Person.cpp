@@ -5,7 +5,9 @@
 
 Person::Person()
 {
-
+	Birthday.day = 1;
+	Birthday.month = 1;
+	Birthday.year = 1;
 }
 
 Person::Person(bool gender, CString id, CString name, Address addr, Date birthday)
