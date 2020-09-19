@@ -1,7 +1,9 @@
 #pragma once
 #include <vector>
 #define COLOR_BLACK 0xFFFFFFFF
-//#define UPPERBOUND 90
+#define UPPERBOUND 400
+#define LOWERBOUND 10
+#define MAXLEGEND 20
 
 using namespace std;
 // GraphObject command target
@@ -14,12 +16,15 @@ public:
 	GraphObject(CClientDC* pDC, CPoint start, vector<int> info, vector<CString> legendValues, CString xAxis, CString yAxis);
 	virtual ~GraphObject();
 	void createAxis();//draws the axis and CStatic axis names
-	void displayGraph();
-	void createRectangles();
-	void createLegend();
-	void loadExistingGraph(CClientDC* pDC);
+	void displayGraph(bool generateNew, CClientDC* _pDC);
+	void createDataVectors();
+	void createLegend(unsigned int mod);
+	void loadGraph();
+	long getLength();
 	//the main function, draws it all
-	CRect unloadGraph();//might be tossed, but this is for the InvalidateRect, as I return a rectangle to use to block out the graph.
+	CRect unloadGraph();
+	void AdjustAllRects(bool y, bool x);
+	//might be tossed, but this is for the InvalidateRect, as I return a rectangle to use to block out the graph.
 	void Serialize(CArchive& archive);//To be edited
 	COLORREF generateRandomColor(int min, int max);
 
@@ -27,6 +32,7 @@ public:
 	void  saveIntoArchive(vector<STLVectorType>& ctype, CArchive& arc, size_t size);
 	template <class STLVectorType>
 	void  loadFromArchive(vector<STLVectorType>& ctype, CArchive& arc, size_t size);
+	//TODO need a function that basically goes through the rectangles and SQUISHES them with the proper function thingy. it will get a BOOL and to see if it is too small, or too big. we will have UPPERBOUND and LOWERBOUND as a check, and that will be once we check for the Height max thingy. If the Max is like under 10 then the whole ordeal is gonna be small so we want to expand it. If it is going to be about above 400 then we divide everyone by 4
 
 private:
 	CClientDC* pDC = nullptr;//holds my "Drawing Assistant" so I can always refer to the OnPaint of the Graph Dialog

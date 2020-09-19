@@ -4,8 +4,8 @@
 #include "GraphObject.h"
 #include "Global.h"
 
-#define START_LINE_GRAPH_Y 450
-#define START_LINE_GRAPH_X 150
+#define START_LINE_GRAPH_Y 425
+#define START_LINE_GRAPH_X 90
 // CGraphDlg dialog
 
 class CGraphDlg : public CDialogEx
@@ -35,7 +35,12 @@ public:
 	afx_msg void OnBnClickedSaveGraphs();
 	afx_msg void OnBnClickedLoadGraphs();
 	afx_msg void OnBnClickedHelpGraph();
+	//afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	void ClearGraphArea();
+	void PredefinedGraphs();
 
+	void loadFromMap(map<CString, int>& mMap, vector<int>& info, vector<CString>& legendValue);
+	void adjustScrollBar(GraphObject& grph);
+	CScrollBar srGraphScroll_Controller;
 	
 };

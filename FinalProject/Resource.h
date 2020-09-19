@@ -114,11 +114,12 @@
 #define staExposedID                    1110
 #define staAddPerson                    1111
 #define comboSearchStat                 1112
-#define btnLoadGraphs                   1113
 #define btnLoadGraphs_GH                1113
 #define btnSaveGraphs_GH                1114
 #define btnViewGraph_GH                 1115
 #define staGraphHEader_GH               1116
+#define IDC_SCROLLBAR1                  1117
+#define srGraphScroll_GH                1117
 
 // Next default values for new objects
 // 
@@ -126,7 +127,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        138
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1117
+#define _APS_NEXT_CONTROL_VALUE         1118
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

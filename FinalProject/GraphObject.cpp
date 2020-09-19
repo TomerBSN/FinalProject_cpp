@@ -86,61 +86,57 @@ void GraphObject::createAxis()
 	pGraph_TL.x = po.x;
 }
 
-void GraphObject::displayGraph()
+void GraphObject::displayGraph(bool generateNew, CClientDC* _pDC)
 {
-	unsigned int i = 0;
-	long max = -1;
-	while (i < information.size())
+	unsigned int mod = 5;
+	int max = -1;
+	for (unsigned int i = 0; i < information.size(); i++) if (information[i] > max) max = information[i];
+	if (generateNew == true)
 	{
-		if (information[i] > max) max = information[i];
-		i++;
+		createDataVectors();
 	}
 	this->length = information.size() * 2 * 15;
-	// *2 - Filler basically, a "Ghost" Rect then the actual Rect. 30 padding each.
-	this->height = max;
-	createAxis();
-	createRectangles();
-	createLegend();
+	this->height = (long)max;
+	if (max > UPPERBOUND)
+	{
+		AdjustAllRects(true, false);
+		this->height = (long)max / 3;
+	}
+	else if (max <= LOWERBOUND)
+	{
+		this->height = 50;
+	}
+	if (information.size() > MAXLEGEND)
+	{
+		mod = 10;
+	}
 
+	this->pDC = _pDC;
+	createAxis();
+	createLegend(mod);
+	loadGraph();
 }
 
-void GraphObject::createRectangles()
+void GraphObject::createDataVectors()
 {
 	COLORREF ref;
-	CRect rec, * r;
-	CString val;
+	CRect rec;
 	CPoint st = this->pStart, end, po;
-	SIZE s; s.cx = 25; s.cy = 15;
-	CPen* pen; CBrush* brush;
 	for (unsigned int i = 0; i < information.size(); i++)//drawing the rects
 	{
 		ref = generateRandomColor(0, 255);
 		colors.push_back(ref);
-		brush = new CBrush(ref);
-		pen = new CPen(PS_SOLID, 1, ref);
-		pDC->SelectObject(pen);
-		pDC->SelectObject(brush);
 
 		st.x += 15;
 		end.x = st.x + 15;
 		end.y = pStart.y - information[i];
 		rec = new CRect(st, end);
-		pDC->Rectangle(rec);
 		rects.push_back(rec);
-
-		val.Format(_T("%d"), information[i]);
-		po = end; po.y -= s.cx; po.x -= s.cy;
-		r = new CRect(po, s);
-		pDC->DrawText(val, r, WS_CHILD | WS_VISIBLE | SS_LEFT | SS_ENDELLIPSIS);
-
 		st.x += 15;
-		DeleteObject(pen);
-		DeleteObject(brush);
-		DeleteObject(r);
 	}
 }
 
-void GraphObject::createLegend()
+void GraphObject::createLegend(unsigned int mod)
 {
 	SIZE s, sq_s; s.cx = 150; s.cy = 20; sq_s.cx = 15; sq_s.cy = 15;
 	CPoint q, pos;// = pGraph_BL;
@@ -165,7 +161,7 @@ void GraphObject::createLegend()
 
 		i++;
 		pos.y += s.cy;
-		if (i % 5 == 0) {
+		if (i % mod == 0) {
 			pos.x += s.cx; low = pos.y;  pos.y = keep;
 		}
 		DeleteObject(r);
@@ -175,7 +171,7 @@ void GraphObject::createLegend()
 	pGraph_BR.x = pos.x > length ? pos.x + s.cx : length + s.cx;
 }
 
-void GraphObject::loadExistingGraph(CClientDC* _pDC)
+void GraphObject::loadGraph()
 {
 	//Logically we come here when everything is set. The Data is here, no need to push items into anything.
 	//createAxis and createLegend both do not pushback data, meaning this function will "redo" what createRectangle does.
@@ -185,9 +181,7 @@ void GraphObject::loadExistingGraph(CClientDC* _pDC)
 	CPoint pos;
 	CRect* r, temp;
 	CPen* pen; CBrush* brush;
-	this->pDC = _pDC;
-
-	createAxis();
+	
 
 	for (unsigned int i = 0; i < information.size(); i++)
 	{
@@ -198,9 +192,8 @@ void GraphObject::loadExistingGraph(CClientDC* _pDC)
 		pDC->SelectObject(pen);
 		pDC->SelectObject(brush);
 		pDC->Rectangle(temp);
-
 		val.Format(_T("%d"), information[i]);
-		pos.y = temp.bottom; pos.x = temp.left;  pos.y -= s.cy * 2;//temp.bottom cause the rectangle is flipped due to the nature of it all. top will always point to 450 which is the base line of ours.
+		pos.y = temp.bottom; pos.x = temp.left;  pos.y -= s.cy;//temp.bottom cause the rectangle is flipped due to the nature of it all. top will always point to 450 which is the base line of ours.
 		r = new CRect(pos, s);
 		pDC->DrawText(val, r, WS_CHILD | WS_VISIBLE | SS_LEFT | SS_ENDELLIPSIS);
 
@@ -208,8 +201,11 @@ void GraphObject::loadExistingGraph(CClientDC* _pDC)
 		DeleteObject(pen);
 		DeleteObject(brush);
 	}
+}
 
-	createLegend();
+long GraphObject::getLength()
+{
+	return this->length;
 }
 
 CRect GraphObject::unloadGraph()
@@ -217,6 +213,19 @@ CRect GraphObject::unloadGraph()
 	return new CRect(pGraph_TL, pGraph_BR);
 }
 
+void GraphObject::AdjustAllRects(bool y, bool x)
+{
+	SIZE def;
+	int adX = x ? 3 : 1;
+	int adY = y ? 3 : 1;
+	for (unsigned int i = 0; i < rects.size(); ++i)
+	{
+		def = rects[i].Size();
+		def.cx /= adX;
+		def.cy /= adY;
+		rects[i].DeflateRect(def);
+	}
+}
 
 COLORREF GraphObject::generateRandomColor(int min, int max) //range : [min, max)
 {
@@ -240,13 +249,13 @@ void GraphObject::Serialize(CArchive& archive)
 	CObject::Serialize(archive);
 
 	if (archive.IsStoring()) {
-		archive << pStart << pGraph_TL << pGraph_BR << height << length << xAxisName << yAxisName; //<< information << legendValues << colors << rects
+		archive << pStart << pGraph_TL << pGraph_BR << height << length << xAxisName << yAxisName;
 		saveIntoArchive(information, archive, information.size());
 		saveIntoArchive(legendValues, archive, legendValues.size());
 		saveIntoArchive(colors, archive, colors.size());
 		saveIntoArchive(rects, archive, information.size());
 	}
-	else
+	else//does not save properly, so when i load a vector it is sie 0 which is wrong..
 	{
 		archive >> pStart >> pGraph_TL >> pGraph_BR >> height >> length >> xAxisName >> yAxisName;
 		loadFromArchive(information, archive, information.size());
@@ -259,7 +268,7 @@ void GraphObject::Serialize(CArchive& archive)
 template<class STLVectorType>
 void GraphObject::saveIntoArchive(vector<STLVectorType>& ctype, CArchive& arc, size_t size)
 {
-	arc << (int)size;
+	arc << size;
 	for (size_t i = 0; i < size; i++)
 	{
 		arc << ctype[i];
@@ -276,4 +285,3 @@ void GraphObject::loadFromArchive(vector<STLVectorType>& ctype, CArchive& arc, s
 		arc >> ctype[i];
 	}
 }
-

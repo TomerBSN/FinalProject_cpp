@@ -1,7 +1,7 @@
 // CGraphDlg.cpp : implementation file
 //
 
-//#include "pch.h"
+#include "pch.h"
 #include "FinalProject.h"
 #include "CGraphDlg.h"
 #include "afxdialogex.h"
@@ -25,6 +25,7 @@ void CGraphDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, comboGraphsSelect_GH, comboGraphsSelect_GH_Controller);
+	DDX_Control(pDX, srGraphScroll_GH, srGraphScroll_Controller);
 }
 
 
@@ -33,70 +34,39 @@ BEGIN_MESSAGE_MAP(CGraphDlg, CDialogEx)
 	ON_BN_CLICKED(btnSaveGraphs_GH, &CGraphDlg::OnBnClickedSaveGraphs)
 	ON_BN_CLICKED(btnLoadGraphs_GH, &CGraphDlg::OnBnClickedLoadGraphs)
 	ON_BN_CLICKED(btnHelpGraph_GH, &CGraphDlg::OnBnClickedHelpGraph)
+	ON_WM_HSCROLL()
 END_MESSAGE_MAP()
 
 BOOL CGraphDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-	CString te;
-	for (int i = 0; i < 5; i++)
-	{
-		te.Format(_T("Graph Slot %d"), i);
-		comboGraphsSelect_GH_Controller.AddString((LPCTSTR)te);
-	}
 	comboGraphsSelect_GH_Controller.SetCurSel(0);
-	return TRUE; // return TRUE unless you set the focus to a control
-	// EXCEPTION: OCX Property Pages should return FALSE
+	PredefinedGraphs();
+	return TRUE;
 }
-// CGraphDlg message handlers
 
 
 void CGraphDlg::OnBnClickedViewGraph()
 {
-	//CDialogEx::OnPaint();
-	CClientDC pDC(this);
-	GraphObject* graph;
-	vector <int> info;
-	vector <CString> names;
-	unsigned int j;
-	CString xAxis, yAxis, temp;
-	CPoint p;
-
-	j = 0;
-	while (j < 10)//fake data for now
-	{
-		temp.Format(_T("Name_%d"), j);
-		info.push_back(j*15 + 25);
-		names.push_back(temp);
-		j++;
-	}
-	//to be edited
-	xAxis.Format(_T("Insert X Axis %d"), 1);
-	yAxis.Format(_T("Insert\nY\nAxis %d"), 1);
-	p.x = START_LINE_GRAPH_X;
-	p.y = START_LINE_GRAPH_Y;
-
-	graph = new GraphObject(&pDC, p, info, names, xAxis, yAxis); //todo: basically after this, try and make a graphobj vector or something to push the items into
-	graph->displayGraph();
-	this->zone = graph->unloadGraph();
-	graphs.push_back(graph);
-
-	/*
 	//What we need here more or less, we need to go to the combo and show that graph
 	ClearGraphArea();
 	CDialogEx::OnPaint();
 	GraphObject* temp;
 	CClientDC pDC(this);
-	int i = comboGRaphViewController.GetCurSel();
+	int i = comboGraphsSelect_GH_Controller.GetCurSel();
 
 	if (i == -1) {
 		MessageBox(L"Select a proper thingy.");
 		return;
 	}
+	if(i > graphs.size()) {
+		MessageBox(L"Out of bounds for graphs.");
+		return;
+	}
 	temp = dynamic_cast<GraphObject*>(graphs[i]);
-	temp->loadExistingGraph(&pDC);
-	
-	*/
+	temp->displayGraph(false, &pDC);
+	adjustScrollBar(*temp);
+	this->zone = temp->unloadGraph();
 }
 
 
@@ -105,7 +75,7 @@ void CGraphDlg::OnBnClickedSaveGraphs()
 	// Choice and open file ostream
 	CFileDialog dlg(FALSE, _TEXT("dat"), _TEXT("*.dat"));
 	CString fname;
-	int res = dlg.DoModal();
+	INT_PTR res = dlg.DoModal();
 	if (res == IDOK)
 		fname = dlg.GetPathName();
 	graphs_size = graphs.size();
@@ -123,43 +93,52 @@ void CGraphDlg::OnBnClickedSaveGraphs()
 	}
 	fOut.Close();
 	Invalidate();
+	ClearGraphArea();
 }
 
 
 void CGraphDlg::OnBnClickedLoadGraphs()
 {
-	// Choice and open file ostream
 	GraphObject* temp;
-	CFileDialog dlg(TRUE, _TEXT("dat"), _TEXT("*.dat"));
 	CString fname;
-	int res = dlg.DoModal();
+	CFileDialog dlg(TRUE, _TEXT("dat"), _TEXT("*.dat"));
+	INT_PTR res = dlg.DoModal(); //ISSUE here for some reason, like it can't bring this modal up and at the end it endlessly loops
 	if (res == IDOK)
 		fname = dlg.GetPathName();
-
-	// load to file
+	CString tp;
 	CFile fOut;
 	if (fOut.Open(fname, CFile::modeRead))
 	{
 		graphs.clear();
 		CArchive ar(&fOut, CArchive::load);
+		
 		ar >> graphs_size;
 		for (int i = 0; i < graphs_size; i++)
 		{
+			tp.Format(_T("Loop %d"), i);
 			temp = new GraphObject();
 			temp->Serialize(ar);
 			graphs.push_back(temp);
 			DeleteObject(temp);
+			
 		}
+
 		ar.Close();
+	}
+	else
+	{
+		MessageBox(_T("File could not be opened\n"));
+		return;
 	}
 	fOut.Close();
 	Invalidate();
+	ClearGraphArea();
 }
 
 
 void CGraphDlg::OnBnClickedHelpGraph()
 {
-	//MessageBox(L"Currently for clearing the graph.\nTo be changed.");
+	MessageBox(L"Select a graph you wish to see from the delegated section.\nAfter that click on View to see it visually.\n\nIf you intend on viewing these in teh future, please save the graph by clicking on Save.\n\nTo view a old version of a graph click on Load and select the correct file.\nNOTE: Any progress from before will be cleared, best to save beforehand.\n\nEnjoy!");
 	ClearGraphArea();
 }
 
@@ -167,3 +146,106 @@ void CGraphDlg::ClearGraphArea()
 {
 	InvalidateRect(zone, true);
 }
+
+void CGraphDlg::PredefinedGraphs()
+{
+	map<CString, int>::iterator itr;
+	vector <int> information;
+	vector <CString> legendValue;
+	CClientDC pDC(this);
+	GraphObject* graph;
+	CString xAxis, yAxis;
+	CPoint p(START_LINE_GRAPH_X, START_LINE_GRAPH_Y);
+	yAxis = L"Amount\nof\nSick";
+
+	loadFromMap(CountByHostital, information, legendValue);
+	xAxis = L"Hospital Names";
+	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
+	information.clear(); legendValue.clear();
+	graph->displayGraph(true, &pDC);
+	graphs.push_back(graph);
+	this->zone = graph->unloadGraph();
+	ClearGraphArea();
+
+	loadFromMap(CountByArea, information, legendValue);
+	xAxis = L"Area Type Names";
+	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
+	information.clear(); legendValue.clear();
+	graph->displayGraph(true, &pDC);
+	graphs.push_back(graph);
+	this->zone = graph->unloadGraph();
+	ClearGraphArea();
+
+
+	loadFromMap(CountByCity, information, legendValue);
+	xAxis = L"City Names";
+	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
+	information.clear(); legendValue.clear();
+	graph->displayGraph(true, &pDC);
+	graphs.push_back(graph);
+	this->zone = graph->unloadGraph();
+	ClearGraphArea();
+	
+	loadFromMap(CountByLevel, information, legendValue);
+	xAxis = L"Sickness Levels";
+	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
+	information.clear(); legendValue.clear();
+	graph->displayGraph(true, &pDC);
+	graphs.push_back(graph);
+	this->zone = graph->unloadGraph();
+	ClearGraphArea();
+}
+
+void CGraphDlg::loadFromMap(map<CString, int> &mMap, vector <int> &info, vector <CString> &legendValue)
+{
+	map<CString, int>::iterator itr;
+	for (itr = mMap.begin(); itr != mMap.end(); ++itr)
+	{
+		legendValue.push_back(itr->first);
+		info.push_back(itr->second);
+	}
+
+}
+
+void CGraphDlg::adjustScrollBar(GraphObject& grph)
+{
+	SCROLLINFO ScrollInfo;
+	ScrollInfo.cbSize = sizeof(ScrollInfo);     // size of this structure
+	ScrollInfo.fMask = SIF_ALL;                 // parameters to set
+	ScrollInfo.nMin = 0;                        // minimum scrolling position
+	ScrollInfo.nMax = grph.getLength();                      // maximum scrolling position
+	ScrollInfo.nPage = 40;                      // the page size of the scroll box
+	ScrollInfo.nPos = 50;                       // initial position of the scroll box
+	ScrollInfo.nTrackPos = 0;                   // immediate position of a scroll box that the user is dragging
+	srGraphScroll_Controller.SetScrollInfo(&ScrollInfo);
+}
+
+//void CGraphDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
+//{
+//	switch (nSBCode)
+//	{
+//	case SB_BOTTOM:         //Scrolls to the lower right. 
+//		break;
+//	case SB_ENDSCROLL:      //Ends scroll. 
+//		break;
+//	case SB_LINEDOWN:       //Scrolls one line down. 
+//		srGraphScroll_Controller.SetScrollPos(srGraphScroll_Controller.GetScrollPos() + 1);
+//		break;
+//	case SB_LINEUP:         //Scrolls one line up. 
+//		srGraphScroll_Controller.SetScrollPos(srGraphScroll_Controller.GetScrollPos() - 1);
+//		break;
+//	case SB_PAGEDOWN:       //Scrolls one page down. 
+//		srGraphScroll_Controller.SetScrollPos(srGraphScroll_Controller.GetScrollPos() + srGraphScroll_Controller.GetScrollInfo();
+//		break;
+//	case SB_PAGEUP:         //Scrolls one page up. 
+//		SetScrollPos(GetScrollPos() - ScrollInfo.nPage);
+//		break;
+//	case SB_THUMBPOSITION:  //The user has dragged the scroll box (thumb) and released the mouse button. The nPos parameter indicates the position of the scroll box at the end of the drag operation. 
+//		break;
+//	case SB_THUMBTRACK:     //The user is dragging the scroll box. This message is sent repeatedly until the user releases the mouse button. The nPos parameter indicates the position that the scroll box has been dragged to. 
+//		srGraphScroll_Controller.SetScrollPos(nPos);
+//		break;
+//	case SB_TOP:            //Scrolls to the upper left. 
+//		break;
+//		CDialogEx::OnHScroll(nSBCode, nPos, pScrollBar);
+//}
