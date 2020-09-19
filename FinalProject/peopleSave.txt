@@ -1,26 +1,25 @@
-3;111111111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
-3;111111211;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
-3;111113111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
-3;111133111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
-3;141111111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
-3;111111115;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
-3;161111111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
-3;111111711;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
-3;181111111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
-3;111119111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
-3;111991111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
-3;188111111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
-0;333333333;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
-0;343333333;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
-0;333333433;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
-0;333333343;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
-0;333333334;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
-0;333333344;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
-0;333344333;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
-0;333444333;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
-0;344333333;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
-3;123123123;asdas;1;Bat Yam;asdasdas;19;9;1883;Beit Shemesh;asdasdasd;19;9;2020;;#
-1;232323233;asdasd;0;Ramat Gan;asdasd;19;9;2020;19;9;2020;Work;Herzliya;asdasd;;#
-0;444444444;asdasd;0;Givataim;asdasda;19;9;2020;19;9;2020;Work;Medium;1;Rambam;19;9;2020;#
-2;555555555;asdasd;1;Ramat Gan;asdasda;19;9;2020;19;9;2020;Work;19;9;2020;#
-3;666666666;asdas;1;Bnei Brak;asdad;19;9;2020;Jerusalem;asdasda;19;9;2020;;#
+2;762645265;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;562563562;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;097875645;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;123123123;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;234234234;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;345345345;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;567567567;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;890890890;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;567567567;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+0;000000001;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000002;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000003;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000004;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000005;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000006;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000007;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000008;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000009;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000010;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000021;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000031;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000041;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000051;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000061;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000071;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#

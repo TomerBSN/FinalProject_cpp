@@ -46,7 +46,7 @@ public:
 	virtual int get_itemType();
 
 protected:
-	bool Gender;           // False -> Female, True -> Male
+	bool Gender = false;           // False -> Female, True -> Male
 	CString ID;
 	CString Name;
 	Address address;

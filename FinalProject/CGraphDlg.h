@@ -21,10 +21,10 @@ public:
 	enum { IDD = IDD_GRAPH_DIALOG };
 #endif
 private:
-	CRect zone;
-	vector<CObject*>graphs;
-	size_t graphs_size = 0;
-	CComboBox comboGraphsSelect_GH_Controller;
+	CRect zone; //Holds the area of the Graph itself, getting the details from GraphObject::unloadGraph
+	vector<CObject*>graphs; //Holds all the graphs
+	size_t graphs_size = 0; //Holds the size of the graphs vector.
+	CComboBox comboGraphsSelect_GH_Controller; //Controls the Graph Selection Combobox
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
@@ -35,12 +35,8 @@ public:
 	afx_msg void OnBnClickedSaveGraphs();
 	afx_msg void OnBnClickedLoadGraphs();
 	afx_msg void OnBnClickedHelpGraph();
-	//afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	void ClearGraphArea();
 	void PredefinedGraphs();
+	void loadFromMap(map<CString, int>& mMap, vector<int>& info, vector<CString>& legendValue, bool sortMe);
 
-	void loadFromMap(map<CString, int>& mMap, vector<int>& info, vector<CString>& legendValue);
-	void adjustScrollBar(GraphObject& grph);
-	CScrollBar srGraphScroll_Controller;
-	
 };

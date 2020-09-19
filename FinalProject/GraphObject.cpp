@@ -6,6 +6,7 @@
 #include "GraphObject.h"
 IMPLEMENT_SERIAL(GraphObject, CObject, 1)
 
+//Function: [CTOR] Generic CTor, needed for the Serialization.
 GraphObject::GraphObject()
 {
 	this->pDC = nullptr;
@@ -15,6 +16,7 @@ GraphObject::GraphObject()
 	this->yAxisName = _T("NA_Y");
 }
 
+//Function: [CTOR] A Custom CTOR that will load up all that is needed. Specifically need pDC to paint on the dialog.
 GraphObject::GraphObject(CClientDC* pDC, CPoint start, vector<int> info, vector<CString> legendValues, CString xAxis, CString yAxis)
 {
 	this->pDC = pDC;
@@ -25,11 +27,15 @@ GraphObject::GraphObject(CClientDC* pDC, CPoint start, vector<int> info, vector<
 	this->legendValues = legendValues;
 }
 
+//Function; [DTOR] Generic destructor
 GraphObject::~GraphObject()
 {
 
 }
 
+/*
+Function: [void] A linear function that creates lines, moving them back and forth upon the pDC. Will also add the Axis's names.
+*/
 void GraphObject::createAxis()
 {
 	CPoint po = pStart, aHead;
@@ -86,11 +92,18 @@ void GraphObject::createAxis()
 	pGraph_TL.x = po.x;
 }
 
+/*
+Function: [void] A function taht gets the CDC and a bool to see if its a new graph being made or not. If it is, it calls for createDataVector that loads up the Colors, Rects to be created. It will also loop through some things and adjust them if needed, and if generateNew is false, it will call the axis, then the rectangles, then the legend to be created.
+*/
 void GraphObject::displayGraph(bool generateNew, CClientDC* _pDC)
 {
 	unsigned int mod = 5;
 	int max = -1;
-	for (unsigned int i = 0; i < information.size(); i++) if (information[i] > max) max = information[i];
+	for (unsigned int i = 0; i < information.size(); i++) {
+		if (information[i] > max) max = information[i];
+		if (information[i] < 0) information[i] *= -1;
+	}
+
 	if (generateNew == true)
 	{
 		createDataVectors();
@@ -99,11 +112,12 @@ void GraphObject::displayGraph(bool generateNew, CClientDC* _pDC)
 	this->height = (long)max;
 	if (max > UPPERBOUND)
 	{
-		AdjustAllRects(true, false);
+		AdjustAllRects(true);
 		this->height = (long)max / 3;
 	}
 	else if (max <= LOWERBOUND)
 	{
+		//AdjustAllRects(false);
 		this->height = 50;
 	}
 	if (information.size() > MAXLEGEND)
@@ -117,6 +131,9 @@ void GraphObject::displayGraph(bool generateNew, CClientDC* _pDC)
 	loadGraph();
 }
 
+/*
+Function: [void] Loops through the information we have gotten in the CTOR and pre-generates the RECTS and COLORS vetors, loading them up for use later. This is only called if the generateNew bool from the displayGraph is called.
+*/
 void GraphObject::createDataVectors()
 {
 	COLORREF ref;
@@ -136,20 +153,23 @@ void GraphObject::createDataVectors()
 	}
 }
 
+/*
+Function: [void] Creates the names on the bottom of the graph; the mod is to see how many names will be listed under each other (Noramlly 5 or 10).
+*/
 void GraphObject::createLegend(unsigned int mod)
 {
-	SIZE s, sq_s; s.cx = 150; s.cy = 20; sq_s.cx = 15; sq_s.cy = 15;
+	SIZE s, sq_s; s.cx = 160; s.cy = 20; sq_s.cx = 15; sq_s.cy = 15;
 	CPoint q, pos;// = pGraph_BL;
 	pos.y = pGraph_BR.y + 40; pos.x = pGraph_TL.x + 20;
 	CRect* r, sq;
 	unsigned int i = 0, keep = pos.y, low = 0;
 	CPen* pen; CBrush* brush;
-
+	CString tstr;
 	while (i < legendValues.size())
 	{
-
+		tstr.Format(_T("%d. %s"), i, (LPCTSTR)legendValues[i]);
 		r = new CRect(pos, s);
-		pDC->DrawText(legendValues[i], r, WS_CHILD | WS_VISIBLE | SS_LEFT | SS_ENDELLIPSIS);
+		pDC->DrawText(tstr, r, WS_CHILD | WS_VISIBLE | SS_LEFT | SS_ENDELLIPSIS);
 
 		brush = new CBrush(colors[i]);
 		pen = new CPen(PS_SOLID, 1, colors[i]);
@@ -171,17 +191,16 @@ void GraphObject::createLegend(unsigned int mod)
 	pGraph_BR.x = pos.x > length ? pos.x + s.cx : length + s.cx;
 }
 
+/*
+Function: [void] Loads the Graph onto the screen with all the data already in it. Make note that the colors,information,rects are all the same length no matter what.
+*/
 void GraphObject::loadGraph()
 {
-	//Logically we come here when everything is set. The Data is here, no need to push items into anything.
-	//createAxis and createLegend both do not pushback data, meaning this function will "redo" what createRectangle does.
-	//note: colors, nameValues, information vectors are all the same size.
 	CString val;
 	SIZE s; s.cx = 25; s.cy = 15;
 	CPoint pos;
 	CRect* r, temp;
 	CPen* pen; CBrush* brush;
-	
 
 	for (unsigned int i = 0; i < information.size(); i++)
 	{
@@ -196,37 +215,41 @@ void GraphObject::loadGraph()
 		pos.y = temp.bottom; pos.x = temp.left;  pos.y -= s.cy;//temp.bottom cause the rectangle is flipped due to the nature of it all. top will always point to 450 which is the base line of ours.
 		r = new CRect(pos, s);
 		pDC->DrawText(val, r, WS_CHILD | WS_VISIBLE | SS_LEFT | SS_ENDELLIPSIS);
-
+		pos.y = pStart.y + 2; pos.x = temp.left;//  pos.y += s.cy/3;
+		r = new CRect(pos, s);
+		val.Format(_T("%d"), i);
+		pDC->DrawText(val, r, WS_CHILD | WS_VISIBLE | SS_LEFT | SS_ENDELLIPSIS);
 		DeleteObject(r);
 		DeleteObject(pen);
 		DeleteObject(brush);
 	}
 }
 
-long GraphObject::getLength()
-{
-	return this->length;
-}
-
+/*
+Function: [CRect] Returns the actual size of the Graph to be "erased"; returning a CRect for it (use for InvalidateRect())
+*/
 CRect GraphObject::unloadGraph()
 {
 	return new CRect(pGraph_TL, pGraph_BR);
 }
 
-void GraphObject::AdjustAllRects(bool y, bool x)
+/*
+Function: [void] Adjusts the Rects, deflating it if needed; if it is true it will lower the size of the rectangles by /3, if true it will let them raise by *10.
+*/
+void GraphObject::AdjustAllRects(bool adj)
 {
 	SIZE def;
-	int adX = x ? 3 : 1;
-	int adY = y ? 3 : 1;
+	int _slimDown = 3;
+	int _slimUp = 10;
 	for (unsigned int i = 0; i < rects.size(); ++i)
 	{
 		def = rects[i].Size();
-		def.cx /= adX;
-		def.cy /= adY;
+		def.cy = (adj) ? (def.cy / _slimDown) : (def.cy * _slimUp);
 		rects[i].DeflateRect(def);
 	}
 }
 
+/*Function: [COLORREF] Generates a random color via creating random ints and placing them into a RGB*/
 COLORREF GraphObject::generateRandomColor(int min, int max) //range : [min, max)
 {
 
@@ -243,7 +266,7 @@ COLORREF GraphObject::generateRandomColor(int min, int max) //range : [min, max)
 	return ref;
 }
 
-
+/*Function: [void] The simplistic Serialize, gets a CArchive and then adds the current stream of bytes from the GraphObject. We need to call in saveIntoArchive or loadFromArchive for the vectors.*/
 void GraphObject::Serialize(CArchive& archive)
 {
 	CObject::Serialize(archive);
@@ -265,6 +288,7 @@ void GraphObject::Serialize(CArchive& archive)
 	}
 }
 
+/*Function: [void] Gets a vector of any kind due to the template and loops through it, saving the size first, then each item until the end. */
 template<class STLVectorType>
 void GraphObject::saveIntoArchive(vector<STLVectorType>& ctype, CArchive& arc, size_t size)
 {
@@ -275,6 +299,7 @@ void GraphObject::saveIntoArchive(vector<STLVectorType>& ctype, CArchive& arc, s
 	}
 }
 
+/*Function: [void] gets any vector due to the template, then loads up the size first, then loads all the data into the CArchive. */
 template<class STLVectorType>
 void GraphObject::loadFromArchive(vector<STLVectorType>& ctype, CArchive& arc, size_t size)
 {

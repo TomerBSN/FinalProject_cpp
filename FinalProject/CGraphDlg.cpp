@@ -1,13 +1,9 @@
-// CGraphDlg.cpp : implementation file
-//
-
 #include "pch.h"
 #include "FinalProject.h"
 #include "CGraphDlg.h"
 #include "afxdialogex.h"
+#include <algorithm>
 
-
-// CGraphDlg dialog
 
 IMPLEMENT_DYNAMIC(CGraphDlg, CDialogEx)
 
@@ -25,7 +21,6 @@ void CGraphDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, comboGraphsSelect_GH, comboGraphsSelect_GH_Controller);
-	DDX_Control(pDX, srGraphScroll_GH, srGraphScroll_Controller);
 }
 
 
@@ -34,18 +29,17 @@ BEGIN_MESSAGE_MAP(CGraphDlg, CDialogEx)
 	ON_BN_CLICKED(btnSaveGraphs_GH, &CGraphDlg::OnBnClickedSaveGraphs)
 	ON_BN_CLICKED(btnLoadGraphs_GH, &CGraphDlg::OnBnClickedLoadGraphs)
 	ON_BN_CLICKED(btnHelpGraph_GH, &CGraphDlg::OnBnClickedHelpGraph)
-	ON_WM_HSCROLL()
 END_MESSAGE_MAP()
 
 BOOL CGraphDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-	comboGraphsSelect_GH_Controller.SetCurSel(0);
-	PredefinedGraphs();
+	comboGraphsSelect_GH_Controller.SetCurSel(0);//Forcing the combobox
+	PredefinedGraphs();//preload
 	return TRUE;
 }
 
-
+/*Function: [Event-Driven] Clicking on the view button will first clear the area of any remaining graphs, then will load up a graph as per the Combobox visible (comboGraphSelect_GH)*/
 void CGraphDlg::OnBnClickedViewGraph()
 {
 	//What we need here more or less, we need to go to the combo and show that graph
@@ -65,11 +59,10 @@ void CGraphDlg::OnBnClickedViewGraph()
 	}
 	temp = dynamic_cast<GraphObject*>(graphs[i]);
 	temp->displayGraph(false, &pDC);
-	adjustScrollBar(*temp);
 	this->zone = temp->unloadGraph();
 }
 
-
+/*Function: [Event-Driven] Brings up the Serialziation to store the information (looping through the graphs vector.*/
 void CGraphDlg::OnBnClickedSaveGraphs()
 {
 	// Choice and open file ostream
@@ -96,7 +89,7 @@ void CGraphDlg::OnBnClickedSaveGraphs()
 	ClearGraphArea();
 }
 
-
+/*Function: [Event-Driven] Brings up the Serialzation when loading up a sample of graphs. */
 void CGraphDlg::OnBnClickedLoadGraphs()
 {
 	GraphObject* temp;
@@ -135,21 +128,22 @@ void CGraphDlg::OnBnClickedLoadGraphs()
 	ClearGraphArea();
 }
 
-
+/*Function: [Event-Driven] Brings up a MessageBox that displays helpful tips.*/
 void CGraphDlg::OnBnClickedHelpGraph()
 {
 	MessageBox(L"Select a graph you wish to see from the delegated section.\nAfter that click on View to see it visually.\n\nIf you intend on viewing these in teh future, please save the graph by clicking on Save.\n\nTo view a old version of a graph click on Load and select the correct file.\nNOTE: Any progress from before will be cleared, best to save beforehand.\n\nEnjoy!");
 	ClearGraphArea();
 }
 
+/*Function: [void] Clears a exact space of the dialog. */
 void CGraphDlg::ClearGraphArea()
 {
 	InvalidateRect(zone, true);
 }
 
+/*Function: [void] Creates custom GraphObjects calling their CTORs and DisplayGraph functionality. Loading into the Vector.*/
 void CGraphDlg::PredefinedGraphs()
 {
-	map<CString, int>::iterator itr;
 	vector <int> information;
 	vector <CString> legendValue;
 	CClientDC pDC(this);
@@ -157,8 +151,8 @@ void CGraphDlg::PredefinedGraphs()
 	CString xAxis, yAxis;
 	CPoint p(START_LINE_GRAPH_X, START_LINE_GRAPH_Y);
 	yAxis = L"Amount\nof\nSick";
-
-	loadFromMap(Counters.CountByHostital, information, legendValue);
+	
+	loadFromMap(Counters.CountByHostital, information, legendValue, false);
 	xAxis = L"Hospital Names";
 	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
 	information.clear(); legendValue.clear();
@@ -167,7 +161,7 @@ void CGraphDlg::PredefinedGraphs()
 	this->zone = graph->unloadGraph();
 	ClearGraphArea();
 
-	loadFromMap(Counters.CountByArea, information, legendValue);
+	loadFromMap(Counters.CountByArea, information, legendValue, false);
 	xAxis = L"Area Type Names";
 	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
 	information.clear(); legendValue.clear();
@@ -176,8 +170,7 @@ void CGraphDlg::PredefinedGraphs()
 	this->zone = graph->unloadGraph();
 	ClearGraphArea();
 
-
-	loadFromMap(Counters.CountByCity, information, legendValue);
+	loadFromMap(Counters.CountByCity, information, legendValue, true);
 	xAxis = L"City Names";
 	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
 	information.clear(); legendValue.clear();
@@ -186,7 +179,7 @@ void CGraphDlg::PredefinedGraphs()
 	this->zone = graph->unloadGraph();
 	ClearGraphArea();
 	
-	loadFromMap(Counters.CountByLevel, information, legendValue);
+	loadFromMap(Counters.CountByLevel, information, legendValue, false);
 	xAxis = L"Sickness Levels";
 	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
 	information.clear(); legendValue.clear();
@@ -196,56 +189,30 @@ void CGraphDlg::PredefinedGraphs()
 	ClearGraphArea();
 }
 
-void CGraphDlg::loadFromMap(map<CString, int> &mMap, vector <int> &info, vector <CString> &legendValue)
+/*Function: [void] Gets a Map and loads the information of each counter map into the vectors. If sortMe is true it will sort the map and limit it to 20 items.*/
+void CGraphDlg::loadFromMap(map<CString, int> &mMap, vector <int> &info, vector <CString> &legendValue, bool sortMe)
 {
-	map<CString, int>::iterator itr;
+	map<CString, int>::iterator itr;//edit - sort the city map first, then load up to 20 items only.
+	vector <pair<CString, int>> vec;
+	pair <CString, int> par;
 	for (itr = mMap.begin(); itr != mMap.end(); ++itr)
 	{
+		par.first = itr->first;
+		par.second = itr->second;
+		vec.push_back(par);
 		legendValue.push_back(itr->first);
 		info.push_back(itr->second);
 	}
-
+	if (sortMe)
+	{
+		std::sort(vec.begin(), vec.end());
+		legendValue.clear();
+		info.clear();
+		int len = vec.size() > 20 ? vec.size() - 20 : 0;
+		for (int i = len; i < vec.size(); i++)
+		{
+			legendValue.push_back(vec[i].first);
+			info.push_back(vec[i].second);
+		}
+	}
 }
-
-void CGraphDlg::adjustScrollBar(GraphObject& grph)
-{
-	SCROLLINFO ScrollInfo;
-	ScrollInfo.cbSize = sizeof(ScrollInfo);     // size of this structure
-	ScrollInfo.fMask = SIF_ALL;                 // parameters to set
-	ScrollInfo.nMin = 0;                        // minimum scrolling position
-	ScrollInfo.nMax = grph.getLength();                      // maximum scrolling position
-	ScrollInfo.nPage = 40;                      // the page size of the scroll box
-	ScrollInfo.nPos = 50;                       // initial position of the scroll box
-	ScrollInfo.nTrackPos = 0;                   // immediate position of a scroll box that the user is dragging
-	srGraphScroll_Controller.SetScrollInfo(&ScrollInfo);
-}
-
-//void CGraphDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
-//{
-//	switch (nSBCode)
-//	{
-//	case SB_BOTTOM:         //Scrolls to the lower right. 
-//		break;
-//	case SB_ENDSCROLL:      //Ends scroll. 
-//		break;
-//	case SB_LINEDOWN:       //Scrolls one line down. 
-//		srGraphScroll_Controller.SetScrollPos(srGraphScroll_Controller.GetScrollPos() + 1);
-//		break;
-//	case SB_LINEUP:         //Scrolls one line up. 
-//		srGraphScroll_Controller.SetScrollPos(srGraphScroll_Controller.GetScrollPos() - 1);
-//		break;
-//	case SB_PAGEDOWN:       //Scrolls one page down. 
-//		srGraphScroll_Controller.SetScrollPos(srGraphScroll_Controller.GetScrollPos() + srGraphScroll_Controller.GetScrollInfo();
-//		break;
-//	case SB_PAGEUP:         //Scrolls one page up. 
-//		SetScrollPos(GetScrollPos() - ScrollInfo.nPage);
-//		break;
-//	case SB_THUMBPOSITION:  //The user has dragged the scroll box (thumb) and released the mouse button. The nPos parameter indicates the position of the scroll box at the end of the drag operation. 
-//		break;
-//	case SB_THUMBTRACK:     //The user is dragging the scroll box. This message is sent repeatedly until the user releases the mouse button. The nPos parameter indicates the position that the scroll box has been dragged to. 
-//		srGraphScroll_Controller.SetScrollPos(nPos);
-//		break;
-//	case SB_TOP:            //Scrolls to the upper left. 
-//		break;
-//		CDialogEx::OnHScroll(nSBCode, nPos, pScrollBar);
-//}
