@@ -7,7 +7,7 @@
 2;567567567;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
 2;890890890;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
 2;567567567;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
-0;000000001;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000001;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;School;Easy;0;Ichilov;19;9;2020;890890890#
 0;000000002;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
 0;000000003;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
 0;000000004;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
@@ -23,3 +23,4 @@
 0;000000051;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
 0;000000061;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
 0;000000071;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+3;746726516;MR ONE TWO;1;Bat Yam;My Street 67;19;9;2020;Ramat Hasharon;My other street 812;19;9;2020;874583837;#

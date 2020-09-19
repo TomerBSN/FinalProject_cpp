@@ -187,6 +187,22 @@ void CGraphDlg::PredefinedGraphs()
 	graphs.push_back(graph);
 	this->zone = graph->unloadGraph();
 	ClearGraphArea();
+
+	information.push_back(Counters.TotalHospitalized);
+	information.push_back(Counters.TotalNonHospitalized);
+	information.push_back(Counters.TotalRecovered);
+	information.push_back(Counters.TotalIsolated);
+	legendValue.push_back(L"Total Hospitalized");
+	legendValue.push_back(L"Total NonHospitalized");
+	legendValue.push_back(L"Total Recovered");
+	legendValue.push_back(L"Total Isolated");
+	xAxis = L"Types of Added People";
+	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
+	information.clear(); legendValue.clear();
+	graph->displayGraph(true, &pDC);
+	graphs.push_back(graph);
+	this->zone = graph->unloadGraph();
+	ClearGraphArea();
 }
 
 /*Function: [void] Gets a Map and loads the information of each counter map into the vectors. If sortMe is true it will sort the map and limit it to 20 items.*/
