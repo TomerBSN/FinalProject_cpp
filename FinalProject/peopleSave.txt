@@ -1,31 +1,26 @@
-0;123123123;asdasd;1;Holon;asdasd;9;8;20;9;8;20;222222222;Work;Easy;1;Shaare Zedek;9;8;20;#
-3;111111111;auuuuuu;1;Holon;asdasdasd;18;9;2020;Efrat;asdasdas;18;9;2020;222222222;#
-3;111222111;asdasd;1;Holon;asdasd;18;9;2020;Modiin Illit;asdasd;18;9;2020;222222222;#
-3;222202111;asdasd;1;Bat Yam;asdasd;18;9;2020;Elad;asdasd;18;9;2020;111222111;#
-0;444444444;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;189189189;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;178178178;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;156156156;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;562562565;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000888;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000023;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000001231;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000012312;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000222;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000001;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000002;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000003;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000004;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000005;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000006;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000007;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000008;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000009;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000000011;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000012930;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;009123892;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000192939;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000827837;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000136227;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000382763;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
-0;000123868;tomer;0;Ramla;asdasd;18;9;2020;18;9;2020;333333333;Work;Critical;0;Rambam;18;9;2020;#
+3;111111111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
+3;111111211;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
+3;111113111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
+3;111133111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
+3;141111111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
+3;111111115;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
+3;161111111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
+3;111111711;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
+3;181111111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
+3;111119111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
+3;111991111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
+3;188111111;asdas;1;Tel Aviv;sadasdaasd;19;9;2020;Jerusalem;asdasdads;19;9;2020;;#
+0;333333333;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
+0;343333333;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
+0;333333433;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
+0;333333343;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
+0;333333334;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
+0;333333344;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
+0;333344333;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
+0;333444333;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
+0;344333333;ttttt;1;Tel Aviv;asdas;19;9;2020;19;9;2020;Transport;Medium;0;Rambam;19;9;2020;#
+3;123123123;asdas;1;Bat Yam;asdasdas;19;9;1883;Beit Shemesh;asdasdasd;19;9;2020;;#
+1;232323233;asdasd;0;Ramat Gan;asdasd;19;9;2020;19;9;2020;Work;Herzliya;asdasd;;#
+0;444444444;asdasd;0;Givataim;asdasda;19;9;2020;19;9;2020;Work;Medium;1;Rambam;19;9;2020;#
+2;555555555;asdasd;1;Ramat Gan;asdasda;19;9;2020;19;9;2020;Work;19;9;2020;#
+3;666666666;asdas;1;Bnei Brak;asdad;19;9;2020;Jerusalem;asdasda;19;9;2020;;#

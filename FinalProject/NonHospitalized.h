@@ -14,7 +14,9 @@ public:
 
 	Address get_WhereIsolated();
 	void set_WhereIsolated(const Address addr);
+	int get_itemType();
 
 private:
 	Address WhereIsolated;
+	const int itemType = 1;
 };

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-
 #define _CRT_SECURE_NO_WARNINGS
+
 #define MAX_ID 10
 #define MAX_STR 25
 #define NUM_OF_CITYS 40
@@ -38,13 +38,12 @@ public:
 	CString get_Name();
 	Address get_Address();
 	Date get_Birthday();
-	int get_itemType();
 	void set_Gender(const bool gender);
 	void set_ID(const CString id);
 	void set_Name(const CString name);
 	void set_Address(const Address addr);
 	void set_Birthday(const Date birthday);
-
+	virtual int get_itemType();
 
 protected:
 	bool Gender;           // False -> Female, True -> Male
@@ -52,5 +51,5 @@ protected:
 	CString Name;
 	Address address;
 	Date Birthday;
-	int itemType = -1;
+	const int itemType = -1;
 };

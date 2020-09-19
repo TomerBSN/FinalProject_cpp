@@ -14,7 +14,9 @@ public:
 	~Recovered();
 
 	Date get_RecoveryDate();
+	int get_itemType();
 
 private:
 	Date Recovery;
+	const int itemType = 2;
 };

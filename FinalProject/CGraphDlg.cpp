@@ -158,7 +158,7 @@ void CGraphDlg::PredefinedGraphs()
 	CPoint p(START_LINE_GRAPH_X, START_LINE_GRAPH_Y);
 	yAxis = L"Amount\nof\nSick";
 
-	loadFromMap(CountByHostital, information, legendValue);
+	loadFromMap(Counters.CountByHostital, information, legendValue);
 	xAxis = L"Hospital Names";
 	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
 	information.clear(); legendValue.clear();
@@ -167,7 +167,7 @@ void CGraphDlg::PredefinedGraphs()
 	this->zone = graph->unloadGraph();
 	ClearGraphArea();
 
-	loadFromMap(CountByArea, information, legendValue);
+	loadFromMap(Counters.CountByArea, information, legendValue);
 	xAxis = L"Area Type Names";
 	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
 	information.clear(); legendValue.clear();
@@ -177,7 +177,7 @@ void CGraphDlg::PredefinedGraphs()
 	ClearGraphArea();
 
 
-	loadFromMap(CountByCity, information, legendValue);
+	loadFromMap(Counters.CountByCity, information, legendValue);
 	xAxis = L"City Names";
 	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
 	information.clear(); legendValue.clear();
@@ -186,7 +186,7 @@ void CGraphDlg::PredefinedGraphs()
 	this->zone = graph->unloadGraph();
 	ClearGraphArea();
 	
-	loadFromMap(CountByLevel, information, legendValue);
+	loadFromMap(Counters.CountByLevel, information, legendValue);
 	xAxis = L"Sickness Levels";
 	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
 	information.clear(); legendValue.clear();

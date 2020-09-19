@@ -11,10 +11,10 @@ Sick::Sick()
 Sick::Sick(bool gender, CString id, CString name, Address addr, Date birthday,
 	Date positivetest, CString infectionarea, CString infectedby) : Person(gender, id, name, addr, birthday)
 {
-	PositiveTest = positivetest;
-	InfectionArea = infectionarea;
+	this->PositiveTest = positivetest;
+	this->InfectionArea = infectionarea;
 	if (infectedby.GetLength())
-		InfectedBy = infectedby;
+		this->InfectedBy = infectedby;
 }
 
 Sick::Sick(const Sick& S): Sick(S.Gender, S.ID, S.Name, S.address, S.Birthday, S.PositiveTest, S.InfectionArea, S.InfectedBy)
@@ -24,10 +24,10 @@ Sick::Sick(const Sick& S): Sick(S.Gender, S.ID, S.Name, S.address, S.Birthday, S
 
 Sick::Sick(Isolated& I, Date positivetest, CString infectionarea, CString infectedby) : Person(I)
 {
-	PositiveTest = positivetest;
-	InfectionArea = infectionarea;
+	this->PositiveTest = positivetest;
+	this->InfectionArea = infectionarea;
 	if (infectedby.GetLength())
-		InfectedBy = infectedby;
+		this->InfectedBy = infectedby;
 }
 
 Sick::~Sick()
@@ -37,15 +37,20 @@ Sick::~Sick()
 
 Date Sick::get_PositiveTest_date()
 {
-	return PositiveTest;
+	return this->PositiveTest;
 }
 
 CString Sick::get_InfectedBy()
 {
-	return InfectedBy;
+	return this->InfectedBy;
 }
 
 CString Sick::get_InfectionArea()
 {
-	return InfectionArea;
+	return this->InfectionArea;
+}
+
+int Sick::get_itemType()
+{
+	return this->itemType;
 }

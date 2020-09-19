@@ -60,26 +60,23 @@ void CSearchDlg::OnBnClickedbtnSearchSh()
 		MessageBox(_T("Person not found!"));
 }
 
-
-void CSearchDlg::ToggleVisibilty(bool visiblity, int chunk)
-{
-
-}
-
+/*
+Function: [Event-Driven] if user has changed the options combobox selection, we want to check if he selected update details
+*/
 void CSearchDlg::OnCbnSelchangecombosearchopt()
 {
-	// TODO: Add your control notification handler code here
-	if (comboSearchOptController.GetCurSel() == 0)
+	if (comboSearchOptController.GetCurSel() == 0)       // update status selection
 	{
-		comboSearchStatController.EnableWindow(true);
+		comboSearchStatController.EnableWindow(true);    // enable status combobox
 		comboSearchStatController.SetCurSel(Persons[searchPersonID]->get_itemType());
 	}
 	else
 		comboSearchStatController.EnableWindow(false);
-	printf("Heelo");
 }
 
-
+/*
+Function: [Event-Driven] user clicked proceed button
+*/
 void CSearchDlg::OnBnProceedClickedSh()
 {
 	int selectedNum = comboSearchOptController.GetCurSel();
@@ -88,20 +85,20 @@ void CSearchDlg::OnBnProceedClickedSh()
 	{
 		case 0:       // Update status
 		{
-			EndDialog(comboSearchStatController.GetCurSel() + 5);
+			EndDialog(comboSearchStatController.GetCurSel() + 5);        // dialog returns the itemtype + 5 (random value)
 			break;
 		}
 
 		case 1:       // Edit details
 		{
-			EndDialog(Persons[searchPersonID]->get_itemType() + 5);
+			EndDialog(Persons[searchPersonID]->get_itemType() + 5);		 // dialog returns the itemtype + 5 (random value)
 			break;
 		}
 
-		case 2:       // Delete
+		case 2:       // Delete person
 		{
-			updateCounters(Persons[searchPersonID], false);
-			Persons.erase(Persons.begin() + searchPersonID);
+			updateCounters(Persons[searchPersonID], false);				// decrease all relevant counters in 1
+			Persons.erase(Persons.begin() + searchPersonID);			// remove person from Persons vector
 			EndDialog(0);
 			MessageBox(_T("Person deleted!"));
 			break;

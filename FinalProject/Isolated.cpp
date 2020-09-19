@@ -1,21 +1,19 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "stdafx.h"
 #include "Isolated.h"
-#include <string>
 
 Isolated::Isolated()
 {
-	itemType = 3;
+
 }
 
 Isolated::Isolated(bool gender, CString id, CString name, Address addr, Date birthday,
 	Address whereisolated, Date isolation, CString exposedto) : Person(gender, id, name, addr, birthday)
 {
-	WhereIsolated = whereisolated;
-	Isolation = isolation;
+	this->WhereIsolated = whereisolated;
+	this->Isolation = isolation;
 	if (exposedto.GetLength())
-		ExposedTo = exposedto;
-	itemType = 3;
+		this->ExposedTo = exposedto;
 }
 
 Isolated::~Isolated()
@@ -36,4 +34,9 @@ Date Isolated::get_Isolation_date()
 CString Isolated::get_ExposedTo()
 {
 	return this->ExposedTo;
+}
+
+int Isolated::get_itemType()
+{
+	return this->itemType;
 }

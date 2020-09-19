@@ -22,10 +22,9 @@ protected:
 	DECLARE_MESSAGE_MAP();
 public:
 	afx_msg void OnBnClickedbtnSearchSh();
-	void ToggleVisibilty(bool visiblity, int chunk);
 	afx_msg void OnCbnSelchangecombosearchopt();
+	afx_msg void OnBnProceedClickedSh();
 	CComboBox comboSearchOptController;
 	CComboBox comboSearchStatController;
-	afx_msg void OnBnProceedClickedSh();
 	CButton comboSearchController;
 };

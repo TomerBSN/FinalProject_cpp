@@ -12,9 +12,11 @@ public:
 	Address get_WhereIsolated();
 	Date get_Isolation_date();
 	CString get_ExposedTo();
+	int get_itemType();
 
 private:
 	Address WhereIsolated;
 	Date Isolation;
 	CString ExposedTo;
+	const int itemType = 3;
 };

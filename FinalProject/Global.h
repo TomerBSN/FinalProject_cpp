@@ -20,6 +20,7 @@ typedef struct cntContainer
 	int TotalSicks;
 	int TotalRecovered;
 	int TotalIsolated;
+	int TotalVentilated;
 } cntContainer;
 
 extern cntContainer Counters;
@@ -27,5 +28,5 @@ extern vector <Person*> Persons;
 extern int searchPersonID;
 
 bool searchPersonByID(CString ID);
-int getDifference(Date dt1, Date dt2);
+int getDatesDiff(Date dt1, Date dt2);
 void updateCounters(Person* p, bool flag);

@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Recovered.h"
-#include <string>
 
 Recovered::Recovered()
 {
@@ -13,19 +12,16 @@ Recovered::Recovered(bool gender, CString id, CString name, Address addr, Date b
 
 {
 	Recovery = recovery;
-	itemType = 2;
 }
 
 Recovered::Recovered(Hospitalized& H, Date recovery) : Sick(H)
 {
 	Recovery = recovery;
-	itemType = 2;
 }
 
 Recovered::Recovered(NonHospitalized& NH, Date recovery) : Sick(NH)
 {
 	Recovery = recovery;
-	itemType = 2;
 }
 
 Recovered::~Recovered()
@@ -36,4 +32,9 @@ Recovered::~Recovered()
 Date Recovered::get_RecoveryDate()
 {
 	return this->Recovery;
+}
+
+int Recovered::get_itemType()
+{
+	return this->itemType;
 }

@@ -1,6 +1,4 @@
-
 // FinalProjectDlg.h : header file
-//
 
 #pragma once
 #include "afxdialogex.h"
@@ -8,6 +6,7 @@
 #include <vector>
 #include <list>
 using namespace std;
+
 // CFinalProjectDlg dialog
 class CFinalProjectDlg : public CDialogEx
 {
@@ -36,14 +35,31 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-//	afx_msg void OnBnClickedButton1();
+	// Event-driven methods
 	afx_msg void OnBnClickedbtnsearch();
 	afx_msg void OnBnClickedbtncreategraphs();
 	afx_msg void OnBnClickedbtnabout();
 	afx_msg void OnBnClickedbtncreate();
 	afx_msg void OnBnClickedbtnclearall();
+	afx_msg void OnBnClickedbtnaddperson();
+	afx_msg void OnBnClickedbtnsaveall();
+	afx_msg void OnBnClickedbtnsavedetails();
+	afx_msg void OnDestroy();
+
+	// Utility methods
 	void ClearFieldsOnScreen();
 	void ToggleVisibilty(bool visiblity, int group);
+	void savePersonsToFile();
+	void fillCstringList(CString wholeFile);
+	void Clear_InvalidIsolated();
+	void ValidateUserInput(CComboBox& Controller, bool& isCorrect);
+	bool checkUserInputData(int selectedFormType);
+	vector <CString> seperateLine(CString theLine, CString seperator);
+	CString loadFile(TCHAR* FileName);
+	template <class T> void SetBorderColor(T &Controller, int R, int G, int B);
+	template <class T> void ValidateUserInput(T& Controller, bool& isCorrect, CString Item1 = _T(""), CString Item2 = _T(""));
+
+	// Controllers
 	CComboBox comboDataTypeController;
 	CComboBox comboGenderController;
 	CComboBox comboStatusController;
@@ -54,14 +70,6 @@ public:
 	CComboBox comboVentilatedController;
 	CComboBox comboCityController;
 	CDateTimeCtrl dtpBirthDateController;
-	afx_msg void OnBnClickedbtnaddperson();
-	afx_msg void OnBnClickedbtnsaveall();
-	void savePersonsToFile();
-	void fillCstringList(CString wholeFile);
-	vector <CString> seperateLine(CString theLine, CString seperator);
-	CString loadFile(TCHAR* FileName);
-	bool checkUserInputData(int selectedFormType);
-	afx_msg void OnBnClickedbtnsavedetails();
 	CDateTimeCtrl dtpPositiveTestController;
 	CDateTimeCtrl dtpHospitalEntryController;
 	CDateTimeCtrl dtpIsolationEntryController;
@@ -73,11 +81,4 @@ public:
 	CEdit txtIsolationAddressController;
 	CEdit txtExposedIDController;
 	CEdit txtInfectorIDController;
-	void Clear_InvalidIsolated();
-	template <class T>
-	void SetBorderColor(T &Controller, int R, int G, int B);
-	template <class T>
-	void ValidateUserInput(T& Controller, bool& isCorrect, CString Item1 = _T(""), CString Item2 = _T(""));
-	void ValidateUserInput(CComboBox& Controller, bool& isCorrect);
-	afx_msg void OnDestroy();
 };

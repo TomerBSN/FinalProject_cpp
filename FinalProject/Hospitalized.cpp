@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Hospitalized.h"
-#include <string>
 
 Hospitalized::Hospitalized()
 {
@@ -13,22 +12,20 @@ Hospitalized::Hospitalized(bool gender, CString id, CString name, Address addr, 
 		id, name, addr, birthday, positivetest, infectionarea, infectedby)
 
 {
-	Level = level;
-	IsVentilated = isventilated;
-	Hospital = hospital;
-	Hospitalization = hospitalization;
-	itemType = 0;
+	this->Level = level;
+	this->IsVentilated = isventilated;
+	this->Hospital = hospital;
+	this->Hospitalization = hospitalization;
 }
 
 Hospitalized::Hospitalized(Isolated& I, Date positivetest, CString infectionarea,
 	CString infectedby, CString level, bool isventilated, CString hospital,
 	Date hospitalization) : Sick(I, positivetest, infectionarea, infectedby)
 {
-	Level = level;
-	IsVentilated = isventilated;
-	Hospital = hospital;
-	Hospitalization = hospitalization;
-	itemType = 0;
+	this->Level = level;
+	this->IsVentilated = isventilated;
+	this->Hospital = hospital;
+	this->Hospitalization = hospitalization;
 }
 
 Hospitalized::~Hospitalized()
@@ -54,4 +51,9 @@ CString Hospitalized::get_Hospital()
 Date Hospitalized::get_HospitalizationDate()
 {
 	return this->Hospitalization;
+}
+
+int Hospitalized::get_itemType()
+{
+	return this->itemType;
 }

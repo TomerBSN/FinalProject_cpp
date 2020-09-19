@@ -8,6 +8,9 @@ vector <Person*> Persons;
 cntContainer Counters;
 int searchPersonID;
 
+/*
+Function: [bool] serach a person object by given ID
+*/
 bool searchPersonByID(CString ID)
 {
 	bool found = false;
@@ -27,6 +30,9 @@ bool searchPersonByID(CString ID)
 	return found;
 }
 
+/*
+Function: [int] count number of leap years before the given date 
+*/
 int countLeapYears(Date d)
 {
     int years = d.year;
@@ -35,33 +41,38 @@ int countLeapYears(Date d)
     if (d.month <= 2)
         years--;
 
-    // An year is a leap year if it is a multiple of 4 / 400 and not a multiple of 100
-    return years / 4 - years / 100 + years / 400;
+    // An year is a leap year if it is a multiple of 4 or 400 and not a multiple of 100
+    return (years / 4) - (years / 100) + (years / 400);
 }
 
-// This function returns number of days between two given dates
-int getDifference(Date dt1, Date dt2)
+/*
+Function: [int] returns number of days between two given dates.
+*/
+int getDatesDiff(Date dt1, Date dt2)
 {
     // initialize count using years and day 
     const int monthDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    long int n1 = dt1.year * 365 + dt1.day;
+    long int dt1_days = dt1.year * 365 + dt1.day;
 
     // Add days for months in given date 
     for (int i = 0; i < dt1.month - 1; i++)
-        n1 += monthDays[i];
+        dt1_days += monthDays[i];
 
     // Since every leap year is of 366 days, Add a day for every leap year  
-    n1 += countLeapYears(dt1);
+    dt1_days += countLeapYears(dt1);
 
     // count total number of days before 'dt2'
-    long int n2 = dt2.year * 365 + dt2.day;
+    long int dt2_days = dt2.year * 365 + dt2.day;
     for (int i = 0; i < dt2.month - 1; i++)
-        n2 += monthDays[i];
-    n2 += countLeapYears(dt2);
+        dt2_days += monthDays[i];
+    dt2_days += countLeapYears(dt2);
 
-    return (n2 - n1);
+    return (dt2_days - dt1_days);
 }
 
+/*
+Function: [void] update system counters - decrease or increase
+*/
 void updateCounters(Person* p, bool flag)    // flag = 0 -> decrease counters, flag = 1 -> increase counters
 {
     int itemType = p->get_itemType();
@@ -71,7 +82,7 @@ void updateCounters(Person* p, bool flag)    // flag = 0 -> decrease counters, f
     else
         Counters.CountByCity[p->get_Address().city]--;
 
-    if (itemType != 3)
+    if (itemType != 3)         // Sick
     {
         Sick* s = (Sick*)(p);
         if (flag)
@@ -82,7 +93,7 @@ void updateCounters(Person* p, bool flag)    // flag = 0 -> decrease counters, f
 
     switch (itemType)
     {
-        case 0:
+        case 0:                // Hospitalized
         {
             Hospitalized* h = (Hospitalized*)(p);
             if (flag)
@@ -90,18 +101,22 @@ void updateCounters(Person* p, bool flag)    // flag = 0 -> decrease counters, f
                 Counters.CountByHostital[h->get_Hospital()]++;
                 Counters.CountByLevel[h->get_Level()]++;
                 Counters.TotalHospitalized++;
+                if (h->get_IsVentilated())
+                    Counters.TotalVentilated++;
             }
             else
             {
                 Counters.CountByHostital[h->get_Hospital()]--;
                 Counters.CountByLevel[h->get_Level()]--;
                 Counters.TotalHospitalized--;
+                if (h->get_IsVentilated())
+                    Counters.TotalVentilated--;
             }
 
             break;
         }
 
-        case 1:
+        case 1:                 // NonHospitalized
         {
             if (flag)
             {
@@ -117,7 +132,7 @@ void updateCounters(Person* p, bool flag)    // flag = 0 -> decrease counters, f
             break;
         }
 
-        case 2:
+        case 2:                 // Recovered
         {
             if (flag)
                 Counters.TotalRecovered++;
@@ -127,7 +142,7 @@ void updateCounters(Person* p, bool flag)    // flag = 0 -> decrease counters, f
             break;
         }
 
-        case 3:
+        case 3:                 // Isolated
         {
             if (flag)
                 Counters.TotalIsolated++;
