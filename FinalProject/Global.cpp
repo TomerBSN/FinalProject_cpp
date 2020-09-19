@@ -86,7 +86,7 @@ void updateCounters(Person* p, bool flag)    // flag = 0 -> decrease counters, f
     {
         Sick* s = (Sick*)(p);
         if (flag)
-            Counters.CountByArea[s->get_InfectionArea()]--;
+            Counters.CountByArea[s->get_InfectionArea()]++;
         else
             Counters.CountByArea[s->get_InfectionArea()]--;
     }
@@ -152,6 +152,8 @@ void updateCounters(Person* p, bool flag)    // flag = 0 -> decrease counters, f
             break;
         }
 
+        default:
+            break;
     }
 
     Counters.TotalSicks = Counters.TotalHospitalized + Counters.TotalNonHospitalized;

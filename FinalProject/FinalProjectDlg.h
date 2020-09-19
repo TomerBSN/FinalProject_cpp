@@ -62,7 +62,6 @@ public:
 	// Controllers
 	CComboBox comboDataTypeController;
 	CComboBox comboGenderController;
-	CComboBox comboStatusController;
 	CComboBox comboInfectionAreaTypeController;
 	CComboBox comboIsolationCityController;
 	CComboBox comboHospitalController;

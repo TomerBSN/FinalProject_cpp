@@ -66,7 +66,6 @@ void CFinalProjectDlg::DoDataExchange(CDataExchange* pDX)
 	//combobox controllers
 	DDX_Control(pDX, comboDataType, comboDataTypeController);
 	DDX_Control(pDX, comboGender, comboGenderController);
-	DDX_Control(pDX, comboStatus, comboStatusController);
 	DDX_Control(pDX, comboInfectionAreaType, comboInfectionAreaTypeController);
 	DDX_Control(pDX, comboIsolationCity, comboIsolationCityController);
 	DDX_Control(pDX, comboHospital, comboHospitalController);
@@ -309,7 +308,6 @@ void CFinalProjectDlg::ClearFieldsOnScreen()
 	comboInfectionAreaTypeController.SetCurSel(-1);
 	comboIsolationCityController.SetCurSel(-1);
 	comboSicknessLevelController.SetCurSel(-1);
-	comboStatusController.SetCurSel(-1);
 	comboVentilatedController.SetCurSel(-1);
 	comboCityController.SetCurSel(-1);
 
@@ -346,8 +344,6 @@ void CFinalProjectDlg::ToggleVisibilty(bool visiblity, int chunk)
 			GetDlgItem(comboCity)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
 			GetDlgItem(staAddress)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
 			GetDlgItem(txtAddress)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-			GetDlgItem(staStatus)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
-			GetDlgItem(comboStatus)->ShowWindow(visiblity ? SW_SHOW : SW_HIDE);
 			break;
 		}
 		case 2:		// chunk 2 - all* second tier

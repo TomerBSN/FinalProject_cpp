@@ -190,13 +190,16 @@ void CGraphDlg::PredefinedGraphs()
 
 	information.push_back(Counters.TotalHospitalized);
 	information.push_back(Counters.TotalNonHospitalized);
+	information.push_back(Counters.TotalVentilated);
 	information.push_back(Counters.TotalRecovered);
 	information.push_back(Counters.TotalIsolated);
 	legendValue.push_back(L"Total Hospitalized");
 	legendValue.push_back(L"Total NonHospitalized");
+	legendValue.push_back(L"Total Ventilated");
 	legendValue.push_back(L"Total Recovered");
 	legendValue.push_back(L"Total Isolated");
 	xAxis = L"Types of Added People";
+	yAxis = L"Amount\nof\nPeople";
 	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
 	information.clear(); legendValue.clear();
 	graph->displayGraph(true, &pDC);

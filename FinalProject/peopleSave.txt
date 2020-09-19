@@ -24,3 +24,6 @@
 0;000000061;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
 0;000000071;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
 3;746726516;MR ONE TWO;1;Bat Yam;My Street 67;19;9;2020;Ramat Hasharon;My other street 812;19;9;2020;874583837;#
+1;333444555;asdas;1;Holon;asdasd;20;9;2020;20;9;2020;Work;Hedera;asdasda;;#
+2;344333444;asdasd;1;Ramat Gan;asdsww;20;9;2020;20;9;2020;Transport;20;9;2020;#
+3;344333449;aaaw;1;Bat Yam;asdase;20;9;2020;Elad;aaaa;20;9;2020;;#
