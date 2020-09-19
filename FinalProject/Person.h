@@ -14,6 +14,10 @@ typedef struct date {
 	int year;
 }Date;
 
+typedef struct address {
+	CString street;
+	CString city;
+}Address;
 
 const CString Citys[NUM_OF_CITYS] = { _T("Tel Aviv"), _T("Bat Yam"), _T("Holon"), _T("Ramat Gan"), _T("Givataim"), _T("Bnei Brak"), _T("Or Yehuda"), _T("Zichron Yaakov"), _T("Ramla"), _T("Lod"),
 			_T("Kfar Chabad"), _T("Petah Tikva"), _T("Rishon Lezion"), _T("Rehovot"), _T("Kfar Saba"), _T("Raanana"), _T("Herzliya"), _T("Hod Hasharon"),
@@ -21,10 +25,6 @@ const CString Citys[NUM_OF_CITYS] = { _T("Tel Aviv"), _T("Bat Yam"), _T("Holon")
 			_T("Ashkelon"), _T("Ashdod"), _T("Netivot"), _T("Kiryat Gat"), _T("Beer Sheva"), _T("Sderot"), _T("Netanya"), _T("Haifa"), _T("Hedera"), _T("Tveria"),
 			_T("Acre"), _T("Nof Hagalil"), _T("Migdal Haemek"), _T("Kiryat Shmona") };
 
-typedef struct address {
-	CString street;
-	CString city;
-}Address;
 
 class Person
 {
