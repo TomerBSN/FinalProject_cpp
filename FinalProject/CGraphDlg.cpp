@@ -53,10 +53,12 @@ void CGraphDlg::OnBnClickedViewGraph()
 		MessageBox(L"Select a proper thingy.");
 		return;
 	}
+
 	if(i > graphs.size()) {
 		MessageBox(L"Out of bounds for graphs.");
 		return;
 	}
+
 	temp = dynamic_cast<GraphObject*>(graphs[i]);
 	temp->displayGraph(false, &pDC);
 	this->zone = temp->unloadGraph();
@@ -72,6 +74,7 @@ void CGraphDlg::OnBnClickedSaveGraphs()
 	if (res == IDOK)
 		fname = dlg.GetPathName();
 	graphs_size = graphs.size();
+
 	// write to file
 	CFile fOut;
 	if (fOut.Open(fname, CFile::modeCreate | CFile::modeWrite))
@@ -79,11 +82,11 @@ void CGraphDlg::OnBnClickedSaveGraphs()
 		CArchive ar(&fOut, CArchive::store);
 		ar << graphs_size;
 		for (int i = 0; i < graphs_size; i++)
-		{
 			graphs[i]->Serialize(ar);
-		}
+
 		ar.Close();
 	}
+
 	fOut.Close();
 	Invalidate();
 	ClearGraphArea();
@@ -100,6 +103,7 @@ void CGraphDlg::OnBnClickedLoadGraphs()
 		fname = dlg.GetPathName();
 	CString tp;
 	CFile fOut;
+
 	if (fOut.Open(fname, CFile::modeRead))
 	{
 		graphs.clear();
@@ -118,11 +122,13 @@ void CGraphDlg::OnBnClickedLoadGraphs()
 
 		ar.Close();
 	}
+
 	else
 	{
 		MessageBox(_T("File could not be opened\n"));
 		return;
 	}
+
 	fOut.Close();
 	Invalidate();
 	ClearGraphArea();
@@ -152,7 +158,7 @@ void CGraphDlg::PredefinedGraphs()
 	CPoint p(START_LINE_GRAPH_X, START_LINE_GRAPH_Y);
 	yAxis = L"Amount\nof\nSick";
 	
-	loadFromMap(Counters.CountByHostital, information, legendValue, false);
+	loadFromMap(Counters.CountByHostital, information, legendValue);
 	xAxis = L"Hospital Names";
 	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
 	information.clear(); legendValue.clear();
@@ -161,7 +167,7 @@ void CGraphDlg::PredefinedGraphs()
 	this->zone = graph->unloadGraph();
 	ClearGraphArea();
 
-	loadFromMap(Counters.CountByArea, information, legendValue, false);
+	loadFromMap(Counters.CountByArea, information, legendValue);
 	xAxis = L"Area Type Names";
 	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
 	information.clear(); legendValue.clear();
@@ -170,7 +176,7 @@ void CGraphDlg::PredefinedGraphs()
 	this->zone = graph->unloadGraph();
 	ClearGraphArea();
 
-	loadFromMap(Counters.CountByCity, information, legendValue, true);
+	loadFromMap(Counters.CountByCity, information, legendValue);
 	xAxis = L"City Names";
 	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
 	information.clear(); legendValue.clear();
@@ -179,7 +185,7 @@ void CGraphDlg::PredefinedGraphs()
 	this->zone = graph->unloadGraph();
 	ClearGraphArea();
 	
-	loadFromMap(Counters.CountByLevel, information, legendValue, false);
+	loadFromMap(Counters.CountByLevel, information, legendValue);
 	xAxis = L"Sickness Levels";
 	graph = new GraphObject(&pDC, p, information, legendValue, xAxis, yAxis);
 	information.clear(); legendValue.clear();
@@ -208,30 +214,28 @@ void CGraphDlg::PredefinedGraphs()
 	ClearGraphArea();
 }
 
-/*Function: [void] Gets a Map and loads the information of each counter map into the vectors. If sortMe is true it will sort the map and limit it to 20 items.*/
-void CGraphDlg::loadFromMap(map<CString, int> &mMap, vector <int> &info, vector <CString> &legendValue, bool sortMe)
+/*Function: [void] Gets a Map and loads the information of each counter map into the vectors. It also will sort the map and limit it to 20 items.*/
+void CGraphDlg::loadFromMap(map<CString, int> &mMap, vector <int> &info, vector <CString> &legendValue)
 {
 	map<CString, int>::iterator itr;//edit - sort the city map first, then load up to 20 items only.
-	vector <pair<CString, int>> vec;
-	pair <CString, int> par;
+	vector <pair<int, CString>> vec;
+	pair <int, CString> par;
 	for (itr = mMap.begin(); itr != mMap.end(); ++itr)
 	{
-		par.first = itr->first;
-		par.second = itr->second;
+		par.first = itr->second;
+		par.second = itr->first;
 		vec.push_back(par);
 		legendValue.push_back(itr->first);
 		info.push_back(itr->second);
 	}
-	if (sortMe)
+
+	sort(vec.begin(), vec.end());
+	legendValue.clear();
+	info.clear();
+	int len = vec.size() > 20 ? vec.size() - 20 : 0;
+	for (int i = len; i < vec.size(); i++)
 	{
-		std::sort(vec.begin(), vec.end());
-		legendValue.clear();
-		info.clear();
-		int len = vec.size() > 20 ? vec.size() - 20 : 0;
-		for (int i = len; i < vec.size(); i++)
-		{
-			legendValue.push_back(vec[i].first);
-			info.push_back(vec[i].second);
-		}
+		legendValue.push_back(vec[i].second);
+		info.push_back(vec[i].first);
 	}
 }

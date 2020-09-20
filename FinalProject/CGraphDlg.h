@@ -37,6 +37,6 @@ public:
 	afx_msg void OnBnClickedHelpGraph();
 	void ClearGraphArea();
 	void PredefinedGraphs();
-	void loadFromMap(map<CString, int>& mMap, vector<int>& info, vector<CString>& legendValue, bool sortMe);
+	void loadFromMap(map<CString, int>& mMap, vector<int>& info, vector<CString>& legendValue);
 
 };

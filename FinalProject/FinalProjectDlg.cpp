@@ -908,7 +908,6 @@ void CFinalProjectDlg::OnBnClickedbtnsearch()
 	{
 		status -= 5;        // decrease in 5 to get the object itemType that the user want to change to
 		int itemType = Persons[searchPersonID]->get_itemType();
-		updateCounters(Persons[searchPersonID], false);
 		comboDataTypeController.SetCurSel(status);
 		GetDlgItem(btnSaveDetails)->ShowWindow(SW_SHOW);
 		this->OnBnClickedbtncreate();
@@ -1004,6 +1003,7 @@ Function: [Event-Driven] User finished to edit / update person, and clicked save
 */
 void CFinalProjectDlg::OnBnClickedbtnsavedetails()
 {
+	updateCounters(Persons[searchPersonID], false);  // decrease counters in 1
 	callfromSearch = 1;
 	OnBnClickedbtnaddperson();
 	callfromSearch = 0;

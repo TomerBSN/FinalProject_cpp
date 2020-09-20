@@ -11,7 +11,7 @@ GraphObject::GraphObject()
 {
 	this->pDC = nullptr;
 	this->pStart.x = 0;
-	this->pStart.y = 0;
+	this->pStart.y = 1;
 	this->xAxisName = _T("NA_X");
 	this->yAxisName = _T("NA_Y");
 }
@@ -39,7 +39,7 @@ Function: [void] A linear function that creates lines, moving them back and fort
 void GraphObject::createAxis()
 {
 	CPoint po = pStart, aHead;
-	SIZE s; s.cx = 150; s.cy = 20;
+	SIZE s; s.cx = 250; s.cy = 30;
 	unsigned int ahead_pad = 5;
 	CPen* pen; CBrush* brush;
 	brush = new CBrush(COLOR_BLACK);
@@ -49,7 +49,7 @@ void GraphObject::createAxis()
 
 	//x axis line
 	pDC->MoveTo(po);//start
-	po.x += this->length + 15;
+	po.x += this->length + 10;
 	pDC->LineTo(po);//end
 	//XAxis Arrow Head;
 	aHead = po;
@@ -77,6 +77,10 @@ void GraphObject::createAxis()
 	pGraph_TL.y = po.y - s.cy;
 	po = pStart;
 	po.y += s.cy;
+
+	CFont font;
+	font.CreatePointFont(95, _T("Arial"));
+	pDC->SelectObject(&font);
 	//xaxis name
 	CRect r = new CRect(po, s);
 	pDC->DrawText(xAxisName, r, WS_CHILD | WS_VISIBLE | SS_LEFT | SS_ENDELLIPSIS);
@@ -84,7 +88,7 @@ void GraphObject::createAxis()
 	pGraph_BR.y = po.y;
 
 	//yaxis name
-	s.cy = 60;
+	s.cy = 70;
 	po.x = pStart.x - s.cy;
 	po.y = pStart.y - height / 2;
 	r = new CRect(po, s);
@@ -105,25 +109,25 @@ void GraphObject::displayGraph(bool generateNew, CClientDC* _pDC)
 	}
 
 	if (generateNew == true)
-	{
 		createDataVectors();
-	}
-	this->length = information.size() * 2 * 15;
+
+	this->length = information.size() * 2 * 20;
 	this->height = (long)max;
+
 	if (max > UPPERBOUND)
 	{
 		AdjustAllRects(true);
 		this->height = (long)max / 3;
 	}
+
 	else if (max <= LOWERBOUND)
 	{
 		//AdjustAllRects(false);
 		this->height = 50;
 	}
+
 	if (information.size() > MAXLEGEND)
-	{
 		mod = 10;
-	}
 
 	this->pDC = _pDC;
 	createAxis();
@@ -144,9 +148,9 @@ void GraphObject::createDataVectors()
 		ref = generateRandomColor(0, 255);
 		colors.push_back(ref);
 
-		st.x += 15;
-		end.x = st.x + 15;
-		end.y = pStart.y - information[i];
+		st.x += 20;
+		end.x = st.x + 20;
+		end.y = pStart.y - information[i] - 2;
 		rec = new CRect(st, end);
 		rects.push_back(rec);
 		st.x += 15;
@@ -158,9 +162,9 @@ Function: [void] Creates the names on the bottom of the graph; the mod is to see
 */
 void GraphObject::createLegend(unsigned int mod)
 {
-	SIZE s, sq_s; s.cx = 160; s.cy = 20; sq_s.cx = 15; sq_s.cy = 15;
+	SIZE s, sq_s; s.cx = 200; s.cy = 20; sq_s.cx = 15; sq_s.cy = 15;
 	CPoint q, pos;// = pGraph_BL;
-	pos.y = pGraph_BR.y + 40; pos.x = pGraph_TL.x + 20;
+	pos.y = pGraph_BR.y + 50; pos.x = pGraph_TL.x + 50;
 	CRect* r, sq;
 	unsigned int i = 0, keep = pos.y, low = 0;
 	CPen* pen; CBrush* brush;
@@ -169,6 +173,9 @@ void GraphObject::createLegend(unsigned int mod)
 	{
 		tstr.Format(_T("%d. %s"), i, (LPCTSTR)legendValues[i]);
 		r = new CRect(pos, s);
+		CFont font;
+		font.CreatePointFont(95, _T("Arial"));
+		pDC->SelectObject(&font);
 		pDC->DrawText(tstr, r, WS_CHILD | WS_VISIBLE | SS_LEFT | SS_ENDELLIPSIS);
 
 		brush = new CBrush(colors[i]);
@@ -181,9 +188,14 @@ void GraphObject::createLegend(unsigned int mod)
 
 		i++;
 		pos.y += s.cy;
-		if (i % mod == 0) {
-			pos.x += s.cx; low = pos.y;  pos.y = keep;
+
+		if (i % mod == 0)
+		{
+			pos.x += s.cx;
+			low = pos.y;
+			pos.y = keep;
 		}
+
 		DeleteObject(r);
 		DeleteObject(sq);
 	}
@@ -197,7 +209,7 @@ Function: [void] Loads the Graph onto the screen with all the data already in it
 void GraphObject::loadGraph()
 {
 	CString val;
-	SIZE s; s.cx = 25; s.cy = 15;
+	SIZE s; s.cx = 30; s.cy = 25;
 	CPoint pos;
 	CRect* r, temp;
 	CPen* pen; CBrush* brush;
@@ -214,10 +226,14 @@ void GraphObject::loadGraph()
 		val.Format(_T("%d"), information[i]);
 		pos.y = temp.bottom; pos.x = temp.left;  pos.y -= s.cy;//temp.bottom cause the rectangle is flipped due to the nature of it all. top will always point to 450 which is the base line of ours.
 		r = new CRect(pos, s);
+		CFont font;
+		font.CreatePointFont(95, _T("Arial"));
+		pDC->SelectObject(&font);
 		pDC->DrawText(val, r, WS_CHILD | WS_VISIBLE | SS_LEFT | SS_ENDELLIPSIS);
 		pos.y = pStart.y + 2; pos.x = temp.left;//  pos.y += s.cy/3;
 		r = new CRect(pos, s);
 		val.Format(_T("%d"), i);
+		pDC->SelectObject(&font);
 		pDC->DrawText(val, r, WS_CHILD | WS_VISIBLE | SS_LEFT | SS_ENDELLIPSIS);
 		DeleteObject(r);
 		DeleteObject(pen);
@@ -252,7 +268,6 @@ void GraphObject::AdjustAllRects(bool adj)
 /*Function: [COLORREF] Generates a random color via creating random ints and placing them into a RGB*/
 COLORREF GraphObject::generateRandomColor(int min, int max) //range : [min, max)
 {
-
 	int val[3];
 	static bool first = true;
 	if (first)
@@ -261,7 +276,9 @@ COLORREF GraphObject::generateRandomColor(int min, int max) //range : [min, max)
 		first = false;
 	}
 
-	for (int i = 0; i < 3; i++) val[i] = min + rand() % ((max + 1) - min);
+	for (int i = 0; i < 3; i++)
+		val[i] = min + rand() % ((max + 1) - min);
+
 	COLORREF ref(RGB(val[0], val[1], val[2]));
 	return ref;
 }
@@ -294,9 +311,7 @@ void GraphObject::saveIntoArchive(vector<STLVectorType>& ctype, CArchive& arc, s
 {
 	arc << size;
 	for (size_t i = 0; i < size; i++)
-	{
 		arc << ctype[i];
-	}
 }
 
 /*Function: [void] gets any vector due to the template, then loads up the size first, then loads all the data into the CArchive. */
@@ -306,7 +321,5 @@ void GraphObject::loadFromArchive(vector<STLVectorType>& ctype, CArchive& arc, s
 	arc >> size;
 	ctype.resize(size);
 	for (size_t i = 0; i < size; i++)
-	{
 		arc >> ctype[i];
-	}
 }

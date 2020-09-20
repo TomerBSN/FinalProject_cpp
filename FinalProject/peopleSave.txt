@@ -7,7 +7,7 @@
 2;567567567;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
 2;890890890;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
 2;567567567;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
-0;000000001;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;School;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000001;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;School;Easy;1;Ichilov;20;9;2020;890890890#
 0;000000002;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
 0;000000003;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Ichilov;19;9;2020;890890890#
 0;000000004;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
@@ -198,3 +198,60 @@
 0;008841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
 0;118841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
 0;128841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;818841171;sick one;0;Kiryat Shmona;street 56;19;9;2020;19;9;2020;Event;Medium;1;Wolfson;19;9;2020;890890890#
+0;828841171;sick one;0;Kiryat Shmona;street 56;19;9;2020;19;9;2020;Event;Medium;1;Wolfson;19;9;2020;890890890#
+0;818541171;sick one;0;Kiryat Shmona;street 56;19;9;2020;19;9;2020;Event;Medium;1;Wolfson;19;9;2020;890890890#
+0;828891171;sick one;0;Kiryat Shmona;street 56;19;9;2020;19;9;2020;Event;Medium;1;Wolfson;19;9;2020;890890890#
+0;828892271;sick one;0;Modiin Illit;street 56;19;9;2020;19;9;2020;Event;Medium;1;Wolfson;19;9;2020;890890890#
+0;828892276;sick one;0;Modiin Illit;street 56;19;9;2020;19;9;2020;Event;Medium;1;Wolfson;19;9;2020;890890890#
+0;888892271;sick one;0;Modiin Illit;street 56;19;9;2020;19;9;2020;Event;Medium;1;Wolfson;19;9;2020;890890890#
+0;828800271;sick one;0;Modiin Illit;street 56;19;9;2020;19;9;2020;Event;Medium;1;Wolfson;19;9;2020;890890890#
+0;828892251;sick one;0;Modiin Illit;street 56;19;9;2020;19;9;2020;Event;Medium;1;Wolfson;19;9;2020;890890890#
+0;448892251;sick one;0;Raanana;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;448811251;sick one;0;Raanana;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;111892251;sick one;0;Raanana;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;448892521;sick one;0;Raanana;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;410052251;sick one;0;Raanana;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;668892251;sick one;0;Raanana;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;433892251;sick one;0;Raanana;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;433891001;sick one;0;Raanana;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;223891001;sick one;0;Ramat Hasharon;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;222221001;sick one;0;Ramat Hasharon;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;222221002;sick one;0;Ramat Hasharon;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;222221003;sick one;0;Ramat Hasharon;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;222221004;sick one;0;Ramat Hasharon;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;222221005;sick one;0;Ramat Hasharon;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;222221006;sick one;0;Ramat Hasharon;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+0;222221007;sick one;0;Ramat Hasharon;street 56;19;9;2020;19;9;2020;Event;Medium;0;Hasharon;19;9;2020;890890890#
+1;333444001;sick;1;Jesusalem;street;20;9;2020;20;9;2020;Synagogue;Hedera;asdasda;;#
+1;333444002;sick;1;Jesusalem;street;20;9;2020;20;9;2020;Synagogue;Hedera;asdasda;;#
+1;333444003;sick;1;Jesusalem;street;20;9;2020;20;9;2020;Supermarket;Hedera;asdasda;;#
+1;333444004;sick;1;Jesusalem;street;20;9;2020;20;9;2020;Supermarket;Hedera;asdasda;;#
+1;333444005;sick;1;Jesusalem;street;20;9;2020;20;9;2020;Supermarket;Hedera;asdasda;;#
+1;333444006;sick;1;Jesusalem;street;20;9;2020;20;9;2020;Supermarket;Hedera;asdasda;;#
+1;333444007;sick;1;Jesusalem;street;20;9;2020;20;9;2020;Supermarket;Hedera;asdasda;;#
+1;333444008;sick;1;Jesusalem;street;20;9;2020;20;9;2020;Supermarket;Hedera;asdasda;;#
+1;333444007;sick;1;Jesusalem;street;20;9;2020;20;9;2020;Supermarket;Hedera;asdasda;;#
+1;333444018;sick;1;Jesusalem;street;20;9;2020;20;9;2020;Supermarket;Hedera;asdasda;;#
+1;333454001;sick;1;Rishon Lezion;street;20;9;2020;20;9;2020;Restaurent;Hedera;asdasda;;#
+1;333454002;sick;1;Rishon Lezion;street;20;9;2020;20;9;2020;Restaurent;Hedera;asdasda;;#
+1;333454003;sick;1;Rishon Lezion;street;20;9;2020;20;9;2020;Restaurent;Hedera;asdasda;;#
+1;333454004;sick;1;Rishon Lezion;street;20;9;2020;20;9;2020;Restaurent;Hedera;asdasda;;#
+1;333454005;sick;1;Rishon Lezion;street;20;9;2020;20;9;2020;Restaurent;Hedera;asdasda;;#
+0;399454001;sick one;0;Rishon Lezion;street 56;19;9;2020;19;9;2020;Event;Medium;0;Assaf Harofeh;19;9;2020;890890890#
+0;399454002;sick one;0;Rishon Lezion;street 56;19;9;2020;19;9;2020;Event;Medium;0;Assaf Harofeh;19;9;2020;890890890#
+0;399454003;sick one;0;Rishon Lezion;street 56;19;9;2020;19;9;2020;Event;Medium;0;Assaf Harofeh;19;9;2020;890890890#
+0;399454004;sick one;0;Rishon Lezion;street 56;19;9;2020;19;9;2020;Event;Medium;0;Assaf Harofeh;19;9;2020;890890890#
+0;399454005;sick one;0;Rishon Lezion;street 56;19;9;2020;19;9;2020;Event;Medium;0;Assaf Harofeh;19;9;2020;890890890#
+0;399454006;sick one;0;Rishon Lezion;street 56;19;9;2020;19;9;2020;Event;Medium;0;Assaf Harofeh;19;9;2020;890890890#
+0;399454007;sick one;0;Rishon Lezion;street 56;19;9;2020;19;9;2020;Event;Medium;0;Assaf Harofeh;19;9;2020;890890890#
+0;399454009;sick one;0;Holon;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Sheba;19;9;2020;890890890#
+0;399454221;sick one;0;Holon;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Sheba;19;9;2020;890890890#
+0;399454222;sick one;0;Holon;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Sheba;19;9;2020;890890890#
+0;399454223;sick one;0;Holon;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Sheba;19;9;2020;890890890#
+0;399454224;sick one;0;Holon;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Sheba;19;9;2020;890890890#
+0;399454225;sick one;0;Holon;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Sheba;19;9;2020;890890890#
+0;399454226;sick one;0;Holon;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Sheba;19;9;2020;890890890#
+3;242424224;david david;0;Holon;david hamelech2;4;9;2020;Elad;david hamelech2;20;9;2020;;#
+0;888888881;asdasd;0;Tel Aviv;asdasd;19;9;2020;20;9;2020;Transport;Easy;1;Rambam;20;9;2020;#
+1;333333332;asdasd;1;Tel Aviv;asdasd;20;9;2020;20;9;2020;Mall;Jerusalem;asdasdsa;;#
