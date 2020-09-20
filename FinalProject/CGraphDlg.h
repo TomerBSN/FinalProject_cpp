@@ -4,7 +4,7 @@
 #include "GraphObject.h"
 #include "Global.h"
 
-#define START_LINE_GRAPH_Y 425
+#define START_LINE_GRAPH_Y 400
 #define START_LINE_GRAPH_X 90
 // CGraphDlg dialog
 
