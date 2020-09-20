@@ -9,21 +9,192 @@
 2;567567567;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
 0;000000001;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;School;Easy;0;Ichilov;19;9;2020;890890890#
 0;000000002;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
-0;000000003;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000003;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Ichilov;19;9;2020;890890890#
 0;000000004;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
-0;000000005;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000005;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Airplane;Easy;0;Ichilov;19;9;2020;890890890#
 0;000000006;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
-0;000000007;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
-0;000000008;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
-0;000000009;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
-0;000000010;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
-0;000000021;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
-0;000000031;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
-0;000000041;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
-0;000000051;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
-0;000000061;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
-0;000000071;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000007;sick one;0;Ramat Gan;street 56;19;9;2020;19;9;2020;School;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000008;sick one;0;Ramat Gan;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000009;sick one;0;Ramat Gan;street 56;19;9;2020;19;9;2020;School;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000010;sick one;0;Ramat Gan;street 56;19;9;2020;19;9;2020;School;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000021;sick one;0;Ramat Gan;street 56;19;9;2020;19;9;2020;Event;Easy;0;Ichilov;19;9;2020;890890890#
+0;000000031;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000041;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Ichilov;19;9;2020;890890890#
+0;000009051;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Airplane;Easy;0;Ichilov;19;9;2020;890890890#
+0;000008061;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+0;000007071;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+0;000006071;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Ichilov;19;9;2020;890890890#
+0;000005071;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+0;000004071;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;School;Critical;0;Ichilov;19;9;2020;890890890#
+0;000003071;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Ichilov;19;9;2020;890890890#
+0;000002071;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000971;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000871;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Rambam;19;9;2020;890890890#
+0;000000771;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Rambam;19;9;2020;890890890#
+0;000000671;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Rambam;19;9;2020;890890890#
+0;000000571;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Rambam;19;9;2020;890890890#
+0;000000471;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Critical;0;Rambam;19;9;2020;890890890#
+0;000000371;sick one;0;Tel Aviv;street 56;19;9;2020;19;9;2020;Event;Critical;0;Rambam;19;9;2020;890890890#
+0;000000271;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Airplane;Critical;0;Ichilov;19;9;2020;890890890#
+0;000000171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Critical;0;Rambam;19;9;2020;890890890#
 3;746726516;MR ONE TWO;1;Bat Yam;My Street 67;19;9;2020;Ramat Hasharon;My other street 812;19;9;2020;874583837;#
 1;333444555;asdas;1;Holon;asdasd;20;9;2020;20;9;2020;Work;Hedera;asdasda;;#
 2;344333444;asdasd;1;Ramat Gan;asdsww;20;9;2020;20;9;2020;Transport;20;9;2020;#
 3;344333449;aaaw;1;Bat Yam;asdase;20;9;2020;Elad;aaaa;20;9;2020;;#
+1;787878781;some name;0;Sderot;add 67;20;9;2020;20;9;2020;Airplane;Raanana;kjdkf 38;837467858;#
+3;234232535;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232123;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232403;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232404;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232405;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232407;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232409;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232400;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232430;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232431;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232432;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232433;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232434;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232435;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232436;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232437;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232438;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+3;234232439;mr h;0;Netanya;ad 769;19;9;2020;Hod Hasharon;klfj 874;20;9;2020;990099887;#
+2;111111111;mr mr mr;0;Sderot;street 76;11;2;2019;16;9;2020;Airplane;19;9;2020;984676371#
+2;111111112;mr mr mr;0;Sderot;street 76;11;2;2019;16;9;2020;Airplane;19;9;2020;984676371#
+2;111111113;mr mr mr;0;Sderot;street 76;11;2;2019;16;9;2020;Airplane;19;9;2020;984676371#
+2;111111114;mr mr mr;0;Sderot;street 76;11;2;2019;16;9;2020;Airplane;19;9;2020;984676371#
+2;111111115;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;111111116;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;111111117;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Airplane;19;9;2020;984676371#
+2;111111118;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;111111119;mr mr mr;0;Sderot;street 76;11;2;2019;16;9;2020;Mall;19;9;2020;984676371#
+2;111111110;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;Airplane;19;9;2020;984676371#
+2;111111121;mr mr mr;0;Sderot;street 76;11;2;2019;16;9;2020;School;19;9;2020;984676371#
+2;111111131;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;School;19;9;2020;984676371#
+2;111111141;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;School;19;9;2020;984676371#
+2;111111151;mr mr mr;0;Sderot;street 76;11;2;2019;16;9;2020;School;19;9;2020;984676371#
+2;111111161;mr mr mr;0;Or Yehuda;street 76;11;2;2019;16;9;2020;School;19;9;2020;984676371#
+0;000001171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000002171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000003171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000004171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000005171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000006171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000007171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000008171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000009171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000010171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000021171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000031171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000141171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000241171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000341171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000441171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000541171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000641171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000741171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;000941171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;001041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;002041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;003041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;004041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;005041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;006041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;007041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;008041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;009041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;010041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;020041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;030041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;040041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;050041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;060041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;070041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;080041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;090041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;100041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;200041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;300041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;400041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;500041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;600041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;700041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;800041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;900041171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;001141171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;001241171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;001341171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;001441171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;001541171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;001641171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;001741171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;001841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;001941171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;002141171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;002241171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;002341171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;002441171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;002541171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;002641171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;002741171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;002841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;002941171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;003141171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;003241171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;003341171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;003541171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;003441171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;003641171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;003741171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;003841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;003941171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;004141171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;004241171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;004341171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;004441171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;004541171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;004641171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;004741171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;004841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;004941171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;005141171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;005241171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;005341171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;005441171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;005541171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;005641171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;005741171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;005841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;005941171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;006141171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;006241171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;006341171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;006441171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;006541171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;006641171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;006741171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;006841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;006941171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;007141171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;007241171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;007341171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;007441171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;007541171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;007641171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;007741171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;007841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;007941171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;008141171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;008241171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;008341171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;008441171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;008541171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;008641171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;008741171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;008941171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;008841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;118841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
+0;128841171;sick one;0;Netanya;street 56;19;9;2020;19;9;2020;Event;Medium;0;Wolfson;19;9;2020;890890890#
