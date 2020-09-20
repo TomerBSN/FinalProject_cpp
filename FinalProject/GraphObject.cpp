@@ -49,7 +49,7 @@ void GraphObject::createAxis()
 
 	//x axis line
 	pDC->MoveTo(po);//start
-	po.x += this->length + 10;
+	po.x += this->length+10;
 	pDC->LineTo(po);//end
 	//XAxis Arrow Head;
 	aHead = po;
@@ -111,7 +111,7 @@ void GraphObject::displayGraph(bool generateNew, CClientDC* _pDC)
 	if (generateNew == true)
 		createDataVectors();
 
-	this->length = information.size() * 2 * 20;
+	this->length = information.size() * 2 * 15;
 	this->height = (long)max;
 
 	if (max > UPPERBOUND)
@@ -148,8 +148,8 @@ void GraphObject::createDataVectors()
 		ref = generateRandomColor(0, 255);
 		colors.push_back(ref);
 
-		st.x += 20;
-		end.x = st.x + 20;
+		st.x += 15;
+		end.x = st.x + 15;
 		end.y = pStart.y - information[i] - 2;
 		rec = new CRect(st, end);
 		rects.push_back(rec);
@@ -162,7 +162,7 @@ Function: [void] Creates the names on the bottom of the graph; the mod is to see
 */
 void GraphObject::createLegend(unsigned int mod)
 {
-	SIZE s, sq_s; s.cx = 200; s.cy = 20; sq_s.cx = 15; sq_s.cy = 15;
+	SIZE s, sq_s; s.cx = 150; s.cy = 20; sq_s.cx = 15; sq_s.cy = 15;
 	CPoint q, pos;// = pGraph_BL;
 	pos.y = pGraph_BR.y + 50; pos.x = pGraph_TL.x + 50;
 	CRect* r, sq;
